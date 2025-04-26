@@ -1,38 +1,83 @@
-.App {
-  text-align: center;
+/* App.css */
+:root {
+  --navbar-height: 64px;
+  --transition-duration: 1s;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+body {
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  background-color: white;
 }
 
-.App-header {
-  background-color: #282c34;
+main {
+  padding-top: var(--navbar-height);
+}
+
+/* Updated home container for scrolling */
+.home-container {
+  position: relative;
+  overflow-y: auto;
+  overflow-x: hidden;
   min-height: 100vh;
+}
+
+/* Each section styling - reduced padding */
+section {
+  width: 100%;
+  padding: 40px 0;
+  position: relative;
+}
+
+/* Specific sections can override the default padding */
+section.hero-section {
+  min-height: calc(100vh - var(--navbar-height));
   display: flex;
-  flex-direction: column;
   align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  padding: 0;
 }
 
-.App-link {
-  color: #61dafb;
+.section-content {
+  width: 100%;
+  max-width: 1200px;
+  padding: 20px;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
+section:nth-child(odd) {
+  background-color: rgba(190, 193, 248, 0.1);
+}
+
+section:nth-child(even) {
+  background-color: white;
+}
+
+/* Remove styles that prevent scrolling */
+.sections-container {
+  position: relative;
+}
+
+/* Optional animation classes - only applied with JavaScript */
+.animate-fade-in {
+  animation: fadeIn 1s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* Media query for responsive adjustments */
+@media (max-width: 768px) {
+  section {
+    padding: 30px 0;
   }
 }
