@@ -185,101 +185,107 @@ const SuccessStoriesPage = ({ colors = {
 
   return (
     <div className="bg-gray-50 min-h-screen">
-      {/* Hero Section */}
-      <div className="bg-gradient-to-r from-white to-blue-50 py-16 md:py-24">
-        <div className="container mx-auto px-4">
-          <div className="max-w-6xl mx-auto">
-            <div className="flex flex-col md:flex-row items-center">
-              <motion.div 
-                className="md:w-1/2 mb-10 md:mb-0 md:pr-12"
-                initial={{ opacity: 0, x: -30 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.8, ease: "easeOut" }}
-              >
-                <h1 
-                  className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6"
-                  style={{ color: colors.darkPurple }}
-                >
-                  Success Stories
-                </h1>
-                <p className="text-xl md:text-2xl text-gray-700 mb-8">
-                  Inspiring journeys of students who achieved their educational goals with UniOversea's guidance.
-                </p>
-                <div className="flex flex-col sm:flex-row gap-4">
-                  <motion.button
-                    className="py-3 px-6 rounded-full text-white font-medium shadow-lg flex items-center justify-center gap-2"
-                    style={{ backgroundColor: colors.darkPurple }}
-                    whileHover={{ scale: 1.05 }}
-                    whileTap={{ scale: 0.98 }}
-                  >
-                    <User size={20} />
-                    Share Your Story
-                  </motion.button>
-                  <motion.button
-                    className="py-3 px-6 rounded-full font-medium shadow-lg flex items-center justify-center gap-2"
-                    style={{ backgroundColor: colors.neonGreen, color: colors.darkPurple }}
-                    whileHover={{ scale: 1.05 }}
-                    whileTap={{ scale: 0.98 }}
-                  >
-                    <GraduationCap size={20} />
-                    Start Your Journey
-                  </motion.button>
-                </div>
-              </motion.div>
-              
-              <motion.div 
-                className="md:w-1/2 relative"
-                initial={{ opacity: 0, x: 30 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.8, ease: "easeOut" }}
-              >
-                <div className="grid grid-cols-2 gap-4">
-                  {[1, 2, 3, 4].map((id) => (
-                    <div key={id} className="relative">
-                      <img 
-                        src={`/api/placeholder/300/200?student${id}`} 
-                        alt={`Student success ${id}`} 
-                        className="w-full h-auto rounded-lg shadow-md"
-                      />
-                    </div>
-                  ))}
-                </div>
-                
-                <motion.div 
-                  className="absolute -bottom-5 -right-5 bg-white p-4 rounded-lg shadow-lg"
-                  initial={{ opacity: 0, scale: 0.8 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  transition={{ delay: 0.5, duration: 0.5 }}
-                >
-                  <div className="flex items-center gap-2">
-                    <div className="w-10 h-10 rounded-full flex items-center justify-center" style={{ backgroundColor: colors.neonGreen }}>
-                      <ThumbsUp size={24} color={colors.darkPurple} />
-                    </div>
-                    <div className="text-sm">
-                      <p className="font-bold" style={{ color: colors.darkPurple }}>98% Success Rate</p>
-                      <p className="text-gray-500">University admissions</p>
-                    </div>
-                  </div>
-                </motion.div>
-                
-                <motion.div 
-                  className="absolute -z-10 -bottom-4 -right-4 w-full h-full rounded-xl"
-                  style={{ backgroundColor: colors.neonGreen, opacity: 0.3 }}
-                  animate={{ 
-                    rotate: [0, 1, 0, -1, 0],
-                    scale: [1, 1.01, 1, 0.99, 1]
-                  }}
-                  transition={{ 
-                    duration: 6, 
-                    repeat: Infinity,
-                    repeatType: "reverse"
-                  }}
-                />
-              </motion.div>
-            </div>
+{/* Hero Section */}
+<div 
+  className="py-32 md:py-40 lg:py-48 bg-cover bg-center relative"
+  style={{
+    backgroundImage: "url('https://media.istockphoto.com/id/1007726450/photo/portrait-of-female-student-holding-books-in-classroom-young-woman-looking-at-camera-and.webp?a=1&b=1&s=612x612&w=0&k=20&c=11ROubtEtbxbZR7vXoDujPkFz8sqzlBHMsoluMyRL3E=')",
+    backgroundColor: "rgba(0,0,0,0.7)",
+    backgroundBlendMode: "overlay"
+  }}
+>
+  <div className="container mx-auto px-4 relative z-10">
+    <div className="max-w-6xl mx-auto">
+      <div className="flex flex-col md:flex-row items-center">
+        <motion.div 
+          className="md:w-1/2 mb-10 md:mb-0 md:pr-12"
+          initial={{ opacity: 0, x: -30 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.8, ease: "easeOut" }}
+        >
+          <h1 
+            className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 text-white"
+          >
+            Success Stories
+          </h1>
+          <p className="text-xl md:text-2xl text-white mb-8">
+            Inspiring journeys of students who achieved their educational goals with UniOversea's guidance.
+          </p>
+          <div className="flex flex-col sm:flex-row gap-4">
+            <motion.button
+              className="py-3 px-6 rounded-full text-white font-medium shadow-lg flex items-center justify-center gap-2"
+              style={{ backgroundColor: colors.darkPurple }}
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.98 }}
+            >
+              <User size={20} />
+              Share Your Story
+            </motion.button>
+            <motion.button
+              className="py-3 px-6 rounded-full font-medium shadow-lg flex items-center justify-center gap-2"
+              style={{ backgroundColor: colors.neonGreen, color: colors.darkPurple }}
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.98 }}
+            >
+              <GraduationCap size={20} />
+              Start Your Journey
+            </motion.button>
           </div>
-        </div>
+        </motion.div>
+        
+        <motion.div 
+          className="md:w-1/2 relative"
+          initial={{ opacity: 0, x: 30 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.8, ease: "easeOut" }}
+        >
+          <div className="grid grid-cols-2 gap-4">
+            {[1, 2, 3, 4].map((id) => (
+              <div key={id} className="relative">
+                <img 
+                  src={`/api/placeholder/300/200?student${id}`} 
+                  alt={`Student success ${id}`} 
+                  className="w-full h-auto rounded-lg shadow-md"
+                />
+              </div>
+            ))}
+          </div>
+          
+          <motion.div 
+            className="absolute -bottom-5 -right-5 bg-white p-4 rounded-lg shadow-lg"
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ delay: 0.5, duration: 0.5 }}
+          >
+            <div className="flex items-center gap-2">
+              <div className="w-10 h-10 rounded-full flex items-center justify-center" style={{ backgroundColor: colors.neonGreen }}>
+                <ThumbsUp size={24} color={colors.darkPurple} />
+              </div>
+              <div className="text-sm">
+                <p className="font-bold" style={{ color: colors.darkPurple }}>98% Success Rate</p>
+                <p className="text-gray-500">University admissions</p>
+              </div>
+            </div>
+          </motion.div>
+          
+          <motion.div 
+            className="absolute -z-10 -bottom-4 -right-4 w-full h-full rounded-xl"
+            style={{ backgroundColor: colors.neonGreen, opacity: 0.3 }}
+            animate={{ 
+              rotate: [0, 1, 0, -1, 0],
+              scale: [1, 1.01, 1, 0.99, 1]
+            }}
+            transition={{ 
+              duration: 6, 
+              repeat: Infinity,
+              repeatType: "reverse"
+            }}
+          />
+        </motion.div>
       </div>
+    </div>
+  </div>
+</div>
       
       {/* Testimonials Section */}
       <div className="py-16 container mx-auto px-4">

@@ -327,106 +327,112 @@ const StudyAbroadPage = ({ colors }) => {
 
   return (
     <div className="bg-gray-50 min-h-screen">
-      {/* Hero Section */}
-      <div className="bg-gradient-to-r from-white to-blue-50 py-16 md:py-24">
-        <div className="container mx-auto px-4">
-          <div className="max-w-6xl mx-auto">
-            <div className="flex flex-col md:flex-row items-center">
-              <motion.div 
-                className="md:w-1/2 mb-10 md:mb-0 md:pr-12"
-                initial={{ opacity: 0, x: -30 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.8, ease: "easeOut" }}
-              >
-                <h1 
-                  className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6"
-                  style={{ color: colors.darkPurple }}
-                >
-                  Study Abroad Counseling
-                </h1>
-                <p className="text-xl md:text-2xl text-gray-700 mb-8">
-                  Expert guidance for your international education journey, with your academic future as our only priority.
-                </p>
-                <div className="flex flex-col sm:flex-row gap-4">
-                  <motion.button
-                    className="py-3 px-6 rounded-full text-white font-medium shadow-lg flex items-center justify-center gap-2"
-                    style={{ backgroundColor: colors.darkPurple }}
-                    whileHover={{ scale: 1.05 }}
-                    whileTap={{ scale: 0.98 }}
-                  >
-                    <Users size={20} />
-                    Free Consultation
-                  </motion.button>
-                  <motion.button
-                    className="py-3 px-6 rounded-full font-medium shadow-lg flex items-center justify-center gap-2"
-                    style={{ backgroundColor: colors.neonGreen, color: colors.darkPurple }}
-                    whileHover={{ scale: 1.05 }}
-                    whileTap={{ scale: 0.98 }}
-                  >
-                    <Globe size={20} />
-                    Explore Destinations
-                  </motion.button>
-                </div>
-              </motion.div>
-              
-              <motion.div 
-                className="md:w-1/2 relative"
-                initial={{ opacity: 0, x: 30 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.8, ease: "easeOut" }}
-              >
-                <img 
-                  src="/api/placeholder/600/400" 
-                  alt="Students studying abroad" 
-                  className="w-full h-auto rounded-xl shadow-xl"
-                />
-                <motion.div 
-                  className="absolute -bottom-5 -right-5 bg-white p-4 rounded-lg shadow-lg"
-                  initial={{ opacity: 0, scale: 0.8 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  transition={{ delay: 0.5, duration: 0.5 }}
-                >
-                  <div className="flex items-center gap-2">
-                    <div className="flex -space-x-2">
-                      {[...Array(3)].map((_, i) => (
-                        <div 
-                          key={i} 
-                          className="w-8 h-8 rounded-full border-2 border-white overflow-hidden bg-gray-200"
-                          style={{ zIndex: 3 - i }}
-                        >
-                          <img 
-                            src={`/api/placeholder/50/50?${i}`} 
-                            alt="Student" 
-                            className="w-full h-full object-cover"
-                          />
-                        </div>
-                      ))}
-                    </div>
-                    <div className="text-sm">
-                      <p className="font-bold" style={{ color: colors.darkPurple }}>100% Offer Guarantee</p>
-                      <p className="text-gray-500">Student-centered approach</p>
-                    </div>
-                  </div>
-                </motion.div>
-                
-                <motion.div 
-                  className="absolute -z-10 -bottom-4 -right-4 w-full h-full rounded-xl"
-                  style={{ backgroundColor: colors.neonGreen, opacity: 0.3 }}
-                  animate={{ 
-                    rotate: [0, 1, 0, -1, 0],
-                    scale: [1, 1.01, 1, 0.99, 1]
-                  }}
-                  transition={{ 
-                    duration: 6, 
-                    repeat: Infinity,
-                    repeatType: "reverse"
-                  }}
-                />
-              </motion.div>
-            </div>
+   {/* Hero Section */}
+<div 
+  className="py-24 md:py-32 lg:py-40 bg-cover bg-center" 
+  style={{ 
+    backgroundImage: "url('https://images.unsplash.com/photo-1495149905644-c9f27692c2c3?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8N3x8ZmxhZ3N8ZW58MHx8MHx8fDA%3D')",
+    backgroundColor: "rgba(0,0,0,0.7)",
+    backgroundBlendMode: "overlay"
+  }}
+>
+  <div className="container mx-auto px-4">
+    <div className="max-w-6xl mx-auto">
+      <div className="flex flex-col md:flex-row items-center">
+        <motion.div 
+          className="md:w-1/2 mb-10 md:mb-0 md:pr-12"
+          initial={{ opacity: 0, x: -30 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.8, ease: "easeOut" }}
+        >
+          <h1 
+            className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 text-white"
+          >
+            Study Abroad Counseling
+          </h1>
+          <p className="text-xl md:text-2xl text-white mb-8">
+            Expert guidance for your international education journey, with your academic future as our only priority.
+          </p>
+          <div className="flex flex-col sm:flex-row gap-4">
+            <motion.button
+              className="py-3 px-6 rounded-full text-white font-medium shadow-lg flex items-center justify-center gap-2"
+              style={{ backgroundColor: colors.darkPurple }}
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.98 }}
+            >
+              <Users size={20} />
+              Free Consultation
+            </motion.button>
+            <motion.button
+              className="py-3 px-6 rounded-full font-medium shadow-lg flex items-center justify-center gap-2"
+              style={{ backgroundColor: colors.neonGreen, color: colors.darkPurple }}
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.98 }}
+            >
+              <Globe size={20} />
+              Explore Destinations
+            </motion.button>
           </div>
-        </div>
+        </motion.div>
+        
+        <motion.div 
+          className="md:w-1/2 relative"
+          initial={{ opacity: 0, x: 30 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.8, ease: "easeOut" }}
+        >
+          <img 
+            src="/api/placeholder/600/400" 
+            alt="Students studying abroad" 
+            className="w-full h-auto rounded-xl shadow-xl"
+          />
+          <motion.div 
+            className="absolute -bottom-5 -right-5 bg-white p-4 rounded-lg shadow-lg"
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ delay: 0.5, duration: 0.5 }}
+          >
+            <div className="flex items-center gap-2">
+              <div className="flex -space-x-2">
+                {[...Array(3)].map((_, i) => (
+                  <div 
+                    key={i} 
+                    className="w-8 h-8 rounded-full border-2 border-white overflow-hidden bg-gray-200"
+                    style={{ zIndex: 3 - i }}
+                  >
+                    <img 
+                      src={`/api/placeholder/50/50?${i}`} 
+                      alt="Student" 
+                      className="w-full h-full object-cover"
+                    />
+                  </div>
+                ))}
+              </div>
+              <div className="text-sm">
+                <p className="font-bold text-gray-800">100% Offer Guarantee</p>
+                <p className="text-gray-600">Student-centered approach</p>
+              </div>
+            </div>
+          </motion.div>
+          
+          <motion.div 
+            className="absolute -z-10 -bottom-4 -right-4 w-full h-full rounded-xl"
+            style={{ backgroundColor: colors.neonGreen, opacity: 0.3 }}
+            animate={{ 
+              rotate: [0, 1, 0, -1, 0],
+              scale: [1, 1.01, 1, 0.99, 1]
+            }}
+            transition={{ 
+              duration: 6, 
+              repeat: Infinity,
+              repeatType: "reverse"
+            }}
+          />
+        </motion.div>
       </div>
+    </div>
+  </div>
+</div>
       
       {/* 3D Carousel Control */}
       <div className="relative">

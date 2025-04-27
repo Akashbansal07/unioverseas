@@ -734,40 +734,48 @@ const ResourcesPage = ({ colors }) => {
   return (
     <div className="bg-gray-50 min-h-screen">
       {/* Header */}
-      <div className="bg-gradient-to-r from-white to-blue-50 py-16">
-        <div className="container mx-auto px-4">
-          <div className="max-w-4xl mx-auto text-center">
-            <h1 className="text-4xl md:text-5xl font-bold mb-6" style={{ color: colors.darkPurple }}>
-              Resources
-            </h1>
-            <p className="text-xl text-gray-700 mb-6">
-              Access free tools, guides, and expert content to support your educational journey
-            </p>
+      {/* Header/Hero Section with background image */}
+<div 
+  className="py-32 md:py-40 lg:py-48 bg-cover bg-center relative"
+  style={{ 
+    backgroundImage: "url('https://images.unsplash.com/photo-1741795746033-d50d48dc1da5?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTl8fHN0dWR5JTIwcmVzb3VyY2VzfGVufDB8fDB8fHww')",
+    backgroundColor: "rgba(0,0,0,0.7)",
+    backgroundBlendMode: "overlay"
+  }}
+>
+  <div className="container mx-auto px-4 relative z-10">
+    <div className="max-w-4xl mx-auto text-center">
+      <h1 className="text-4xl md:text-5xl font-bold mb-6 text-white">
+        Resources
+      </h1>
+      <p className="text-xl text-white mb-6">
+        Access free tools, guides, and expert content to support your educational journey
+      </p>
 
-            {/* Category Navigation */}
-            <div className="flex flex-wrap justify-center gap-2 mt-8">
-              {categories.map((category) => (
-                <button
-                  key={category.id}
-                  onClick={() => handleCategoryChange(category.id)}
-                  className={`px-4 py-2 rounded-full text-sm font-medium transition-all flex items-center gap-2 ${
-                    activeCategory === category.id 
-                      ? 'shadow-md' 
-                      : 'hover:bg-white/50'
-                  }`}
-                  style={{ 
-                    backgroundColor: activeCategory === category.id ? colors.neonGreen : 'white',
-                    color: colors.darkPurple
-                  }}
-                >
-                  {category.icon}
-                  {category.label}
-                </button>
-              ))}
-            </div>
-          </div>
-        </div>
+      {/* Category Navigation */}
+      <div className="flex flex-wrap justify-center gap-2 mt-8">
+        {categories.map((category) => (
+          <button
+            key={category.id}
+            onClick={() => handleCategoryChange(category.id)}
+            className={`px-4 py-2 rounded-full text-sm font-medium transition-all flex items-center gap-2 ${
+              activeCategory === category.id 
+                ? 'shadow-md' 
+                : 'hover:bg-white/50'
+            }`}
+            style={{ 
+              backgroundColor: activeCategory === category.id ? colors.neonGreen : 'white',
+              color: colors.darkPurple
+            }}
+          >
+            {category.icon}
+            {category.label}
+          </button>
+        ))}
       </div>
+    </div>
+  </div>
+</div>
 
       {/* Main Content */}
       <div className="container mx-auto px-4 pb-16">

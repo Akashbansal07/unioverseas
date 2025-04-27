@@ -69,27 +69,27 @@ const StatsSection = ({ colors }) => {
 
   // University logos for the bottom animation
   const universities = [
-    { name: "Harvard University", country: "USA" },
-    { name: "Oxford University", country: "UK" },
-    { name: "Stanford University", country: "USA" },
-    { name: "Massachusetts Institute of Technology", country: "USA" },
-    { name: "University of Toronto", country: "Canada" },
-    { name: "ETH Zurich", country: "Switzerland" },
-    { name: "University of Melbourne", country: "Australia" },
-    { name: "Imperial College London", country: "UK" },
-    { name: "National University of Singapore", country: "Singapore" },
-    { name: "University of Tokyo", country: "Japan" },
+    { name: "Harvard University", country: "USA", logo: "/api/placeholder/180/80" },
+    { name: "Oxford University", country: "UK", logo: "/api/placeholder/180/80" },
+    { name: "Stanford University", country: "USA", logo: "/api/placeholder/180/80" },
+    { name: "Massachusetts Institute of Technology", country: "USA", logo: "/api/placeholder/180/80" },
+    { name: "University of Toronto", country: "Canada", logo: "https://fundit.fr/sites/default/files/styles/max_650x650/public/actors/2527-universite-toronto.png?itok=mPR77h6x" },
+    { name: "ETH Zurich", country: "Switzerland", logo: "/api/placeholder/180/80" },
+    { name: "University of Melbourne", country: "Australia", logo: "/api/placeholder/180/80" },
+    { name: "Imperial College London", country: "UK", logo: "/api/placeholder/180/80" },
+    { name: "National University of Singapore", country: "Singapore", logo: "/api/placeholder/180/80" },
+    { name: "University of Tokyo", country: "Japan", logo: "/api/placeholder/180/80" },
     // Repeat for continuous effect
-    { name: "Harvard University", country: "USA" },
-    { name: "Oxford University", country: "UK" },
-    { name: "Stanford University", country: "USA" },
-    { name: "Massachusetts Institute of Technology", country: "USA" },
-    { name: "University of Toronto", country: "Canada" },
-    { name: "ETH Zurich", country: "Switzerland" },
-    { name: "University of Melbourne", country: "Australia" },
-    { name: "Imperial College London", country: "UK" },
-    { name: "National University of Singapore", country: "Singapore" },
-    { name: "University of Tokyo", country: "Japan" },
+    { name: "Harvard University", country: "USA", logo: "/api/placeholder/180/80" },
+    { name: "Oxford University", country: "UK", logo: "/api/placeholder/180/80" },
+    { name: "Stanford University", country: "USA", logo: "/api/placeholder/180/80" },
+    { name: "Massachusetts Institute of Technology", country: "USA", logo: "/api/placeholder/180/80" },
+    { name: "University of Toronto", country: "Canada", logo: "https://fundit.fr/sites/default/files/styles/max_650x650/public/actors/2527-universite-toronto.png?itok=mPR77h6x" },
+    { name: "ETH Zurich", country: "Switzerland", logo: "/api/placeholder/180/80" },
+    { name: "University of Melbourne", country: "Australia", logo: "/api/placeholder/180/80" },
+    { name: "Imperial College London", country: "UK", logo: "/api/placeholder/180/80" },
+    { name: "National University of Singapore", country: "Singapore", logo: "/api/placeholder/180/80" },
+    { name: "University of Tokyo", country: "Japan", logo: "/api/placeholder/180/80" },
   ];
 
   const containerVariants = {
@@ -267,19 +267,29 @@ const StatsSection = ({ colors }) => {
                       borderColor: index % 2 === 0 ? `${colors.darkPurple}40` : `${colors.lightPurple}80`,
                     }}
                   >
-                    <img
-                      src={`/api/placeholder/180/80`}
-                      alt={`${university.name} logo`}
-                      className="h-12 w-auto object-contain mb-1"
-                    />
-                    <div className="text-center">
-                      <span className="text-xs font-bold block" style={{ color: colors.darkPurple }}>
-                        {university.name}
-                      </span>
-                      <span className="text-xs text-gray-500">
-                        {university.country}
-                      </span>
-                    </div>
+                    {university.name === "University of Toronto" ? (
+                      <img
+                        src={university.logo}
+                        alt={`${university.name} logo`}
+                        className="h-full w-auto object-contain"
+                      />
+                    ) : (
+                      <>
+                        <img
+                          src={university.logo}
+                          alt={`${university.name} logo`}
+                          className="h-12 w-auto object-contain mb-1"
+                        />
+                        <div className="text-center">
+                          <span className="text-xs font-bold block" style={{ color: colors.darkPurple }}>
+                            {university.name}
+                          </span>
+                          <span className="text-xs text-gray-500">
+                            {university.country}
+                          </span>
+                        </div>
+                      </>
+                    )}
                   </div>
                 </motion.div>
               ))}

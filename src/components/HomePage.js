@@ -9,14 +9,14 @@ import ContactSection from './home/ContactSection';
 
 const HomePage = ({ colors }) => {
   return (
-    <div className="home-container w-full">
+    <main className="overflow-hidden">
       <HeroSection colors={colors} />
       <StatsSection colors={colors} />
       <ServicesSection colors={colors} />
       <SuccessStoriesSection colors={colors} />
       <EventsSection colors={colors} />
       <ContactSection colors={colors} />
-    </div>
+    </main>
   );
 };
 

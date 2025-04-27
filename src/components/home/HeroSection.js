@@ -5,8 +5,18 @@ import { Globe, BookOpen } from 'lucide-react';
 
 const HeroSection = ({ colors }) => {
   return (
-    <section className="min-h-screen flex items-center justify-center bg-gradient-to-br from-white to-blue-50 py-16">
-      <div className="container mx-auto px-4 md:px-8">
+    <section 
+      className="hero-section min-h-screen flex items-center justify-center relative"
+      style={{
+        backgroundImage: 'url("https://images.unsplash.com/20/cambridge.JPG?q=80&w=2947&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D")',
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+        backgroundRepeat: 'no-repeat',
+        marginTop: '-64px', /* Compensate for the navbar height */
+        paddingTop: '64px'  /* Add padding equal to navbar height to maintain content position */
+      }}>
+      <div className="absolute inset-0 bg-black opacity-50"></div>
+      <div className="container mx-auto px-4 md:px-8 relative z-10">
         <div className="flex flex-col md:flex-row items-center justify-between gap-12">
           <motion.div 
             className="md:w-1/2"
@@ -15,8 +25,7 @@ const HeroSection = ({ colors }) => {
             transition={{ duration: 0.8, ease: "easeOut" }}
           >
             <motion.h1 
-              className="text-4xl md:text-5xl lg:text-6xl font-bold mb-4"
-              style={{ color: colors.darkPurple }}
+              className="text-4xl md:text-5xl lg:text-6xl font-bold mb-4 text-white"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 0.3, duration: 0.8 }}
@@ -24,8 +33,7 @@ const HeroSection = ({ colors }) => {
               From Testprep to Admissions
             </motion.h1>
             <motion.h2
-              className="text-3xl md:text-4xl font-semibold mb-6"
-              style={{ color: colors.darkPurple }}
+              className="text-3xl md:text-4xl font-semibold mb-6 text-white"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 0.5, duration: 0.8 }}
@@ -34,7 +42,7 @@ const HeroSection = ({ colors }) => {
             </motion.h2>
             
             <motion.p 
-              className="text-lg md:text-xl mb-8 text-gray-700 max-w-2xl"
+              className="text-lg md:text-xl mb-8 text-white max-w-2xl"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 0.7, duration: 0.8 }}
@@ -85,8 +93,8 @@ const HeroSection = ({ colors }) => {
             >
               <div className="aspect-w-4 aspect-h-3">
                 <img 
-                  src="/api/placeholder/600/450" 
-                  alt="Students studying abroad" 
+                  src="https://images.unsplash.com/photo-1607237138185-eedd9c632b0b?q=80&w=1000&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8Y29sbGVnZSUyMGNhbXB1c3xlbnwwfHwwfHx8MA%3D%3D" 
+                  alt="Historic university building" 
                   className="object-cover w-full h-full rounded-lg"
                 />
               </div>

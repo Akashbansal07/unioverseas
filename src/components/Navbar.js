@@ -33,7 +33,7 @@ const Navbar = ({ activeTab, setActiveTab, colors }) => {
               
               {/* Logo text */}
               <span className="text-2xl font-bold" style={{ color: colors.darkPurple }}>
-                Uni<span style={{ color: colors.darkPurple }}>O</span>versea
+                Uni<span style={{ color: colors.darkPurple }}>O</span>verseas
               </span>
             </div>
           </div>
