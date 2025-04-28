@@ -73,37 +73,37 @@ const StatsSection = ({ colors }) => {
   // Create a single array of countries with enough flags for a continuous effect
   const countries = [
     // First set
-    { name: "USA", code: "us" },
-    { name: "UK", code: "gb" },
-    { name: "Canada", code: "ca" },
-    { name: "Australia", code: "au" },
-    { name: "Germany", code: "de" },
-    { name: "France", code: "fr" },
-    { name: "Singapore", code: "sg" },
-    { name: "Japan", code: "jp" },
-    { name: "Italy", code: "it" },
-    { name: "Spain", code: "es" },
-    { name: "Netherlands", code: "nl" },
-    { name: "Sweden", code: "se" },
-    { name: "Ireland", code: "ie" },
-    { name: "New Zealand", code: "nz" },
-    { name: "Switzerland", code: "ch" },
+    { name: "USA", code: "us", flag: "https://cdn.countryflags.com/thumbs/united-states-of-america/flag-square-500.png" },
+    { name: "UK", code: "gb", flag: "https://cdn.countryflags.com/thumbs/england/flag-square-500.png" },
+    { name: "Canada", code: "ca", flag: "https://cdn.countryflags.com/thumbs/canada/flag-square-500.png" },
+    { name: "Australia", code: "au", flag: "https://cdn.countryflags.com/thumbs/australia/flag-square-500.png" },
+    { name: "Germany", code: "de", flag: "https://cdn.countryflags.com/thumbs/germany/flag-square-500.png" },
+    { name: "France", code: "fr", flag: "https://cdn.countryflags.com/thumbs/france/flag-square-500.png" },
+    { name: "Singapore", code: "sg", flag: "/api/placeholder/80/80" },
+    { name: "Japan", code: "jp", flag: "https://cdn.countryflags.com/thumbs/japan/flag-square-500.png" },
+    { name: "Italy", code: "it", flag: "https://cdn.countryflags.com/thumbs/italy/flag-square-500.png" },
+    { name: "Spain", code: "es", flag: "/api/placeholder/80/80" },
+    { name: "Netherlands", code: "nl", flag: "/api/placeholder/80/80" },
+    { name: "Sweden", code: "se", flag: "/api/placeholder/80/80" },
+    { name: "Ireland", code: "ie", flag: "https://cdn.countryflags.com/thumbs/ireland/flag-square-500.png" },
+    { name: "New Zealand", code: "nz", flag: "/api/placeholder/80/80" },
+    { name: "Switzerland", code: "ch", flag: "https://cdn.countryflags.com/thumbs/switzerland/flag-square-500.png" },
     // Repeat the same set for continuous effect
-    { name: "USA", code: "us" },
-    { name: "UK", code: "gb" },
-    { name: "Canada", code: "ca" },
-    { name: "Australia", code: "au" },
-    { name: "Germany", code: "de" },
-    { name: "France", code: "fr" },
-    { name: "Singapore", code: "sg" },
-    { name: "Japan", code: "jp" },
-    { name: "Italy", code: "it" },
-    { name: "Spain", code: "es" },
-    { name: "Netherlands", code: "nl" },
-    { name: "Sweden", code: "se" },
-    { name: "Ireland", code: "ie" },
-    { name: "New Zealand", code: "nz" },
-    { name: "Switzerland", code: "ch" },
+    { name: "USA", code: "us", flag: "https://cdn.countryflags.com/thumbs/united-states-of-america/flag-square-500.png" },
+    { name: "UK", code: "gb", flag: "https://cdn.countryflags.com/thumbs/england/flag-square-500.png" },
+    { name: "Canada", code: "ca", flag: "https://cdn.countryflags.com/thumbs/canada/flag-square-500.png" },
+    { name: "Australia", code: "au", flag: "https://cdn.countryflags.com/thumbs/australia/flag-square-500.png" },
+    { name: "Germany", code: "de", flag: "https://cdn.countryflags.com/thumbs/germany/flag-square-500.png" },
+    { name: "France", code: "fr", flag: "https://cdn.countryflags.com/thumbs/france/flag-square-500.png" },
+    { name: "Singapore", code: "sg", flag: "/api/placeholder/80/80" },
+    { name: "Japan", code: "jp", flag: "https://cdn.countryflags.com/thumbs/japan/flag-square-500.png" },
+    { name: "Italy", code: "it", flag: "https://cdn.countryflags.com/thumbs/italy/flag-square-500.png" },
+    { name: "Spain", code: "es", flag: "/api/placeholder/80/80" },
+    { name: "Netherlands", code: "nl", flag: "/api/placeholder/80/80" },
+    { name: "Sweden", code: "se", flag: "/api/placeholder/80/80" },
+    { name: "Ireland", code: "ie", flag: "https://cdn.countryflags.com/thumbs/ireland/flag-square-500.png" },
+    { name: "New Zealand", code: "nz", flag: "/api/placeholder/80/80" },
+    { name: "Switzerland", code: "ch", flag: "https://cdn.countryflags.com/thumbs/switzerland/flag-square-500.png" },
   ];
 
   // University logos for the bottom animation
@@ -196,7 +196,7 @@ const StatsSection = ({ colors }) => {
                       boxShadow: "0 4px 14px rgba(0, 0, 0, 0.1)"
                     }}>
                     <img
-                      src={`/api/placeholder/80/80`}
+                      src={country.flag}
                       alt={`${country.name} flag`}
                       className="w-full h-full object-cover"
                     />
