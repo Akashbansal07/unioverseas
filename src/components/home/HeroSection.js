@@ -2,6 +2,8 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Globe, BookOpen } from 'lucide-react';
+// Import the image directly - this is the most reliable method
+import modelImage from '../../utils/model.png';
 
 const HeroSection = ({ colors }) => {
   return (
@@ -16,8 +18,8 @@ const HeroSection = ({ colors }) => {
         paddingTop: '64px'  /* Add padding equal to navbar height to maintain content position */
       }}>
       <div className="absolute inset-0 bg-black opacity-50"></div>
-      <div className="container mx-auto px-4 md:px-8 relative z-10">
-        <div className="flex flex-col md:flex-row items-center justify-between gap-12">
+      <div className="container mx-auto px-4 md:px-8 relative z-10 h-full py-8">
+        <div className="flex flex-col md:flex-row items-center justify-between gap-12 h-full">
           <motion.div 
             className="md:w-1/2"
             initial={{ opacity: 0, x: -50 }}
@@ -81,21 +83,24 @@ const HeroSection = ({ colors }) => {
           </motion.div>
           
           <motion.div 
-            className="md:w-1/2 relative"
+            className="md:w-1/2 relative h-full flex items-center"
             initial={{ opacity: 0, x: 50 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8, ease: "easeOut" }}
           >
             <motion.div 
-              className="relative z-10 bg-white rounded-2xl shadow-2xl overflow-hidden border-8 border-white"
+              className="relative z-10 rounded-2xl overflow-hidden h-3/4"
               whileHover={{ scale: 1.02 }}
               transition={{ duration: 0.3 }}
+              style={{ height: "100%" }} /* Full height of the container */
             >
-              <div className="aspect-w-4 aspect-h-3">
+              <div className="h-full w-full">
+                {/* Use the imported image variable */}
                 <img 
-                  src="https://images.unsplash.com/photo-1607237138185-eedd9c632b0b?q=80&w=1000&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8Y29sbGVnZSUyMGNhbXB1c3xlbnwwfHwwfHx8MA%3D%3D" 
-                  alt="Historic university building" 
+                  src={modelImage} 
+                  alt="Student model" 
                   className="object-cover w-full h-full rounded-lg"
+                  style={{ objectPosition: "center top" }} /* Align image to the top */
                 />
               </div>
             </motion.div>
