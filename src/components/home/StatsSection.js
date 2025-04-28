@@ -105,7 +105,7 @@ const StatsSection = ({ colors }) => {
     { name: "Switzerland", code: "ch", flag: "https://cdn.countryflags.com/thumbs/switzerland/flag-square-500.png" },
   ];
 
-  // Updated university logos with the ones provided
+  // Updated university logos without University of Toronto
   const universities = [
     { name: "Harvard University", country: "USA", logo: "https://upload.wikimedia.org/wikipedia/commons/7/70/Harvard_University_logo.svg" },
     { name: "Stanford University", country: "USA", logo: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR3jDkYBdQuEVMbQ1hy36otEDX9AlAFvvJy_g&s" },
@@ -114,7 +114,6 @@ const StatsSection = ({ colors }) => {
     { name: "University of Cambridge", country: "UK", logo: "https://rostrumedu.com/wp-content/uploads/al_opt_content/IMAGE/rostrumedu.com/wp-content/uploads/university-of-cambridge-2-logo-png-transparent-119x150-2.webp.bv_resized_desktop.webp.bv.webp" },
     { name: "University of Oxford", country: "UK", logo: "https://rostrumedu.com/wp-content/uploads/al_opt_content/IMAGE/rostrumedu.com/wp-content/uploads/PngItem_2788638-120x150-2.webp.bv_resized_desktop.webp.bv.webp" },
     { name: "Cornell University", country: "USA", logo: "https://rostrumedu.com/wp-content/uploads/al_opt_content/IMAGE/rostrumedu.com/wp-content/uploads/Cornell_University_seal.svg_-150x150-2.webp.bv_resized_desktop.webp.bv.webp" },
-    { name: "University of Toronto", country: "Canada", logo: "https://fundit.fr/sites/default/files/styles/max_650x650/public/actors/2527-universite-toronto.png?itok=mPR77h6x" },
     // Repeat for continuous effect
     { name: "Harvard University", country: "USA", logo: "https://upload.wikimedia.org/wikipedia/commons/7/70/Harvard_University_logo.svg" },
     { name: "Stanford University", country: "USA", logo: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR3jDkYBdQuEVMbQ1hy36otEDX9AlAFvvJy_g&s" },
@@ -123,7 +122,6 @@ const StatsSection = ({ colors }) => {
     { name: "University of Cambridge", country: "UK", logo: "https://rostrumedu.com/wp-content/uploads/al_opt_content/IMAGE/rostrumedu.com/wp-content/uploads/university-of-cambridge-2-logo-png-transparent-119x150-2.webp.bv_resized_desktop.webp.bv.webp" },
     { name: "University of Oxford", country: "UK", logo: "https://rostrumedu.com/wp-content/uploads/al_opt_content/IMAGE/rostrumedu.com/wp-content/uploads/PngItem_2788638-120x150-2.webp.bv_resized_desktop.webp.bv.webp" },
     { name: "Cornell University", country: "USA", logo: "https://rostrumedu.com/wp-content/uploads/al_opt_content/IMAGE/rostrumedu.com/wp-content/uploads/Cornell_University_seal.svg_-150x150-2.webp.bv_resized_desktop.webp.bv.webp" },
-    { name: "University of Toronto", country: "Canada", logo: "https://fundit.fr/sites/default/files/styles/max_650x650/public/actors/2527-universite-toronto.png?itok=mPR77h6x" },
   ];
 
   const containerVariants = {
@@ -257,7 +255,7 @@ const StatsSection = ({ colors }) => {
           ))}
         </motion.div>
 
-        {/* University Logos Scroll Animation */}
+        {/* University Logos Scroll Animation - Fixed Initial Position */}
         <motion.div 
           className="mt-16"
           initial={{ opacity: 0 }}
@@ -278,8 +276,9 @@ const StatsSection = ({ colors }) => {
           <div className="relative w-full overflow-hidden py-4">
             <motion.div 
               className="flex"
+              initial={{ x: 0 }} // Start with logos visible (no empty space)
               animate={{ 
-                x: [-3500, 0] // Moving from left to right (opposite of flags)
+                x: [-2800, 0] // Adjusted value to ensure no empty space
               }}
               transition={{ 
                 repeat: Infinity,
@@ -298,26 +297,16 @@ const StatsSection = ({ colors }) => {
                   <div 
                     className="w-48 h-24 rounded-lg shadow-md overflow-hidden flex flex-col items-center justify-center bg-white p-3 mb-2" 
                   >
-                    {university.name === "University of Toronto" ? (
-                      <img
-                        src={university.logo}
-                        alt={`${university.name} logo`}
-                        className="h-full w-auto object-contain"
-                      />
-                    ) : (
-                      <>
-                        <img
-                          src={university.logo}
-                          alt={`${university.name} logo`}
-                          className="h-14 w-auto object-contain mb-1"
-                        />
-                        <div className="text-center">
-                          <span className="text-xs font-bold block" style={{ color: colors.darkPurple }}>
-                            {university.name}
-                          </span>
-                        </div>
-                      </>
-                    )}
+                    <img
+                      src={university.logo}
+                      alt={`${university.name} logo`}
+                      className="h-14 w-auto object-contain mb-1"
+                    />
+                    <div className="text-center">
+                      <span className="text-xs font-bold block" style={{ color: colors.darkPurple }}>
+                        {university.name}
+                      </span>
+                    </div>
                   </div>
                 </motion.div>
               ))}
