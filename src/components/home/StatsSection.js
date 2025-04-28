@@ -1,7 +1,46 @@
 // StatsSection.js
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Building, GraduationCap, Globe, Users } from 'lucide-react';
+
+const CountUp = ({ target, duration = 1.5 }) => {
+  const [count, setCount] = useState(0);
+  const [isInView, setIsInView] = useState(false);
+  
+  useEffect(() => {
+    if (!isInView) return;
+    
+    let startValue = 0;
+    const endValue = parseInt(target.replace(/\D/g, ''));
+    const totalFrames = Math.min(duration * 60, 100); // 60fps, max 100 frames
+    const increment = endValue / totalFrames;
+    
+    let currentFrame = 0;
+    
+    const counter = setInterval(() => {
+      currentFrame++;
+      startValue += increment;
+      
+      if (currentFrame <= totalFrames) {
+        setCount(Math.floor(startValue));
+      } else {
+        clearInterval(counter);
+        setCount(endValue);
+      }
+    }, 1000 / 60);
+    
+    return () => clearInterval(counter);
+  }, [target, duration, isInView]);
+  
+  return (
+    <motion.div
+      onViewportEnter={() => setIsInView(true)}
+      viewport={{ once: true, amount: 0.5 }}
+    >
+      {target.includes('+') ? `${count}+` : count}
+    </motion.div>
+  );
+};
 
 const StatsSection = ({ colors }) => {
   const stats = [
@@ -9,25 +48,25 @@ const StatsSection = ({ colors }) => {
       icon: <Building />,
       value: "500+",
       label: "University Partnerships Worldwide",
-      delay: 0.2
+      delay: 0.1  // Reduced from 0.2
     },
     {
       icon: <Globe />,
       value: "10+",
       label: "Countries for Study Destinations",
-      delay: 0.4
+      delay: 0.15  // Reduced from 0.4
     },
     {
       icon: <GraduationCap />,
       value: "35+",
       label: "Academic Courses and Test Prep Options",
-      delay: 0.6
+      delay: 0.2  // Reduced from 0.6
     },
     {
       icon: <Users />,
       value: "200+",
       label: "Success Stories and Counting",
-      delay: 0.8
+      delay: 0.25  // Reduced from 0.8
     }
   ];
 
@@ -97,8 +136,8 @@ const StatsSection = ({ colors }) => {
     visible: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.1,
-        delayChildren: 0.3
+        staggerChildren: 0.05,  // Faster staggering (was 0.1)
+        delayChildren: 0.2  // Reduced from 0.3
       }
     }
   };
@@ -110,7 +149,7 @@ const StatsSection = ({ colors }) => {
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
+          transition={{ duration: 0.3 }}  // Faster transition (was 0.6)
           className="text-center mb-10"
         >
           <h2 className="text-3xl md:text-4xl font-bold mb-2" style={{ color: colors.darkPurple }}>
@@ -140,7 +179,7 @@ const StatsSection = ({ colors }) => {
               transition={{ 
                 repeat: Infinity,
                 repeatType: "loop",
-                duration: 40, // Slower speed for better visibility
+                duration: 40,
                 ease: "linear"
               }}
               style={{ width: "fit-content" }}
@@ -187,10 +226,10 @@ const StatsSection = ({ colors }) => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ 
-                duration: 0.6, 
+                duration: 0.4,  // Faster transition (was 0.6)
                 delay: stat.delay,
                 type: "spring",
-                stiffness: 100
+                stiffness: 200  // Increased stiffness for snappier animation (was 100)
               }}
             >
               <motion.div 
@@ -204,7 +243,7 @@ const StatsSection = ({ colors }) => {
                   scale: 1.1,
                   backgroundColor: colors.neonGreen
                 }}
-                transition={{ duration: 0.5 }}
+                transition={{ duration: 0.3 }}  // Faster transition (was 0.5)
               >
                 {React.cloneElement(stat.icon, { size: 24, strokeWidth: 1.5 })}
               </motion.div>
@@ -214,9 +253,9 @@ const StatsSection = ({ colors }) => {
                 initial={{ opacity: 0, scale: 0.8 }}
                 whileInView={{ opacity: 1, scale: 1 }}
                 viewport={{ once: true }}
-                transition={{ delay: stat.delay + 0.2, duration: 0.5 }}
+                transition={{ delay: stat.delay + 0.1, duration: 0.3 }}  // Faster transition (was delay + 0.2, duration 0.5)
               >
-                {stat.value}
+                <CountUp target={stat.value} duration={1.5} />
               </motion.h3>
               <p className="text-sm md:text-base text-gray-600 font-medium">{stat.label}</p>
             </motion.div>
@@ -229,7 +268,7 @@ const StatsSection = ({ colors }) => {
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.8 }}
+          transition={{ duration: 0.6 }}  // Slightly faster (was 0.8)
         >
           <motion.h3 
             className="text-xl md:text-2xl font-semibold text-center mb-8"
@@ -250,7 +289,7 @@ const StatsSection = ({ colors }) => {
               transition={{ 
                 repeat: Infinity,
                 repeatType: "loop",
-                duration: 45, // Slightly slower than flags
+                duration: 45,
                 ease: "linear"
               }}
               style={{ width: "fit-content" }}
