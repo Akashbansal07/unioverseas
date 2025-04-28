@@ -1,11 +1,44 @@
 // HeroSection.js
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Globe, BookOpen } from 'lucide-react';
 // Import the image directly - this is the most reliable method
 import modelImage from '../../utils/model.png';
 
 const HeroSection = ({ colors }) => {
+  // State to track viewport dimensions
+  const [dimensions, setDimensions] = useState({
+    height: 0,
+    width: 0,
+    aspectRatio: 0
+  });
+
+  // Effect to set dimensions on mount and update on resize
+  useEffect(() => {
+    const updateDimensions = () => {
+      const height = window.innerHeight;
+      const width = window.innerWidth;
+      setDimensions({
+        height,
+        width,
+        aspectRatio: width / height
+      });
+    };
+
+    // Initial dimensions
+    updateDimensions();
+    
+    // Update dimensions on resize
+    window.addEventListener('resize', updateDimensions);
+    
+    // Cleanup
+    return () => window.removeEventListener('resize', updateDimensions);
+  }, []);
+
+  // Determine if we should show the model image
+  // Hide when aspect ratio is portrait-like (height > width or very slightly landscape)
+  const shouldShowModel = dimensions.aspectRatio > 0.8;
+
   return (
     <section 
       className="hero-section min-h-screen flex items-center justify-center relative"
@@ -17,11 +50,15 @@ const HeroSection = ({ colors }) => {
         marginTop: '-64px', /* Compensate for the navbar height */
         paddingTop: '64px'  /* Add padding equal to navbar height to maintain content position */
       }}>
+      {/* Overlay */}
       <div className="absolute inset-0 bg-black opacity-50"></div>
+      
+      {/* Main content container */}
       <div className="container mx-auto px-4 md:px-8 relative z-10 h-full py-8">
-        <div className="flex flex-col md:flex-row items-center justify-between gap-12 h-full">
+        <div className="flex flex-col md:flex-row items-start justify-between h-full">
+          {/* Left content side */}
           <motion.div 
-            className="md:w-1/2"
+            className={`${shouldShowModel ? 'md:w-1/2' : 'w-full'} z-10`}
             initial={{ opacity: 0, x: -50 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8, ease: "easeOut" }}
@@ -81,46 +118,58 @@ const HeroSection = ({ colors }) => {
               </motion.button>
             </motion.div>
           </motion.div>
-          
-          <motion.div 
-            className="md:w-1/2 relative h-full flex items-center"
-            initial={{ opacity: 0, x: 50 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8, ease: "easeOut" }}
-          >
-            <motion.div 
-              className="relative z-10 rounded-2xl overflow-hidden h-3/4"
-              whileHover={{ scale: 1.02 }}
-              transition={{ duration: 0.3 }}
-              style={{ height: "100%" }} /* Full height of the container */
-            >
-              <div className="h-full w-full">
-                {/* Use the imported image variable */}
-                <img 
-                  src={modelImage} 
-                  alt="Student model" 
-                  className="object-cover w-full h-full rounded-lg"
-                  style={{ objectPosition: "center top" }} /* Align image to the top */
-                />
-              </div>
-            </motion.div>
-            
-            <motion.div 
-              className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-full h-full -z-10 rounded-full opacity-20"
-              style={{ backgroundColor: colors.lightPurple }}
-              animate={{ 
-                scale: [1, 1.1, 1],
-                rotate: [0, 5, 0, -5, 0],
-              }}
-              transition={{ 
-                duration: 10, 
-                repeat: Infinity,
-                repeatType: "reverse"
-              }}
-            />
-          </motion.div>
         </div>
       </div>
+      
+      {/* Image positioned separately from content flow with adjustments to show full image */}
+      {shouldShowModel && (
+        <motion.div 
+          className="hidden md:flex" // Hide on mobile, display on medium screens and up
+          style={{
+            position: 'absolute',
+            right: '5%',
+            bottom: '0',
+            width: '40%',
+            height: '90%', /* Fixed height to control vertical space */
+            zIndex: '5', /* Below the content */
+            display: 'flex',
+            alignItems: 'flex-end',
+            justifyContent: 'center',
+            overflow: 'visible'
+          }}
+          initial={{ opacity: 0, x: 100 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.8, delay: 0.5, ease: "easeOut" }}
+        >
+          <img 
+            src={modelImage} 
+            alt="Student model" 
+            style={{
+              maxWidth: '100%',
+              maxHeight: '100%',
+              objectFit: 'contain',
+              objectPosition: 'bottom',
+              display: 'block'
+            }}
+          />
+        </motion.div>
+      )}
+      
+      {/* Background effect - centered at right bottom corner */}
+      <motion.div 
+        className="absolute rounded-full opacity-20 z-0 hidden md:block" // Hide on mobile
+        style={{ 
+          backgroundColor: colors.lightPurple,
+          width: '50%',
+          height: '70%',
+          right: '-12%',  /* Positioned to extend slightly off-screen */
+          bottom: '-30%', /* Positioned to extend slightly off-screen */
+          transform: 'translate(-25%, -25%)'  /* Pull the center toward the bottom right corner */
+        }}
+        initial={{ opacity: 0, x: 200, scale: 0.8 }}
+        animate={{ opacity: 0.2, x: 0, scale: 1 }}
+        transition={{ duration: 1.2, delay: 0.2, ease: "easeOut" }}
+      />
     </section>
   );
 };
