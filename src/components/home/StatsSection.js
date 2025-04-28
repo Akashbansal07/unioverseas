@@ -86,7 +86,7 @@ const StatsSection = ({ colors }) => {
     { name: "Netherlands", code: "nl", flag: "https://cdn.countryflags.com/thumbs/netherlands/flag-square-500.png" },
     { name: "Sweden", code: "se", flag: "https://cdn.countryflags.com/thumbs/sweden/flag-square-500.png" },
     { name: "Ireland", code: "ie", flag: "https://cdn.countryflags.com/thumbs/ireland/flag-square-500.png" },
-    { name: "New Zealand", code: "nz", flag: "/api/placeholder/80/80" }, // No URL provided for New Zealand
+    { name: "New Zealand", code: "nz", flag: "https://cdn.countryflags.com/thumbs/new-zealand/flag-square-500.png" }, // No URL provided for New Zealand
     { name: "Switzerland", code: "ch", flag: "https://cdn.countryflags.com/thumbs/switzerland/flag-square-500.png" },
     // Repeat the same set for continuous effect
     { name: "USA", code: "us", flag: "https://cdn.countryflags.com/thumbs/united-states-of-america/flag-square-500.png" },
