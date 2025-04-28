@@ -1,4 +1,3 @@
-// StatsSection.js
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Building, GraduationCap, Globe, Users } from 'lucide-react';
@@ -48,25 +47,25 @@ const StatsSection = ({ colors }) => {
       icon: <Building />,
       value: "500+",
       label: "University Partnerships Worldwide",
-      delay: 0.1  // Reduced from 0.2
+      delay: 0.1
     },
     {
       icon: <Globe />,
       value: "10+",
       label: "Countries for Study Destinations",
-      delay: 0.15  // Reduced from 0.4
+      delay: 0.15
     },
     {
       icon: <GraduationCap />,
       value: "35+",
       label: "Academic Courses and Test Prep Options",
-      delay: 0.2  // Reduced from 0.6
+      delay: 0.2
     },
     {
       icon: <Users />,
       value: "200+",
       label: "Success Stories and Counting",
-      delay: 0.25  // Reduced from 0.8
+      delay: 0.25
     }
   ];
 
@@ -86,7 +85,7 @@ const StatsSection = ({ colors }) => {
     { name: "Netherlands", code: "nl", flag: "https://cdn.countryflags.com/thumbs/netherlands/flag-square-500.png" },
     { name: "Sweden", code: "se", flag: "https://cdn.countryflags.com/thumbs/sweden/flag-square-500.png" },
     { name: "Ireland", code: "ie", flag: "https://cdn.countryflags.com/thumbs/ireland/flag-square-500.png" },
-    { name: "New Zealand", code: "nz", flag: "https://cdn.countryflags.com/thumbs/new-zealand/flag-square-500.png" }, // No URL provided for New Zealand
+    { name: "New Zealand", code: "nz", flag: "https://cdn.countryflags.com/thumbs/new-zealand/flag-square-500.png" },
     { name: "Switzerland", code: "ch", flag: "https://cdn.countryflags.com/thumbs/switzerland/flag-square-500.png" },
     // Repeat the same set for continuous effect
     { name: "USA", code: "us", flag: "https://cdn.countryflags.com/thumbs/united-states-of-america/flag-square-500.png" },
@@ -102,33 +101,29 @@ const StatsSection = ({ colors }) => {
     { name: "Netherlands", code: "nl", flag: "https://cdn.countryflags.com/thumbs/netherlands/flag-square-500.png" },
     { name: "Sweden", code: "se", flag: "https://cdn.countryflags.com/thumbs/sweden/flag-square-500.png" },
     { name: "Ireland", code: "ie", flag: "https://cdn.countryflags.com/thumbs/ireland/flag-square-500.png" },
-    { name: "New Zealand", code: "nz", flag: "/api/placeholder/80/80" }, // No URL provided for New Zealand
+    { name: "New Zealand", code: "nz", flag: "https://cdn.countryflags.com/thumbs/new-zealand/flag-square-500.png" },
     { name: "Switzerland", code: "ch", flag: "https://cdn.countryflags.com/thumbs/switzerland/flag-square-500.png" },
   ];
 
-  // University logos for the bottom animation
+  // Updated university logos with the ones provided
   const universities = [
-    { name: "Harvard University", country: "USA", logo: "/api/placeholder/180/80" },
-    { name: "Oxford University", country: "UK", logo: "/api/placeholder/180/80" },
-    { name: "Stanford University", country: "USA", logo: "/api/placeholder/180/80" },
-    { name: "Massachusetts Institute of Technology", country: "USA", logo: "/api/placeholder/180/80" },
+    { name: "Harvard University", country: "USA", logo: "https://upload.wikimedia.org/wikipedia/commons/7/70/Harvard_University_logo.svg" },
+    { name: "Stanford University", country: "USA", logo: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR3jDkYBdQuEVMbQ1hy36otEDX9AlAFvvJy_g&s" },
+    { name: "Yale University", country: "USA", logo: "https://rostrumedu.com/wp-content/uploads/al_opt_content/IMAGE/rostrumedu.com/wp-content/uploads/yale-117x150-2.webp.bv_resized_desktop.webp.bv.webp" },
+    { name: "University of Michigan", country: "USA", logo: "https://rostrumedu.com/wp-content/uploads/al_opt_content/IMAGE/rostrumedu.com/wp-content/uploads/1200px-Seal_of_the_University_of_Michigan.svg_-150x150-2.webp.bv_resized_desktop.webp.bv.webp" },
+    { name: "University of Cambridge", country: "UK", logo: "https://rostrumedu.com/wp-content/uploads/al_opt_content/IMAGE/rostrumedu.com/wp-content/uploads/university-of-cambridge-2-logo-png-transparent-119x150-2.webp.bv_resized_desktop.webp.bv.webp" },
+    { name: "University of Oxford", country: "UK", logo: "https://rostrumedu.com/wp-content/uploads/al_opt_content/IMAGE/rostrumedu.com/wp-content/uploads/PngItem_2788638-120x150-2.webp.bv_resized_desktop.webp.bv.webp" },
+    { name: "Cornell University", country: "USA", logo: "https://rostrumedu.com/wp-content/uploads/al_opt_content/IMAGE/rostrumedu.com/wp-content/uploads/Cornell_University_seal.svg_-150x150-2.webp.bv_resized_desktop.webp.bv.webp" },
     { name: "University of Toronto", country: "Canada", logo: "https://fundit.fr/sites/default/files/styles/max_650x650/public/actors/2527-universite-toronto.png?itok=mPR77h6x" },
-    { name: "ETH Zurich", country: "Switzerland", logo: "/api/placeholder/180/80" },
-    { name: "University of Melbourne", country: "Australia", logo: "/api/placeholder/180/80" },
-    { name: "Imperial College London", country: "UK", logo: "/api/placeholder/180/80" },
-    { name: "National University of Singapore", country: "Singapore", logo: "/api/placeholder/180/80" },
-    { name: "University of Tokyo", country: "Japan", logo: "/api/placeholder/180/80" },
     // Repeat for continuous effect
-    { name: "Harvard University", country: "USA", logo: "/api/placeholder/180/80" },
-    { name: "Oxford University", country: "UK", logo: "/api/placeholder/180/80" },
-    { name: "Stanford University", country: "USA", logo: "/api/placeholder/180/80" },
-    { name: "Massachusetts Institute of Technology", country: "USA", logo: "/api/placeholder/180/80" },
+    { name: "Harvard University", country: "USA", logo: "https://upload.wikimedia.org/wikipedia/commons/7/70/Harvard_University_logo.svg" },
+    { name: "Stanford University", country: "USA", logo: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR3jDkYBdQuEVMbQ1hy36otEDX9AlAFvvJy_g&s" },
+    { name: "Yale University", country: "USA", logo: "https://rostrumedu.com/wp-content/uploads/al_opt_content/IMAGE/rostrumedu.com/wp-content/uploads/yale-117x150-2.webp.bv_resized_desktop.webp.bv.webp" },
+    { name: "University of Michigan", country: "USA", logo: "https://rostrumedu.com/wp-content/uploads/al_opt_content/IMAGE/rostrumedu.com/wp-content/uploads/1200px-Seal_of_the_University_of_Michigan.svg_-150x150-2.webp.bv_resized_desktop.webp.bv.webp" },
+    { name: "University of Cambridge", country: "UK", logo: "https://rostrumedu.com/wp-content/uploads/al_opt_content/IMAGE/rostrumedu.com/wp-content/uploads/university-of-cambridge-2-logo-png-transparent-119x150-2.webp.bv_resized_desktop.webp.bv.webp" },
+    { name: "University of Oxford", country: "UK", logo: "https://rostrumedu.com/wp-content/uploads/al_opt_content/IMAGE/rostrumedu.com/wp-content/uploads/PngItem_2788638-120x150-2.webp.bv_resized_desktop.webp.bv.webp" },
+    { name: "Cornell University", country: "USA", logo: "https://rostrumedu.com/wp-content/uploads/al_opt_content/IMAGE/rostrumedu.com/wp-content/uploads/Cornell_University_seal.svg_-150x150-2.webp.bv_resized_desktop.webp.bv.webp" },
     { name: "University of Toronto", country: "Canada", logo: "https://fundit.fr/sites/default/files/styles/max_650x650/public/actors/2527-universite-toronto.png?itok=mPR77h6x" },
-    { name: "ETH Zurich", country: "Switzerland", logo: "/api/placeholder/180/80" },
-    { name: "University of Melbourne", country: "Australia", logo: "/api/placeholder/180/80" },
-    { name: "Imperial College London", country: "UK", logo: "/api/placeholder/180/80" },
-    { name: "National University of Singapore", country: "Singapore", logo: "/api/placeholder/180/80" },
-    { name: "University of Tokyo", country: "Japan", logo: "/api/placeholder/180/80" },
   ];
 
   const containerVariants = {
@@ -136,8 +131,8 @@ const StatsSection = ({ colors }) => {
     visible: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.05,  // Faster staggering (was 0.1)
-        delayChildren: 0.2  // Reduced from 0.3
+        staggerChildren: 0.05,
+        delayChildren: 0.2
       }
     }
   };
@@ -149,7 +144,7 @@ const StatsSection = ({ colors }) => {
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.3 }}  // Faster transition (was 0.6)
+          transition={{ duration: 0.3 }}
           className="text-center mb-10"
         >
           <h2 className="text-3xl md:text-4xl font-bold mb-2" style={{ color: colors.darkPurple }}>
@@ -226,10 +221,10 @@ const StatsSection = ({ colors }) => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ 
-                duration: 0.4,  // Faster transition (was 0.6)
+                duration: 0.4,
                 delay: stat.delay,
                 type: "spring",
-                stiffness: 200  // Increased stiffness for snappier animation (was 100)
+                stiffness: 200
               }}
             >
               <motion.div 
@@ -243,7 +238,7 @@ const StatsSection = ({ colors }) => {
                   scale: 1.1,
                   backgroundColor: colors.neonGreen
                 }}
-                transition={{ duration: 0.3 }}  // Faster transition (was 0.5)
+                transition={{ duration: 0.3 }}
               >
                 {React.cloneElement(stat.icon, { size: 24, strokeWidth: 1.5 })}
               </motion.div>
@@ -253,7 +248,7 @@ const StatsSection = ({ colors }) => {
                 initial={{ opacity: 0, scale: 0.8 }}
                 whileInView={{ opacity: 1, scale: 1 }}
                 viewport={{ once: true }}
-                transition={{ delay: stat.delay + 0.1, duration: 0.3 }}  // Faster transition (was delay + 0.2, duration 0.5)
+                transition={{ delay: stat.delay + 0.1, duration: 0.3 }}
               >
                 <CountUp target={stat.value} duration={1.5} />
               </motion.h3>
@@ -268,7 +263,7 @@ const StatsSection = ({ colors }) => {
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.6 }}  // Slightly faster (was 0.8)
+          transition={{ duration: 0.6 }}
         >
           <motion.h3 
             className="text-xl md:text-2xl font-semibold text-center mb-8"
@@ -301,10 +296,7 @@ const StatsSection = ({ colors }) => {
                   whileHover={{ y: -5, boxShadow: "0 10px 25px -5px rgba(0, 0, 0, 0.1)" }}
                 >
                   <div 
-                    className="w-48 h-24 rounded-lg shadow-md overflow-hidden border-2 flex flex-col items-center justify-center bg-white p-3 mb-2" 
-                    style={{ 
-                      borderColor: index % 2 === 0 ? `${colors.darkPurple}40` : `${colors.lightPurple}80`,
-                    }}
+                    className="w-48 h-24 rounded-lg shadow-md overflow-hidden flex flex-col items-center justify-center bg-white p-3 mb-2" 
                   >
                     {university.name === "University of Toronto" ? (
                       <img
@@ -317,14 +309,11 @@ const StatsSection = ({ colors }) => {
                         <img
                           src={university.logo}
                           alt={`${university.name} logo`}
-                          className="h-12 w-auto object-contain mb-1"
+                          className="h-14 w-auto object-contain mb-1"
                         />
                         <div className="text-center">
                           <span className="text-xs font-bold block" style={{ color: colors.darkPurple }}>
                             {university.name}
-                          </span>
-                          <span className="text-xs text-gray-500">
-                            {university.country}
                           </span>
                         </div>
                       </>
