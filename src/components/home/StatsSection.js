@@ -69,25 +69,8 @@ const StatsSection = ({ colors }) => {
     }
   ];
 
-  // Create a single array of countries with enough flags for a continuous effect
+  // Create a single array of countries
   const countries = [
-    // First set
-    { name: "USA", code: "us", flag: "https://cdn.countryflags.com/thumbs/united-states-of-america/flag-square-500.png" },
-    { name: "UK", code: "gb", flag: "https://cdn.countryflags.com/thumbs/united-kingdom/flag-square-500.png" },
-    { name: "Canada", code: "ca", flag: "https://cdn.countryflags.com/thumbs/canada/flag-square-500.png" },
-    { name: "Australia", code: "au", flag: "https://cdn.countryflags.com/thumbs/australia/flag-square-500.png" },
-    { name: "Germany", code: "de", flag: "https://cdn.countryflags.com/thumbs/germany/flag-square-500.png" },
-    { name: "France", code: "fr", flag: "https://cdn.countryflags.com/thumbs/france/flag-square-500.png" },
-    { name: "Singapore", code: "sg", flag: "https://cdn.countryflags.com/thumbs/singapore/flag-square-500.png" },
-    { name: "Japan", code: "jp", flag: "https://cdn.countryflags.com/thumbs/japan/flag-square-500.png" },
-    { name: "Italy", code: "it", flag: "https://cdn.countryflags.com/thumbs/italy/flag-square-500.png" },
-    { name: "Spain", code: "es", flag: "https://cdn.countryflags.com/thumbs/spain/flag-square-500.png" },
-    { name: "Netherlands", code: "nl", flag: "https://cdn.countryflags.com/thumbs/netherlands/flag-square-500.png" },
-    { name: "Sweden", code: "se", flag: "https://cdn.countryflags.com/thumbs/sweden/flag-square-500.png" },
-    { name: "Ireland", code: "ie", flag: "https://cdn.countryflags.com/thumbs/ireland/flag-square-500.png" },
-    { name: "New Zealand", code: "nz", flag: "https://cdn.countryflags.com/thumbs/new-zealand/flag-square-500.png" },
-    { name: "Switzerland", code: "ch", flag: "https://cdn.countryflags.com/thumbs/switzerland/flag-square-500.png" },
-    // Repeat the same set for continuous effect
     { name: "USA", code: "us", flag: "https://cdn.countryflags.com/thumbs/united-states-of-america/flag-square-500.png" },
     { name: "UK", code: "gb", flag: "https://cdn.countryflags.com/thumbs/united-kingdom/flag-square-500.png" },
     { name: "Canada", code: "ca", flag: "https://cdn.countryflags.com/thumbs/canada/flag-square-500.png" },
@@ -105,16 +88,8 @@ const StatsSection = ({ colors }) => {
     { name: "Switzerland", code: "ch", flag: "https://cdn.countryflags.com/thumbs/switzerland/flag-square-500.png" },
   ];
 
-  // Updated university logos without University of Toronto
+  // University logos array
   const universities = [
-    { name: "Harvard University", country: "USA", logo: "https://upload.wikimedia.org/wikipedia/commons/7/70/Harvard_University_logo.svg" },
-    { name: "Stanford University", country: "USA", logo: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR3jDkYBdQuEVMbQ1hy36otEDX9AlAFvvJy_g&s" },
-    { name: "Yale University", country: "USA", logo: "https://rostrumedu.com/wp-content/uploads/al_opt_content/IMAGE/rostrumedu.com/wp-content/uploads/yale-117x150-2.webp.bv_resized_desktop.webp.bv.webp" },
-    { name: "University of Michigan", country: "USA", logo: "https://rostrumedu.com/wp-content/uploads/al_opt_content/IMAGE/rostrumedu.com/wp-content/uploads/1200px-Seal_of_the_University_of_Michigan.svg_-150x150-2.webp.bv_resized_desktop.webp.bv.webp" },
-    { name: "University of Cambridge", country: "UK", logo: "https://rostrumedu.com/wp-content/uploads/al_opt_content/IMAGE/rostrumedu.com/wp-content/uploads/university-of-cambridge-2-logo-png-transparent-119x150-2.webp.bv_resized_desktop.webp.bv.webp" },
-    { name: "University of Oxford", country: "UK", logo: "https://rostrumedu.com/wp-content/uploads/al_opt_content/IMAGE/rostrumedu.com/wp-content/uploads/PngItem_2788638-120x150-2.webp.bv_resized_desktop.webp.bv.webp" },
-    { name: "Cornell University", country: "USA", logo: "https://rostrumedu.com/wp-content/uploads/al_opt_content/IMAGE/rostrumedu.com/wp-content/uploads/Cornell_University_seal.svg_-150x150-2.webp.bv_resized_desktop.webp.bv.webp" },
-    // Repeat for continuous effect
     { name: "Harvard University", country: "USA", logo: "https://upload.wikimedia.org/wikipedia/commons/7/70/Harvard_University_logo.svg" },
     { name: "Stanford University", country: "USA", logo: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR3jDkYBdQuEVMbQ1hy36otEDX9AlAFvvJy_g&s" },
     { name: "Yale University", country: "USA", logo: "https://rostrumedu.com/wp-content/uploads/al_opt_content/IMAGE/rostrumedu.com/wp-content/uploads/yale-117x150-2.webp.bv_resized_desktop.webp.bv.webp" },
@@ -133,6 +108,96 @@ const StatsSection = ({ colors }) => {
         delayChildren: 0.2
       }
     }
+  };
+
+  // Create a function to render flag items with dynamic keys
+  const renderFlags = (isReversed = false) => {
+    // Need to duplicate the array to create a continuous effect
+    const itemsToRender = [...countries, ...countries, ...countries];
+    
+    return (
+      <motion.div 
+        className="flex"
+        animate={{ 
+          x: isReversed ? [0, 3200] : [0, -3200] 
+        }}
+        transition={{ 
+          repeat: Infinity,
+          repeatType: "loop",
+          duration: 40,
+          ease: "linear"
+        }}
+        style={{ width: "fit-content" }}
+      >
+        {itemsToRender.map((country, index) => (
+          <motion.div
+            key={`${country.code}-${index}-${isReversed ? 'rev' : 'fwd'}`}
+            className="mx-8 flex flex-col items-center"
+            whileHover={{ y: -5, scale: 1.1 }}
+          >
+            <div className="w-16 h-16 md:w-20 md:h-20 rounded-full overflow-hidden border-3 shadow-lg mb-2" 
+              style={{ 
+                borderColor: index % 2 === 0 ? colors.neonGreen : colors.lightPurple,
+                boxShadow: "0 4px 14px rgba(0, 0, 0, 0.1)"
+              }}>
+              <img
+                src={country.flag}
+                alt={`${country.name} flag`}
+                className="w-full h-full object-cover"
+              />
+            </div>
+            <span className="text-sm font-medium" style={{ color: colors.darkPurple }}>
+              {country.name}
+            </span>
+          </motion.div>
+        ))}
+      </motion.div>
+    );
+  };
+
+  // Create a function to render university logos with dynamic keys and direction
+  const renderUniversities = (isReversed = false) => {
+    // Need to duplicate the array to create a continuous effect
+    const itemsToRender = [...universities, ...universities, ...universities, ...universities, ...universities];
+    
+    return (
+      <motion.div 
+        className="flex"
+        animate={{ 
+          x: isReversed ? [0, 3200] : [0, -3200]
+        }}
+        transition={{ 
+          repeat: Infinity,
+          repeatType: "loop",
+          duration: 45,
+          ease: "linear"
+        }}
+        style={{ width: "fit-content" }}
+      >
+        {itemsToRender.map((university, index) => (
+          <motion.div
+            key={`university-${index}-${isReversed ? 'rev' : 'fwd'}`}
+            className="mx-6 flex flex-col items-center"
+            whileHover={{ y: -5, boxShadow: "0 10px 25px -5px rgba(0, 0, 0, 0.1)" }}
+          >
+            <div 
+              className="w-48 h-24 rounded-lg shadow-md overflow-hidden flex flex-col items-center justify-center bg-white p-3 mb-2" 
+            >
+              <img
+                src={university.logo}
+                alt={`${university.name} logo`}
+                className="h-14 w-auto object-contain mb-1"
+              />
+              <div className="text-center">
+                <span className="text-xs font-bold block" style={{ color: colors.darkPurple }}>
+                  {university.name}
+                </span>
+              </div>
+            </div>
+          </motion.div>
+        ))}
+      </motion.div>
+    );
   };
 
   return (
@@ -164,42 +229,7 @@ const StatsSection = ({ colors }) => {
           </motion.h3>
           
           <div className="relative w-full overflow-hidden py-4">
-            <motion.div 
-              className="flex"
-              animate={{ 
-                x: [0, -3200] // Long distance to ensure smooth loop
-              }}
-              transition={{ 
-                repeat: Infinity,
-                repeatType: "loop",
-                duration: 40,
-                ease: "linear"
-              }}
-              style={{ width: "fit-content" }}
-            >
-              {countries.map((country, index) => (
-                <motion.div
-                  key={`${country.code}-${index}`}
-                  className="mx-8 flex flex-col items-center" // Increased spacing between flags
-                  whileHover={{ y: -5, scale: 1.1 }}
-                >
-                  <div className="w-16 h-16 md:w-20 md:h-20 rounded-full overflow-hidden border-3 shadow-lg mb-2" 
-                    style={{ 
-                      borderColor: index % 2 === 0 ? colors.neonGreen : colors.lightPurple,
-                      boxShadow: "0 4px 14px rgba(0, 0, 0, 0.1)"
-                    }}>
-                    <img
-                      src={country.flag}
-                      alt={`${country.name} flag`}
-                      className="w-full h-full object-cover"
-                    />
-                  </div>
-                  <span className="text-sm font-medium" style={{ color: colors.darkPurple }}>
-                    {country.name}
-                  </span>
-                </motion.div>
-              ))}
-            </motion.div>
+            {renderFlags()}
           </div>
         </div>
 
@@ -255,7 +285,7 @@ const StatsSection = ({ colors }) => {
           ))}
         </motion.div>
 
-        {/* University Logos Scroll Animation - Fixed Initial Position */}
+        {/* University Logos Scroll Animation - Now with two rows moving in opposite directions */}
         <motion.div 
           className="mt-16"
           initial={{ opacity: 0 }}
@@ -273,44 +303,14 @@ const StatsSection = ({ colors }) => {
             Our Partner Universities
           </motion.h3>
           
+          {/* First row - Default direction */}
           <div className="relative w-full overflow-hidden py-4">
-            <motion.div 
-              className="flex"
-              initial={{ x: 0 }} // Start with logos visible (no empty space)
-              animate={{ 
-                x: [-2800, 0] // Adjusted value to ensure no empty space
-              }}
-              transition={{ 
-                repeat: Infinity,
-                repeatType: "loop",
-                duration: 45,
-                ease: "linear"
-              }}
-              style={{ width: "fit-content" }}
-            >
-              {universities.map((university, index) => (
-                <motion.div
-                  key={`university-${index}`}
-                  className="mx-6 flex flex-col items-center"
-                  whileHover={{ y: -5, boxShadow: "0 10px 25px -5px rgba(0, 0, 0, 0.1)" }}
-                >
-                  <div 
-                    className="w-48 h-24 rounded-lg shadow-md overflow-hidden flex flex-col items-center justify-center bg-white p-3 mb-2" 
-                  >
-                    <img
-                      src={university.logo}
-                      alt={`${university.name} logo`}
-                      className="h-14 w-auto object-contain mb-1"
-                    />
-                    <div className="text-center">
-                      <span className="text-xs font-bold block" style={{ color: colors.darkPurple }}>
-                        {university.name}
-                      </span>
-                    </div>
-                  </div>
-                </motion.div>
-              ))}
-            </motion.div>
+            {renderUniversities(false)}
+          </div>
+          
+          {/* Second row - Reverse direction */}
+          <div className="relative w-full overflow-hidden py-4 mt-6">
+            {renderUniversities(true)}
           </div>
         </motion.div>
       </div>
