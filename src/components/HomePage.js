@@ -14,7 +14,6 @@ const HomePage = ({ colors, contactSectionRef }) => {
       <StatsSection colors={colors} />
       <ServicesSection colors={colors} />
       <SuccessStoriesSection colors={colors} />
-      <EventsSection colors={colors} />
       <div id="contact-section" ref={contactSectionRef}>
         <ContactSection colors={colors} />
       </div>
