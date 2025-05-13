@@ -10,7 +10,7 @@ const AboutUsPage = ({ colors = {
   darkPurple: "#4F46E5", 
   lightPurple: "#A5B4FC", 
   neonGreen: "#4ADE80"
-} }) => {
+}, onContactClick }) => {
   const [activeTab, setActiveTab] = useState(0);
   
   const fadeIn = {
@@ -69,53 +69,55 @@ const AboutUsPage = ({ colors = {
     }
   ];
 
+  // Updated values from paste-2.txt
   const values = [
     {
-      title: "Student-Centered Decisions",
-      description: "Every recommendation we make is based solely on what's best for your educational journey",
+      title: "Academic Integrity",
+      description: "We uphold the highest standards of honesty and ethical conduct in all our educational practices. We empower students to achieve success through legitimate skill development.",
       icon: <Users />
     },
     {
-      title: "Full Disclosure",
-      description: "We're transparent about our processes, partnerships, and the reasoning behind our recommendations",
+      title: "Excellence Without Compromise",
+      description: "We pursue excellence in everything we do—from our teaching methodologies to our admissions guidance. We continuously update our curriculum and refine our processes.",
       icon: <MessageCircle />
     },
     {
-      title: "Academic Honesty",
-      description: "We help you showcase your strengths while maintaining complete authenticity in applications",
+      title: "Student-Centered Approach",
+      description: "Our students' best interests guide every decision we make, creating personalized pathways rather than one-size-fits-all solutions.",
       icon: <BookOpen />
     },
     {
-      title: "Educational Quality",
-      description: "We never compromise on the quality of our tutoring or guidance to cut corners",
+      title: "Global Perspective",
+      description: "We prepare students not just for international education but for global citizenship, fostering cultural awareness and adaptability.",
       icon: <Award />
     },
     {
-      title: "Measured Success",
-      description: "We define our success by your educational outcomes and satisfaction, not by our profit margins",
+      title: "Transparency and Trust",
+      description: "We provide honest assessments, realistic expectations, and complete information, allowing families to make informed decisions with confidence.",
       icon: <Shield />
     }
   ];
   
+  // Updated approaches from paste-2.txt
   const approaches = [
     {
-      title: "Transparency First",
-      description: "We openly discuss all options available to you, your best interest is our only consideration",
+      title: "Personalized Learning Pathways",
+      description: "We recognize that each student's journey is unique. Our educators create a customized plan tailored specifically to your goals and learning style.",
       icon: <Check />
     },
     {
-      title: "Evidence-Based Recommendations",
-      description: "Our advice is grounded in careful analysis of your academic profile, aspirations, and real-world admissions data",
+      title: "Expert Specialized Instruction",
+      description: "Our faculty consists of subject matter experts specifically trained in SAT, ACT, AP, IGCSE, IB, and GCSE curricula for targeted preparation.",
       icon: <BookOpen />
     },
     {
-      title: "Subject Matter Expertise",
-      description: "We match students with tutors who have expertise in their subjects and curricula, ensuring authentic learning",
+      title: "Data-Driven Strategies",
+      description: "Our teaching methods and admissions recommendations are powered by comprehensive data analysis to maximize your academic performance.",
       icon: <GraduationCap />
     },
     {
-      title: "Long-term Perspective",
-      description: "Our recommendations prioritize your long-term educational and career success, not short-term conveniences or metrics",
+      title: "Holistic Development",
+      description: "We develop the whole student through critical thinking workshops and personal growth opportunities to ensure you thrive in an international environment.",
       icon: <Globe />
     }
   ];
@@ -141,7 +143,7 @@ const AboutUsPage = ({ colors = {
               </p>
             </div>
             
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
+            <div className="grid grid-cols-1 gap-8 mb-12">
               <div>
                 <p className="mb-6 text-lg text-gray-700">
                   UniOversea was born from a commitment to transform how educational guidance services operate. After years of witnessing industry practices where student outcomes were secondary to business interests, our founder set out to create a different kind of educational consultancy—one where transparency, ethics, and student success truly come first.
@@ -151,33 +153,6 @@ const AboutUsPage = ({ colors = {
                   Drawing on extensive experience both in tutoring and consulting, our founder recognized the critical need for an education service that would put the student needs first.
                 </p>
               </div>
-              
-              <motion.div 
-                className="relative"
-                initial={{ opacity: 0, x: 30 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.8, ease: "easeOut" }}
-              >
-                <img 
-                  src="/api/placeholder/500/400" 
-                  alt="UniOversea founding team" 
-                  className="w-full h-auto rounded-xl shadow-xl"
-                />
-                
-                <motion.div 
-                  className="absolute -z-10 -bottom-4 -right-4 w-full h-full rounded-xl"
-                  style={{ backgroundColor: colors.neonGreen, opacity: 0.3 }}
-                  animate={{ 
-                    rotate: [0, 1, 0, -1, 0],
-                    scale: [1, 1.01, 1, 0.99, 1]
-                  }}
-                  transition={{ 
-                    duration: 6, 
-                    repeat: Infinity,
-                    repeatType: "reverse"
-                  }}
-                />
-              </motion.div>
             </div>
             
             <p className="mb-6 text-lg text-gray-700">
@@ -214,35 +189,8 @@ const AboutUsPage = ({ colors = {
               </p>
             </div>
             
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
-              <motion.div 
-                className="relative order-2 md:order-1"
-                initial={{ opacity: 0, x: -30 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.8, ease: "easeOut" }}
-              >
-                <img 
-                  src="/api/placeholder/500/400" 
-                  alt="UniOversea mission" 
-                  className="w-full h-auto rounded-xl shadow-xl"
-                />
-                
-                <motion.div 
-                  className="absolute -z-10 -bottom-4 -left-4 w-full h-full rounded-xl"
-                  style={{ backgroundColor: colors.lightPurple, opacity: 0.3 }}
-                  animate={{ 
-                    rotate: [0, -1, 0, 1, 0],
-                    scale: [1, 0.99, 1, 1.01, 1]
-                  }}
-                  transition={{ 
-                    duration: 6, 
-                    repeat: Infinity,
-                    repeatType: "reverse"
-                  }}
-                />
-              </motion.div>
-              
-              <div className="order-1 md:order-2">
+            <div className="grid grid-cols-1 gap-8 mb-12">
+              <div>
                 <p className="mb-6 text-lg text-gray-700">
                   At UniOversea, our mission is to restore trust to educational guidance through unwavering commitment to student-centered outcomes. We strive to:
                 </p>
@@ -306,8 +254,8 @@ const AboutUsPage = ({ colors = {
               </p>
             </div>
             
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
-              <div className="md:col-span-2">
+            <div className="grid grid-cols-1 gap-8 mb-12">
+              <div className="text-center">
                 <p className="mb-6 text-lg text-gray-700">
                   UniOversea was founded by an education specialist with a clear vision: to create a student-first alternative to the status quo in educational consulting.
                 </p>
@@ -324,33 +272,6 @@ const AboutUsPage = ({ colors = {
                   This commitment to student-centered guidance drives every aspect of UniOversea's operations and shapes our unique approach to both tutoring and international education counseling.
                 </p>
               </div>
-              
-              <motion.div
-                className="relative"
-                initial={{ opacity: 0, scale: 0.9 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ duration: 0.8, ease: "easeOut" }}
-              >
-                <img 
-                  src="/api/placeholder/300/400" 
-                  alt="UniOversea founder" 
-                  className="w-full h-auto rounded-xl shadow-xl"
-                />
-                
-                <motion.div 
-                  className="absolute -z-10 -bottom-4 -right-4 w-full h-full rounded-xl"
-                  style={{ backgroundColor: colors.darkPurple, opacity: 0.2 }}
-                  animate={{ 
-                    rotate: [0, 1, 0, -1, 0],
-                    scale: [1, 1.01, 1, 0.99, 1]
-                  }}
-                  transition={{ 
-                    duration: 5, 
-                    repeat: Infinity,
-                    repeatType: "reverse"
-                  }}
-                />
-              </motion.div>
             </div>
             
             <div className="bg-white p-6 rounded-xl shadow-md border-t-4" style={{ borderColor: colors.darkPurple }}>
@@ -391,7 +312,7 @@ const AboutUsPage = ({ colors = {
             </div>
             
             <p className="mb-8 text-lg text-gray-700">
-              Our approach to educational guidance is built on principles that place your needs and aspirations at the center of every recommendation we make. We believe in a transparent, evidence-based process that consistently leads to better educational outcomes.
+              We provide end-to-end educational services that combine test preparation, curriculum support, and overseas admissions counseling. Our integrated approach ensures students receive seamless guidance from academic excellence through to international university placement.
             </p>
             
             <motion.div 
@@ -511,11 +432,11 @@ const AboutUsPage = ({ colors = {
       <div className="bg-gradient-to-r from-white to-blue-50 py-16 md:py-24">
         <div className="container mx-auto px-4">
           <div className="max-w-6xl mx-auto">
-            <div className="flex flex-col md:flex-row items-center">
+            <div className="flex flex-col items-center">
               <motion.div 
-                className="md:w-1/2 mb-10 md:mb-0 md:pr-12"
-                initial={{ opacity: 0, x: -30 }}
-                animate={{ opacity: 1, x: 0 }}
+                className="md:w-full text-center"
+                initial={{ opacity: 0, y: -20 }}
+                animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, ease: "easeOut" }}
               >
                 <h1 
@@ -527,8 +448,9 @@ const AboutUsPage = ({ colors = {
                 <p className="text-xl md:text-2xl text-gray-700 mb-8">
                   Founded on a commitment to transform educational guidance with transparency and student-first principles.
                 </p>
-                <div className="flex flex-col sm:flex-row gap-4">
+                <div className="flex flex-col sm:flex-row gap-4 justify-center">
                   <motion.button
+                    onClick={onContactClick}
                     className="py-3 px-6 rounded-full text-white font-medium shadow-lg flex items-center justify-center gap-2"
                     style={{ backgroundColor: colors.darkPurple }}
                     whileHover={{ scale: 1.05 }}
@@ -538,63 +460,22 @@ const AboutUsPage = ({ colors = {
                     Contact Us
                   </motion.button>
                   <motion.button
+                    onClick={() => setActiveTab(2)}
                     className="py-3 px-6 rounded-full font-medium shadow-lg flex items-center justify-center gap-2"
                     style={{ backgroundColor: colors.neonGreen, color: colors.darkPurple }}
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.98 }}
                   >
-                    <Users size={20} />
-                    Meet Our Team
+                    <GraduationCap size={20} />
+                    Meet Our Founder
                   </motion.button>
                 </div>
-              </motion.div>
-              
-              <motion.div 
-                className="md:w-1/2 relative"
-                initial={{ opacity: 0, x: 30 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.8, ease: "easeOut" }}
-              >
-                <img 
-                  src="/api/placeholder/600/400" 
-                  alt="The UniOversea team" 
-                  className="w-full h-auto rounded-xl shadow-xl"
-                />
-                <motion.div 
-                  className="absolute -bottom-5 -right-5 bg-white p-4 rounded-lg shadow-lg"
-                  initial={{ opacity: 0, scale: 0.8 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  transition={{ delay: 0.5, duration: 0.5 }}
-                >
-                  <div className="flex items-center gap-2">
-                    <div className="w-10 h-10 rounded-full flex items-center justify-center" style={{ backgroundColor: colors.neonGreen }}>
-                      <Smile size={24} color={colors.darkPurple} />
-                    </div>
-                    <div className="text-sm">
-                      <p className="font-bold" style={{ color: colors.darkPurple }}>Student-First Philosophy</p>
-                      <p className="text-gray-500">Honest guidance, always</p>
-                    </div>
-                  </div>
-                </motion.div>
-                
-                <motion.div 
-                  className="absolute -z-10 -bottom-4 -right-4 w-full h-full rounded-xl"
-                  style={{ backgroundColor: colors.neonGreen, opacity: 0.3 }}
-                  animate={{ 
-                    rotate: [0, 1, 0, -1, 0],
-                    scale: [1, 1.01, 1, 0.99, 1]
-                  }}
-                  transition={{ 
-                    duration: 6, 
-                    repeat: Infinity,
-                    repeatType: "reverse"
-                  }}
-                />
               </motion.div>
             </div>
           </div>
         </div>
       </div>
+      
       
       {/* Tab Navigation */}
       <div className="sticky top-16 bg-white shadow-md z-10 mb-4">
@@ -639,16 +520,11 @@ const AboutUsPage = ({ colors = {
             </p>
             <div className="flex flex-col sm:flex-row justify-center gap-4">
               <button
+                onClick={onContactClick}
                 className="py-3 px-6 rounded-full text-white font-medium shadow-lg"
                 style={{ backgroundColor: colors.darkPurple }}
               >
                 Schedule a Consultation
-              </button>
-              <button
-                className="py-3 px-6 rounded-full font-medium shadow-lg"
-                style={{ backgroundColor: colors.neonGreen, color: colors.darkPurple }}
-              >
-                Explore Our Services
               </button>
             </div>
           </div>

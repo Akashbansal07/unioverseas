@@ -1,9 +1,82 @@
 // ContactSection.js
-import React from 'react';
+import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Send, Check } from 'lucide-react';
+import { Send, Check, Loader2 } from 'lucide-react';
 
 const ContactSection = ({ colors }) => {
+  // Form state
+  const [formData, setFormData] = useState({
+    fullName: '',
+    email: '',
+    phone: '',
+    serviceInterest: '',
+    message: ''
+  });
+  
+  // Form submission states
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitSuccess, setSubmitSuccess] = useState(false);
+  const [submitError, setSubmitError] = useState(null);
+  
+  // Handle input changes
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData(prevState => ({
+      ...prevState,
+      [name]: value
+    }));
+  };
+  
+  // Handle form submission
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+    setSubmitError(null);
+    
+    try {
+      // Replace with your actual Google Apps Script deployment ID
+      const GOOGLE_APPS_SCRIPT_URL = process.env.REACT_APP_GOOGLE_SCRIPT_URL;
+      
+      // Create form data for submission
+      const formDataToSend = new FormData();
+      
+      // Add form fields to FormData
+      Object.keys(formData).forEach(key => {
+        formDataToSend.append(key, formData[key]);
+      });
+      
+      // Send data to Google Sheet
+      const response = await fetch(GOOGLE_APPS_SCRIPT_URL, {
+        method: 'POST',
+        body: formDataToSend,
+        mode: 'no-cors' // This is important for CORS issues
+      });
+      
+      // Handle success (note: with no-cors we can't actually read the response)
+      setSubmitSuccess(true);
+      
+      // Reset form after successful submission
+      setFormData({
+        fullName: '',
+        email: '',
+        phone: '',
+        serviceInterest: '',
+        message: ''
+      });
+      
+      // Reset success message after 5 seconds
+      setTimeout(() => {
+        setSubmitSuccess(false);
+      }, 5000);
+      
+    } catch (error) {
+      console.error('Error submitting form:', error);
+      setSubmitError('There was an error submitting your request. Please try again.');
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
   return (
     <section className="py-20 bg-gradient-to-b from-gray-50 to-white">
       <div className="container mx-auto px-4 md:px-8">
@@ -91,7 +164,30 @@ const ContactSection = ({ colors }) => {
                   Request Free Consultation
                 </motion.h3>
                 
-                <form>
+                {submitSuccess ? (
+                  <motion.div
+                    className="p-4 rounded-lg bg-green-50 border border-green-200 text-green-800 mb-6"
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                  >
+                    <div className="flex items-center">
+                      <Check className="mr-2" size={20} />
+                      <p className="font-medium">Thank you! Your consultation request has been submitted successfully.</p>
+                    </div>
+                  </motion.div>
+                ) : null}
+                
+                {submitError ? (
+                  <motion.div
+                    className="p-4 rounded-lg bg-red-50 border border-red-200 text-red-800 mb-6"
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                  >
+                    <p className="font-medium">{submitError}</p>
+                  </motion.div>
+                ) : null}
+                
+                <form onSubmit={handleSubmit}>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
                     <motion.div
                       initial={{ opacity: 0, y: 20 }}
@@ -102,8 +198,12 @@ const ContactSection = ({ colors }) => {
                       <label className="block text-gray-700 mb-2 font-medium">Full Name</label>
                       <input 
                         type="text" 
+                        name="fullName"
+                        value={formData.fullName}
+                        onChange={handleChange}
                         className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-purple-400"
                         placeholder="Your name"
+                        required
                       />
                     </motion.div>
                     
@@ -116,8 +216,12 @@ const ContactSection = ({ colors }) => {
                       <label className="block text-gray-700 mb-2 font-medium">Email</label>
                       <input 
                         type="email" 
+                        name="email"
+                        value={formData.email}
+                        onChange={handleChange}
                         className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-purple-400"
                         placeholder="Your email"
+                        required
                       />
                     </motion.div>
                   </div>
@@ -132,8 +236,12 @@ const ContactSection = ({ colors }) => {
                       <label className="block text-gray-700 mb-2 font-medium">Phone</label>
                       <input 
                         type="tel" 
+                        name="phone"
+                        value={formData.phone}
+                        onChange={handleChange}
                         className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-purple-400"
                         placeholder="Your phone number"
+                        required
                       />
                     </motion.div>
                     
@@ -145,7 +253,11 @@ const ContactSection = ({ colors }) => {
                     >
                       <label className="block text-gray-700 mb-2 font-medium">Service Interest</label>
                       <select 
+                        name="serviceInterest"
+                        value={formData.serviceInterest}
+                        onChange={handleChange}
                         className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-purple-400 bg-white"
+                        required
                       >
                         <option value="">Select a service</option>
                         <option value="tutoring">Tutoring</option>
@@ -164,25 +276,39 @@ const ContactSection = ({ colors }) => {
                   >
                     <label className="block text-gray-700 mb-2 font-medium">Message</label>
                     <textarea 
+                      name="message"
+                      value={formData.message}
+                      onChange={handleChange}
                       className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-purple-400 min-h-32"
                       placeholder="Tell us about your educational goals"
                       rows={4}
+                      required
                     ></textarea>
                   </motion.div>
                   
                   <motion.button
                     type="submit"
+                    disabled={isSubmitting}
                     className="w-full flex items-center justify-center gap-2 py-3 rounded-lg font-medium text-white"
                     style={{ backgroundColor: colors.darkPurple }}
-                    whileHover={{ scale: 1.02, backgroundColor: "#4340D0" }}
-                    whileTap={{ scale: 0.98 }}
+                    whileHover={{ scale: isSubmitting ? 1 : 1.02, backgroundColor: isSubmitting ? colors.darkPurple : "#4340D0" }}
+                    whileTap={{ scale: isSubmitting ? 1 : 0.98 }}
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     transition={{ duration: 0.5, delay: 0.8 }}
                   >
-                    <Send size={20} />
-                    Submit Request
+                    {isSubmitting ? (
+                      <>
+                        <Loader2 size={20} className="animate-spin" />
+                        Processing...
+                      </>
+                    ) : (
+                      <>
+                        <Send size={20} />
+                        Submit Request
+                      </>
+                    )}
                   </motion.button>
                 </form>
               </div>

@@ -3,9 +3,9 @@ import React, { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { 
   Globe, Check, ChevronRight, ArrowRight, MapPin, 
-  GraduationCap, FilePlus, Users, Calendar, Briefcase,
-  FileText, CreditCard, Plane, School, CheckCircle, Star, Plus,
-  ChevronLeft, ChevronDown
+  GraduationCap, FilePlus, Users, Calendar, 
+  FileText, CreditCard, Plane, School, CheckCircle,
+  ChevronLeft, ChevronDown, Briefcase
 } from 'lucide-react';
 
 // 3D Carousel Component
@@ -271,7 +271,7 @@ const StudyAbroadPage = ({ colors }) => {
     }
   };
 
-  // Tabs for the page
+  // Tabs for the page - Removed counselors, success stories, and packages
   const tabs = [
     { 
       id: 'overview', 
@@ -292,24 +292,6 @@ const StudyAbroadPage = ({ colors }) => {
       component: <DestinationsContent colors={colors} activeDestination={activeDestination} setActiveDestination={setActiveDestination} />
     },
     { 
-      id: 'counselors', 
-      label: 'Counselors', 
-      icon: <Users size={18} />,
-      component: <CounselorsContent colors={colors} />
-    },
-    { 
-      id: 'success', 
-      label: 'Success Stories', 
-      icon: <Star size={18} />,
-      component: <SuccessContent colors={colors} />
-    },
-    { 
-      id: 'packages', 
-      label: 'Packages', 
-      icon: <Briefcase size={18} />,
-      component: <PackagesContent colors={colors} />
-    },
-    { 
       id: 'faq', 
       label: 'FAQ', 
       icon: <CheckCircle size={18} />,
@@ -327,112 +309,112 @@ const StudyAbroadPage = ({ colors }) => {
 
   return (
     <div className="bg-gray-50 min-h-screen">
-   {/* Hero Section */}
-<div 
-  className="py-24 md:py-32 lg:py-40 bg-cover bg-center" 
-  style={{ 
-    backgroundImage: "url('https://images.unsplash.com/photo-1495149905644-c9f27692c2c3?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8N3x8ZmxhZ3N8ZW58MHx8MHx8fDA%3D')",
-    backgroundColor: "rgba(0,0,0,0.7)",
-    backgroundBlendMode: "overlay"
-  }}
->
-  <div className="container mx-auto px-4">
-    <div className="max-w-6xl mx-auto">
-      <div className="flex flex-col md:flex-row items-center">
-        <motion.div 
-          className="md:w-1/2 mb-10 md:mb-0 md:pr-12"
-          initial={{ opacity: 0, x: -30 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.8, ease: "easeOut" }}
-        >
-          <h1 
-            className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 text-white"
-          >
-            Study Abroad Counseling
-          </h1>
-          <p className="text-xl md:text-2xl text-white mb-8">
-            Expert guidance for your international education journey, with your academic future as our only priority.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4">
-            <motion.button
-              className="py-3 px-6 rounded-full text-white font-medium shadow-lg flex items-center justify-center gap-2"
-              style={{ backgroundColor: colors.darkPurple }}
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.98 }}
-            >
-              <Users size={20} />
-              Free Consultation
-            </motion.button>
-            <motion.button
-              className="py-3 px-6 rounded-full font-medium shadow-lg flex items-center justify-center gap-2"
-              style={{ backgroundColor: colors.neonGreen, color: colors.darkPurple }}
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.98 }}
-            >
-              <Globe size={20} />
-              Explore Destinations
-            </motion.button>
-          </div>
-        </motion.div>
-        
-        <motion.div 
-          className="md:w-1/2 relative"
-          initial={{ opacity: 0, x: 30 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.8, ease: "easeOut" }}
-        >
-          <img 
-            src="/api/placeholder/600/400" 
-            alt="Students studying abroad" 
-            className="w-full h-auto rounded-xl shadow-xl"
-          />
-          <motion.div 
-            className="absolute -bottom-5 -right-5 bg-white p-4 rounded-lg shadow-lg"
-            initial={{ opacity: 0, scale: 0.8 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ delay: 0.5, duration: 0.5 }}
-          >
-            <div className="flex items-center gap-2">
-              <div className="flex -space-x-2">
-                {[...Array(3)].map((_, i) => (
-                  <div 
-                    key={i} 
-                    className="w-8 h-8 rounded-full border-2 border-white overflow-hidden bg-gray-200"
-                    style={{ zIndex: 3 - i }}
+      {/* Hero Section */}
+      <div 
+        className="py-24 md:py-32 lg:py-40 bg-cover bg-center" 
+        style={{ 
+          backgroundImage: "url('https://images.unsplash.com/photo-1495149905644-c9f27692c2c3?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8N3x8ZmxhZ3N8ZW58MHx8MHx8fDA%3D')",
+          backgroundColor: "rgba(0,0,0,0.7)",
+          backgroundBlendMode: "overlay"
+        }}
+      >
+        <div className="container mx-auto px-4">
+          <div className="max-w-6xl mx-auto">
+            <div className="flex flex-col md:flex-row items-center">
+              <motion.div 
+                className="md:w-1/2 mb-10 md:mb-0 md:pr-12"
+                initial={{ opacity: 0, x: -30 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.8, ease: "easeOut" }}
+              >
+                <h1 
+                  className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 text-white"
+                >
+                  Study Abroad Counseling
+                </h1>
+                <p className="text-xl md:text-2xl text-white mb-8">
+                  Expert guidance for your international education journey, with your academic future as our only priority.
+                </p>
+                <div className="flex flex-col sm:flex-row gap-4">
+                  <motion.button
+                    className="py-3 px-6 rounded-full text-white font-medium shadow-lg flex items-center justify-center gap-2"
+                    style={{ backgroundColor: colors.darkPurple }}
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.98 }}
                   >
-                    <img 
-                      src={`/api/placeholder/50/50?${i}`} 
-                      alt="Student" 
-                      className="w-full h-full object-cover"
-                    />
+                    <Users size={20} />
+                    Free Consultation
+                  </motion.button>
+                  <motion.button
+                    className="py-3 px-6 rounded-full font-medium shadow-lg flex items-center justify-center gap-2"
+                    style={{ backgroundColor: colors.neonGreen, color: colors.darkPurple }}
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.98 }}
+                  >
+                    <Globe size={20} />
+                    Explore Destinations
+                  </motion.button>
+                </div>
+              </motion.div>
+              
+              <motion.div 
+                className="md:w-1/2 relative"
+                initial={{ opacity: 0, x: 30 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.8, ease: "easeOut" }}
+              >
+                <img 
+                  src="/api/placeholder/600/400" 
+                  alt="Students studying abroad" 
+                  className="w-full h-auto rounded-xl shadow-xl"
+                />
+                <motion.div 
+                  className="absolute -bottom-5 -right-5 bg-white p-4 rounded-lg shadow-lg"
+                  initial={{ opacity: 0, scale: 0.8 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{ delay: 0.5, duration: 0.5 }}
+                >
+                  <div className="flex items-center gap-2">
+                    <div className="flex -space-x-2">
+                      {[...Array(3)].map((_, i) => (
+                        <div 
+                          key={i} 
+                          className="w-8 h-8 rounded-full border-2 border-white overflow-hidden bg-gray-200"
+                          style={{ zIndex: 3 - i }}
+                        >
+                          <img 
+                            src={`/api/placeholder/50/50?${i}`} 
+                            alt="Student" 
+                            className="w-full h-full object-cover"
+                          />
+                        </div>
+                      ))}
+                    </div>
+                    <div className="text-sm">
+                      <p className="font-bold text-gray-800">100% Offer Guarantee</p>
+                      <p className="text-gray-600">Student-centered approach</p>
+                    </div>
                   </div>
-                ))}
-              </div>
-              <div className="text-sm">
-                <p className="font-bold text-gray-800">100% Offer Guarantee</p>
-                <p className="text-gray-600">Student-centered approach</p>
-              </div>
+                </motion.div>
+                
+                <motion.div 
+                  className="absolute -z-10 -bottom-4 -right-4 w-full h-full rounded-xl"
+                  style={{ backgroundColor: colors.neonGreen, opacity: 0.3 }}
+                  animate={{ 
+                    rotate: [0, 1, 0, -1, 0],
+                    scale: [1, 1.01, 1, 0.99, 1]
+                  }}
+                  transition={{ 
+                    duration: 6, 
+                    repeat: Infinity,
+                    repeatType: "reverse"
+                  }}
+                />
+              </motion.div>
             </div>
-          </motion.div>
-          
-          <motion.div 
-            className="absolute -z-10 -bottom-4 -right-4 w-full h-full rounded-xl"
-            style={{ backgroundColor: colors.neonGreen, opacity: 0.3 }}
-            animate={{ 
-              rotate: [0, 1, 0, -1, 0],
-              scale: [1, 1.01, 1, 0.99, 1]
-            }}
-            transition={{ 
-              duration: 6, 
-              repeat: Infinity,
-              repeatType: "reverse"
-            }}
-          />
-        </motion.div>
+          </div>
+        </div>
       </div>
-    </div>
-  </div>
-</div>
       
       {/* 3D Carousel Control */}
       <div className="relative">
@@ -487,7 +469,7 @@ const StudyAbroadPage = ({ colors }) => {
                 className="py-3 px-6 rounded-full font-medium shadow-lg"
                 style={{ backgroundColor: colors.neonGreen, color: colors.darkPurple }}
               >
-                Explore Service Packages
+                Explore Service Options
               </button>
             </div>
           </div>
@@ -923,285 +905,6 @@ const DestinationsContent = ({ colors, activeDestination, setActiveDestination }
             ))}
           </ul>
         </div>
-      </div>
-    </div>
-  );
-};
-
-// Counselors Content Component
-const CounselorsContent = ({ colors }) => {
-  // Counselor profiles
-  const counselors = [
-    {
-      title: "Lead US Counselor",
-      description: "M.Ed. in Higher Education Administration. Former Assistant Director of Admissions at a top US University with 8+ years of experience in international student recruitment and application evaluation. Specializes in engineering, computer science, and business program applications.",
-      image: "/api/placeholder/100/100"
-    },
-    {
-      title: "UK & Europe Specialist",
-      description: "MA in International Education Management. With 10+ years of experience in UK university admissions and a network of connections across Russell Group institutions. Expert in UCAS applications and Oxbridge interview preparation.",
-      image: "/api/placeholder/100/100"
-    },
-    {
-      title: "Australia & Canada Specialist",
-      description: "MBA, Certified Education Agent Counsellor (PIER). Specialized in guiding students to Australian and Canadian universities with particular expertise in business, hospitality, and STEM field applications.",
-      image: "/api/placeholder/100/100"
-    },
-    {
-      title: "Financial Aid & Scholarship Expert",
-      description: "MS in Financial Planning. Dedicated to maximizing scholarship opportunities and developing realistic financial plans for international education.",
-      image: "/api/placeholder/100/100"
-    }
-  ];
-
-  return (
-    <div className="max-w-5xl mx-auto">
-      <h2 className="text-3xl md:text-4xl font-bold mb-6 text-center" style={{ color: colors.darkPurple }}>
-        Your Dedicated Advisors
-      </h2>
-      
-      <p className="text-lg text-center text-gray-700 mb-12 max-w-3xl mx-auto">
-        Meet our experienced counseling team, each specializing in specific destinations 
-        and aspects of the international education journey.
-      </p>
-      
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
-        {counselors.map((counselor, index) => (
-          <div 
-            key={index}
-            className="bg-white rounded-xl shadow-md overflow-hidden hover:-translate-y-1 hover:shadow-lg transition-all duration-300"
-          >
-            <div className="flex p-6">
-              <div className="w-20 h-20 rounded-full overflow-hidden mr-4 flex-shrink-0">
-                <img 
-                  src={counselor.image} 
-                  alt={counselor.title}
-                  className="w-full h-full object-cover"
-                />
-              </div>
-              <div>
-                <h3 className="text-xl font-bold mb-2" style={{ color: colors.darkPurple }}>
-                  {counselor.title}
-                </h3>
-                <p className="text-gray-600 text-sm">
-                  {counselor.description}
-                </p>
-              </div>
-            </div>
-          </div>
-        ))}
-      </div>
-    </div>
-  );
-};
-
-// Success Stories Content Component
-const SuccessContent = ({ colors }) => {
-  // Success stories
-  const successStories = [
-    {
-      quote: "UniOversea transformed my application from ordinary to compelling. Their strategic guidance helped me secure admission to Columbia University with a $25,000 annual scholarship—something I couldn't have achieved alone.",
-      student: "Rohan J.",
-      university: "Columbia University",
-      year: "Class of 2024",
-      category: "USA Success"
-    },
-    {
-      quote: "The personal statement support from UniOversea was invaluable. My counselor helped highlight my research experience in a way that secured my place at Imperial College London for Biomedical Engineering.",
-      student: "Ananya P.",
-      university: "Imperial College London",
-      year: "Class of 2023",
-      category: "UK Success"
-    },
-    {
-      quote: "Working with UniOversea's financial aid specialists helped me identify and apply for scholarships I never would have found on my own. I'm now attending the University of Toronto with 70% of my tuition covered.",
-      student: "Vikram S.",
-      university: "University of Toronto",
-      year: "Class of 2024",
-      category: "Scholarship Achievement"
-    },
-    {
-      quote: "With UniOversea's guidance, I received offers from 7 out of 8 universities I applied to across the US and UK, giving me wonderful options to choose from.",
-      student: "Leila A.",
-      university: "University of California Berkeley",
-      year: "Class of 2023",
-      category: "Multiple Offers"
-    }
-  ];
-
-  return (
-    <div className="max-w-5xl mx-auto">
-      <h2 className="text-3xl md:text-4xl font-bold mb-6 text-center" style={{ color: colors.darkPurple }}>
-        Global Education Journeys
-      </h2>
-      
-      <p className="text-lg text-center text-gray-700 mb-8 max-w-3xl mx-auto">
-        Read the success stories of students who achieved their international education 
-        goals with UniOversea's guidance.
-      </p>
-      
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
-        {successStories.map((story, index) => (
-          <div 
-            key={index}
-            className="bg-white rounded-xl shadow-md overflow-hidden hover:-translate-y-1 hover:shadow-lg transition-all duration-300"
-          >
-            <div className="h-2" style={{ backgroundColor: colors.neonGreen }}></div>
-            <div className="p-6">
-              <div className="mb-4">
-                <span 
-                  className="inline-block px-3 py-1 rounded-full text-sm font-medium"
-                  style={{ 
-                    backgroundColor: `${colors.lightPurple}20`,
-                    color: colors.darkPurple
-                  }}
-                >
-                  {story.category}
-                </span>
-              </div>
-              
-              <div className="mb-6 relative">
-                <div className="absolute -left-2 top-0 bottom-0 w-1" style={{ backgroundColor: colors.lightPurple }}></div>
-                <p className="text-gray-700 pl-4 italic">
-                  "{story.quote}"
-                </p>
-              </div>
-              
-              <div>
-                <p className="font-bold" style={{ color: colors.darkPurple }}>— {story.student}</p>
-                <p className="text-sm text-gray-600">{story.university}, {story.year}</p>
-              </div>
-            </div>
-          </div>
-        ))}
-      </div>
-    </div>
-  );
-};
-
-// Packages Content Component
-const PackagesContent = ({ colors }) => {
-  // Packages data
-  const packages = [
-    {
-      name: "Comprehensive Package",
-      description: "Complete end-to-end support including all services from university shortlisting through pre-departure orientation. Includes application guidance for up to 8 universities across 2 countries.",
-      features: [
-        "University shortlisting & strategy",
-        "Profile evaluation & enhancement",
-        "Document preparation (SOP, essays, resume)",
-        "Application submission support",
-        "Interview preparation",
-        "Visa guidance",
-        "Pre-departure orientation"
-      ],
-      color: colors.lightPurple,
-      accent: colors.darkPurple
-    },
-    {
-      name: "Premium Package",
-      description: "All comprehensive package services plus application support for up to 12 universities across 3 countries, priority counselor access, guaranteed 24-hour response time, and scholarship application support for up to 10 opportunities.",
-      features: [
-        "All Comprehensive Package features",
-        "Support for 12 universities across 3 countries",
-        "Priority counselor access & 24-hour response time",
-        "Scholarship application support (10 opportunities)",
-        "Financial aid planning",
-        "Extended post-acceptance support",
-        "Housing & accommodation guidance"
-      ],
-      color: colors.neonGreen,
-      accent: colors.darkPurple,
-      featured: true
-    },
-    {
-      name: "Essentials Package",
-      description: "Core services including university shortlisting, application strategy, and document preparation for up to 5 universities in 1 country.",
-      features: [
-        "University shortlisting",
-        "Basic application strategy",
-        "SOP & essay guidance",
-        "Resume building assistance",
-        "Application review",
-        "Basic interview preparation",
-        "Limited email support"
-      ],
-      color: colors.lightPurple,
-      accent: colors.darkPurple
-    }
-  ];
-
-  // À La Carte Services
-  const alaCarteServices = [
-    "University Shortlisting",
-    "SOP/Essay Development",
-    "Resume Building",
-    "Interview Preparation",
-    "Scholarship Application Support",
-    "Visa Guidance",
-    "Pre-departure Orientation"
-  ];
-
-  return (
-    <div className="max-w-5xl mx-auto">
-      <h2 className="text-3xl md:text-4xl font-bold mb-6 text-center" style={{ color: colors.darkPurple }}>
-        Counseling Service Packages
-      </h2>
-      
-      <p className="text-lg text-center text-gray-700 mb-8 max-w-3xl mx-auto">
-        Choose from our flexible service packages, designed to provide comprehensive 
-        support throughout your international education journey.
-      </p>
-      
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
-        {packages.map((pkg, index) => (
-          <div 
-            key={index}
-            className={`bg-white rounded-xl shadow-lg overflow-hidden relative hover:-translate-y-1 hover:shadow-xl transition-all duration-300 ${
-              pkg.featured ? 'md:-mt-4 md:-mb-4 md:shadow-xl' : ''
-            }`}
-          >
-            {pkg.featured && (
-              <div 
-                className="absolute top-0 right-0 px-4 py-1 text-sm font-bold text-white rounded-bl-lg"
-                style={{ backgroundColor: colors.darkPurple }}
-              >
-                POPULAR
-              </div>
-            )}
-            <div className="h-2" style={{ backgroundColor: pkg.color }}></div>
-            <div className="p-6">
-              <h3 className="text-xl font-bold mb-3" style={{ color: colors.darkPurple }}>
-                {pkg.name}
-              </h3>
-              <p className="text-gray-600 text-sm mb-6">
-                {pkg.description}
-              </p>
-              <h4 className="text-lg font-semibold mb-3" style={{ color: colors.darkPurple }}>
-                What's Included:
-              </h4>
-              <ul className="space-y-2 mb-8">
-                {pkg.features.map((feature, fIndex) => (
-                  <li key={fIndex} className="flex items-start">
-                    <div className="mr-2 mt-1 flex-shrink-0">
-                      <Check size={16} style={{ color: pkg.accent }} />
-                    </div>
-                    <span className="text-gray-700 text-sm">{feature}</span>
-                  </li>
-                ))}
-              </ul>
-              <button
-                className="w-full py-2 rounded-lg font-medium transition-colors hover:opacity-90"
-                style={{ 
-                  backgroundColor: pkg.featured ? pkg.color : `${pkg.color}50`,
-                  color: pkg.accent
-                }}
-              >
-                Select Package
-              </button>
-            </div>
-          </div>
-        ))}
       </div>
     </div>
   );

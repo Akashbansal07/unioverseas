@@ -232,8 +232,7 @@ const Carousel3D = ({ items, activeIndex, setActiveIndex, colors }) => {
 };
 
 // Hero Section Component
-// Hero Section Component
-const TutoringHero = ({ colors }) => {
+const TutoringHero = ({ colors, onContactClick }) => {
   return (
     <motion.div 
       className="relative py-24 md:py-36 min-h-[600px] flex items-center"
@@ -300,6 +299,7 @@ const TutoringHero = ({ colors }) => {
               className="py-3 px-6 rounded-full text-white font-medium shadow-lg bg-white bg-opacity-30 backdrop-blur-sm hover:bg-opacity-40 transition-all"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.98 }}
+              onClick={onContactClick}
             >
               Request Free Consultation
             </motion.button>
@@ -318,9 +318,6 @@ const TutoringHero = ({ colors }) => {
     </motion.div>
   );
 };
-
-
-
 
 // Overview Section Component
 const OverviewSection = ({ colors }) => {
@@ -443,18 +440,27 @@ const MethodsSection = ({ colors }) => {
 
 // Exam Prep Section Component
 const ExamPrepSection = ({ colors }) => {
-  // List of exam preparation services
+  // Expanded list of exam preparation services
   const examPrepServices = [
     {
       title: "SAT/ACT Preparation",
       icon: <Target size={24} />,
-      description: "Comprehensive preparation with diagnostic assessment, customized study plans, and regular mock tests. Our students average 250+ point improvements on the SAT and 4+ point improvements on the ACT.",
+      description: "Our standardized test preparation programs go beyond content review to build test-taking strategies, time management skills, and confidence. Our specialized approach includes:",
+      features: [
+        "Diagnostic assessment to identify strengths and improvement areas",
+        "Customized study plans based on target scores and timelines",
+        "Official practice materials supplemented with proprietary resources",
+        "Regular mock tests under timed conditions with detailed analysis",
+        "Score improvement tracking and strategy adjustments",
+        "Specialized modules for Math, Evidence-Based Reading, Writing, and Science sections"
+      ],
+      results: "Our students average 250+ point improvements on the SAT and 4+ point improvements on the ACT.",
       subjects: []
     },
     {
       title: "Advanced Placement (AP) Courses",
       icon: <Book size={24} />,
-      description: "Comprehensive support for all AP subjects with emphasis on concept mastery and exam preparation.",
+      description: "Comprehensive support for all AP subjects with emphasis on concept mastery and exam preparation. Our AP tutoring focuses on conceptual understanding, practice with free-response questions, and targeted review of challenging topics to maximize your score potential.",
       subjects: [
         "AP Calculus AB/BC", "AP Statistics", "AP Physics 1, 2, C", "AP Chemistry",
         "AP Biology", "AP Computer Science", "AP English Literature and Language",
@@ -463,12 +469,39 @@ const ExamPrepSection = ({ colors }) => {
       ]
     },
     {
-      title: "International Baccalaureate (IBDP)",
+      title: "International Baccalaureate Diploma Programme (IBDP)",
       icon: <Award size={24} />,
-      description: "Expert tutoring for all IBDP subjects at both Standard Level and Higher Level. 85% of our IBDP students achieve 6-7 in their tutored subjects.",
+      description: "Expert tutoring for all IBDP subjects at both Standard Level and Higher Level.",
       subjects: [
         "Studies in Language and Literature", "Language Acquisition",
         "Individuals and Societies", "Sciences", "Mathematics", "The Arts"
+      ],
+      additionalServices: [
+        "Extended Essay development and research",
+        "Theory of Knowledge essay and presentation",
+        "CAS portfolio development",
+        "Internal Assessment preparation",
+        "Exam strategies for maximizing points"
+      ],
+      results: "85% of our IBDP students achieve 6-7 in their tutored subjects."
+    },
+    {
+      title: "Middle Years Programme (MYP)",
+      icon: <BookOpen size={24} />,
+      description: "Supportive tutoring for all MYP subjects with focus on building strong foundational knowledge and critical thinking skills. Our MYP tutoring emphasizes concept-based learning and the development of approaches to learning (ATL) skills that prepare students for success in the IBDP.",
+      subjects: [
+        "Mathematics", "Sciences", "Language and Literature", "Language Acquisition",
+        "Individuals and Societies", "Arts", "Physical Education", "Design"
+      ]
+    },
+    {
+      title: "IGCSE/GCSE Support",
+      icon: <Globe size={24} />,
+      description: "Comprehensive tutoring for all IGCSE and GCSE subjects with focus on examination techniques and content mastery. Our approach combines thorough content review with extensive practice using past papers and mark schemes to ensure optimal grade achievement.",
+      subjects: [
+        "Mathematics", "English Language and Literature", "Physics", "Chemistry", 
+        "Biology", "History", "Geography", "Modern Languages", "Computer Science", 
+        "Business Studies", "Economics"
       ]
     }
   ];
@@ -491,7 +524,9 @@ const ExamPrepSection = ({ colors }) => {
               <div className="p-6">
                 <div className="flex items-center mb-4">
                   <div className="w-12 h-12 rounded-full flex items-center justify-center mr-4" style={{ backgroundColor: `${colors.lightPurple}30` }}>
-                    {service.icon}
+                    <div style={{ color: colors.darkPurple }}>
+                      {service.icon}
+                    </div>
                   </div>
                   <h3 className="text-xl font-bold" style={{ color: colors.darkPurple }}>
                     {service.title}
@@ -502,9 +537,32 @@ const ExamPrepSection = ({ colors }) => {
                   {service.description}
                 </p>
                 
-                {service.subjects.length > 0 && (
+                {service.features && service.features.length > 0 && (
+                  <div className="mt-4 mb-4">
+                    <ul className="space-y-2">
+                      {service.features.map((feature, featIndex) => (
+                        <li key={featIndex} className="flex items-start">
+                          <div className="mr-2 mt-1 text-sm" style={{ color: colors.neonGreen }}>•</div>
+                          <span className="text-gray-700">{feature}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                )}
+                
+                {service.results && (
+                  <div className="my-4 p-3 rounded-md" style={{ backgroundColor: `${colors.lightPurple}15` }}>
+                    <p className="font-medium" style={{ color: colors.darkPurple }}>
+                      <strong>Results:</strong> {service.results}
+                    </p>
+                  </div>
+                )}
+                
+                {service.subjects && service.subjects.length > 0 && (
                   <div className="mt-4">
-                    <h4 className="font-semibold mb-2" style={{ color: colors.darkPurple }}>Subjects Offered:</h4>
+                    <h4 className="font-semibold mb-2" style={{ color: colors.darkPurple }}>
+                      {service.title.includes("AP") ? "Subjects Offered:" : "Core Subjects:"}
+                    </h4>
                     <div className="flex flex-wrap gap-2">
                       {service.subjects.map((subject, subjIndex) => (
                         <span 
@@ -519,6 +577,22 @@ const ExamPrepSection = ({ colors }) => {
                         </span>
                       ))}
                     </div>
+                  </div>
+                )}
+                
+                {service.additionalServices && service.additionalServices.length > 0 && (
+                  <div className="mt-4">
+                    <h4 className="font-semibold mb-2" style={{ color: colors.darkPurple }}>
+                      Our IBDP specialists also provide guidance on:
+                    </h4>
+                    <ul className="space-y-1">
+                      {service.additionalServices.map((item, itemIndex) => (
+                        <li key={itemIndex} className="flex items-start">
+                          <div className="mr-2 mt-1 text-sm" style={{ color: colors.neonGreen }}>•</div>
+                          <span className="text-gray-700">{item}</span>
+                        </li>
+                      ))}
+                    </ul>
                   </div>
                 )}
               </div>
@@ -642,82 +716,6 @@ const TutorsSection = ({ colors }) => {
   );
 };
 
-// Success Stories Section Component
-const SuccessStoriesSection = ({ colors }) => {
-  // Success stories
-  const successStories = [
-    {
-      quote: "I started with a 1280 on my SAT diagnostic. After 12 weeks with my UniOversea tutor, I scored 1520 on the official test. The personalized study plan and weekly practice tests made all the difference.",
-      student: "Maya P.",
-      university: "Harvard University",
-      year: "Class of 2025",
-      exam: "SAT Success"
-    },
-    {
-      quote: "UniOversea tutoring helped me raise my predicted grades from 32 to 41 points. My Math HL score improved from a 4 to a 7, and my Chemistry HL from a 5 to a 7.",
-      student: "Ahmed K.",
-      university: "University College London",
-      year: "Class of 2024",
-      exam: "IBDP Achievement"
-    }
-  ];
-
-  return (
-    <div className="py-8">
-      <div className="max-w-4xl mx-auto">
-        <h2 className="text-3xl md:text-4xl font-bold mb-6 text-center" style={{ color: colors.darkPurple }}>
-          Academic Transformations
-        </h2>
-        
-        <p className="text-lg text-center text-gray-700 mb-8">
-          Real success stories from our students
-        </p>
-        
-        <div className="space-y-8">
-          {successStories.map((story, index) => (
-            <div 
-              key={index}
-              className="bg-white rounded-xl shadow-lg overflow-hidden border border-gray-100 hover:-translate-y-1 hover:shadow-xl transition-all duration-300"
-            >
-              <div className="h-2" style={{ backgroundColor: colors.neonGreen }}></div>
-              <div className="p-6">
-                <div className="mb-4">
-                  <span 
-                    className="inline-block px-3 py-1 rounded-full text-sm font-medium"
-                    style={{ 
-                      backgroundColor: `${colors.lightPurple}20`,
-                      color: colors.darkPurple
-                    }}
-                  >
-                    {story.exam}
-                  </span>
-                </div>
-                
-                <div className="mb-6 relative">
-                  <div className="absolute -left-2 top-0 bottom-0 w-1" style={{ backgroundColor: colors.lightPurple }}></div>
-                  <p className="text-lg text-gray-700 pl-4 italic">
-                    "{story.quote}"
-                  </p>
-                </div>
-                
-                <div className="flex items-center">
-                  <div className="w-12 h-12 rounded-full bg-gray-200 flex items-center justify-center mr-3">
-                    <Users size={24} style={{ color: colors.darkPurple }} />
-                  </div>
-                  <div>
-                    <p className="font-bold" style={{ color: colors.darkPurple }}>{story.student}</p>
-                    <p className="text-sm text-gray-600">{story.university}, {story.year}</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          ))}
-        </div>
-      </div>
-    </div>
-  );
-};
-
 // Pricing Section Component
 const PricingSection = ({ colors }) => {
   // Pricing packages
@@ -805,12 +803,8 @@ const FaqSection = ({ colors }) => {
     setExpandedFaq(expandedFaq === index ? null : index);
   };
 
-  // FAQ items
+  // Updated FAQ items
   const faqItems = [
-    {
-      question: "How are tutoring sessions conducted?",
-      answer: "All tutoring sessions take place on our secure online platform featuring interactive whiteboards, screen sharing, document collaboration, and recording capabilities for later review."
-    },
     {
       question: "How do you match students with tutors?",
       answer: "We match students based on learning style, academic needs, personality compatibility, and scheduling requirements. Students can request to change tutors if they feel the match isn't optimal."
@@ -818,6 +812,18 @@ const FaqSection = ({ colors }) => {
     {
       question: "What if I need to reschedule a session?",
       answer: "Sessions can be rescheduled with 24-hour notice. Last-minute cancellations may be accommodated on a case-by-case basis."
+    },
+    {
+      question: "How do you track progress?",
+      answer: "We conduct regular assessments, practice tests, and progress reviews. Parents and students receive detailed feedback reports highlighting improvements and areas needing additional focus."
+    },
+    {
+      question: "Are materials included in the tutoring packages?",
+      answer: "Yes, digital study materials, practice questions, and mock tests are included in all packages. Some specialized courses may require purchasing official textbooks or exam guides."
+    },
+    {
+      question: "Do you guarantee score improvements?",
+      answer: "While we don't offer guaranteed score increases, our track record shows consistent improvement for students who fully engage with our programs. Our average improvements exceed industry standards across all test types."
     }
   ];
 
@@ -871,7 +877,7 @@ const FaqSection = ({ colors }) => {
 };
 
 // Call-to-Action Component
-const TutoringCta = ({ colors }) => {
+const TutoringCta = ({ colors, onContactClick }) => {
   return (
     <div className="bg-gradient-to-br from-white to-blue-50 py-16">
       <div className="container mx-auto px-4">
@@ -888,6 +894,7 @@ const TutoringCta = ({ colors }) => {
             <button
               className="py-3 px-6 rounded-full text-white font-medium shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-300"
               style={{ backgroundColor: colors.darkPurple }}
+              onClick={onContactClick}
             >
               Schedule a Free Consultation
             </button>
@@ -906,8 +913,26 @@ const TutoringCta = ({ colors }) => {
 };
 
 // Main TutoringPage Component
-const TutoringPage = ({ colors }) => {
+const TutoringPage = ({ colors = {
+  darkPurple: "#4F46E5", 
+  lightPurple: "#A5B4FC", 
+  neonGreen: "#4ADE80"
+}, onContactClick }) => {
   const [activeTab, setActiveTab] = useState(0);
+  
+  // Use the provided onContactClick or fallback to a default implementation
+  const handleContactClick = () => {
+    if (onContactClick) {
+      // Use the callback passed from App.js
+      onContactClick();
+    } else {
+      // Fallback method if onContactClick prop isn't provided
+      const contactSection = document.querySelector('#contact-section');
+      if (contactSection) {
+        contactSection.scrollIntoView({ behavior: 'smooth' });
+      }
+    }
+  };
   
   // Define the tabs
   const tabs = [
@@ -916,7 +941,6 @@ const TutoringPage = ({ colors }) => {
     { id: 'exams', label: 'Exam Prep', component: <ExamPrepSection colors={colors} /> },
     { id: 'approach', label: 'Approach', component: <ApproachSection colors={colors} /> },
     { id: 'tutors', label: 'Our Tutors', component: <TutorsSection colors={colors} /> },
-    { id: 'success', label: 'Success Stories', component: <SuccessStoriesSection colors={colors} /> },
     { id: 'pricing', label: 'Pricing', component: <PricingSection colors={colors} /> },
     { id: 'faq', label: 'FAQ', component: <FaqSection colors={colors} /> }
   ];
@@ -932,7 +956,7 @@ const TutoringPage = ({ colors }) => {
   return (
     <div className="bg-gray-50">
       {/* Hero section */}
-      <TutoringHero colors={colors} />
+      <TutoringHero colors={colors} onContactClick={handleContactClick} />
       
       {/* 3D Carousel Control */}
       <div className="relative">
@@ -963,7 +987,7 @@ const TutoringPage = ({ colors }) => {
       </div>
       
       {/* Call to action */}
-      <TutoringCta colors={colors} />
+      <TutoringCta colors={colors} onContactClick={handleContactClick} />
     </div>
   );
 };

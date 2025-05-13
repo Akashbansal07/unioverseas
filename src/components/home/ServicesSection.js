@@ -9,7 +9,7 @@ const ServicesSection = ({ colors }) => {
       icon: <BookOpen />,
       title: "Tutoring Services",
       description: "Expert-led online tutoring that prioritizes your actual learning outcomes and long-term success. Our specialized instructors deliver personalized learning experiences for SAT, ACT, AP, IBDP, MYP, IGCSE, and GCSE, available as one-on-one or group sessions tailored to your learning style and genuine educational needs.",
-      buttonText: "Learn More",
+      buttonText: "",
       color: colors.darkPurple,
       bgColor: "white",
       delay: 0.2
@@ -18,7 +18,7 @@ const ServicesSection = ({ colors }) => {
       icon: <GraduationCap />,
       title: "Study Abroad Counseling",
       description: "End-to-end guidance where your dream university is our priority—not hidden agendas. From university selection across the USA, UK, Canada, Australia, Germany and more to application submission, our dedicated counselors provide transparent, principled support through every step of your global education pursuit.",
-      buttonText: "Learn More",
+      buttonText: "",
       color: "white",
       bgColor: colors.darkPurple,
       delay: 0.4

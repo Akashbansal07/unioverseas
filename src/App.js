@@ -1,5 +1,4 @@
-// App.js
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import Navbar from './components/Navbar';
 import HomePage from './components/HomePage';
 import TutoringPage from './components/TutoringPage';
@@ -11,6 +10,7 @@ import './App.css';
 
 const App = () => {
   const [activeTab, setActiveTab] = useState('home');
+  const contactSectionRef = useRef(null);
   
   // Define the color palette
   const colors = {
@@ -19,23 +19,34 @@ const App = () => {
     neonGreen: '#D8FC44'
   };
 
+  // Function to handle navigation to contact section
+  const handleContactClick = () => {
+    setActiveTab('home'); // First switch to home page
+    
+    // Use setTimeout to ensure the home page is rendered before trying to scroll
+    setTimeout(() => {
+      const contactSection = document.querySelector('#contact-section');
+      if (contactSection) {
+        contactSection.scrollIntoView({ behavior: 'smooth' });
+      }
+    }, 100);
+  };
+
   // Render the appropriate component based on active tab
   const renderContent = () => {
     switch (activeTab) {
       case 'home':
-        return <HomePage colors={colors} />;
+        return <HomePage colors={colors} contactSectionRef={contactSectionRef} />;
       case 'tutoring':
-        return <TutoringPage colors={colors} />;
+        return <TutoringPage colors={colors} onContactClick={handleContactClick} />;
       case 'abroad':
         return <StudyAbroadPage colors={colors} />;
       case 'resources':
         return <ResourcesPage colors={colors} />;
-      case 'success':
-        return <SuccessStoriesPage colors={colors} />;
       case 'about':
-        return <AboutUsPage colors={colors} />;
+        return <AboutUsPage colors={colors} onContactClick={handleContactClick} />;
       default:
-        return <HomePage colors={colors} />;
+        return <HomePage colors={colors} contactSectionRef={contactSectionRef} />;
     }
   };
 

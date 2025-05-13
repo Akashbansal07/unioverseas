@@ -9,7 +9,6 @@ const Navbar = ({ activeTab, setActiveTab, colors }) => {
     { id: 'tutoring', label: 'Tutoring Services' },
     { id: 'abroad', label: 'Study Abroad Counseling' },
     { id: 'resources', label: 'Resources' },
-    { id: 'success', label: 'Success Stories' },
     { id: 'about', label: 'About Us' }
   ];
 

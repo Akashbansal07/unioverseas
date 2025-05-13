@@ -1,30 +1,82 @@
 // SuccessStoriesSection.js
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Star, ChevronLeft, ChevronRight, User } from 'lucide-react';
+import { ChevronLeft, ChevronRight, User } from 'lucide-react';
+// Import individual student photos with correct capitalization
+import KhushiBhatnagarImage from '../../utils/KhushiBhatnagar.jpeg';
+import KanikaAhlawatImage from '../../utils/KanikaAhlawat.jpeg';
+import PrernaRanaImage from '../../utils/PrernaRana.jpeg';
+import SamsonMadhukarHenryImage from '../../utils/SamsonMadhukarHenry.jpeg';
+import ManasRaiImage from '../../utils/ManasRai.jpeg';
+import JeevanKollaImage from '../../utils/JeevanKolla.jpeg';
+import SumeetGuptaImage from '../../utils/SumeetGupta.jpeg';
+import GurumeharSinghImage from '../../utils/GurumeharSingh.jpeg';
+import AmitSoniImage from '../../utils/AmitSoni.jpeg';
 
 const SuccessStoriesSection = ({ colors }) => {
   const stories = [
     {
       id: 1,
-      name: "Priya Sharma",
-      university: "Cornell University",
-      year: "Class of 2023",
-      testimonial: "UniOversea transformed my SAT preparation and university application process. My dedicated counselor helped me secure admission to Cornell University with a partial scholarship!"
+      name: "Khushi Bhatnagar",
+      university: "University of Pittsburgh",
+      testimonial: "Ms. Pooja's guidance really helped me in every step of the way to get into the right university. Because of their guidance, I am in a university and in a program that I love",
+      image: KhushiBhatnagarImage
     },
     {
       id: 2,
-      name: "Arjun Mehta",
-      university: "Imperial College London",
-      year: "Class of 2024",
-      testimonial: "The IBDP tutoring at UniOversea helped me achieve a 42/45 score. Their study abroad counseling then secured my place at Imperial College London for Engineering."
+      name: "Kanika Ahlawat",
+      university: "San Francisco State University",
+      testimonial: "I really want to thank the company UniOversea for being so supportive and motivating and a special thanks to Ms. Pooja who had helped me throughout my visa process. I am so fortunate to have her for guidance. Thank you for being so kind and compassionate. I am so grateful that I have made some of the best decisions of my life under your guidance and supervision. I really want to thank all the members of the faculty. They have provided me an opportunity for better future and respectful placement. Thank you so much!",
+      image: KanikaAhlawatImage
     },
     {
       id: 3,
-      name: "Zara Khan",
-      university: "University of Toronto",
-      year: "Class of 2023",
-      testimonial: "From ACT prep to scholarship applications, UniOversea provided exceptional guidance. I'm now studying at the University of Toronto with a $15,000 annual scholarship."
+      name: "Prerna Rana",
+      university: "University of Glasgow",
+      testimonial: "I moved to Glasgow to pursue masters from University of Glasgow. My experience with UniOversea has been so amazing that I've been constantly messaging my friends to avail its services. They provided me with all the options so I could choose the right university for me and my career goals. Since it was my first time going abroad, I was clueless at first but UniOversea made the application and visa process super smooth. I would certainly recommend Unioversea to all future students who wish to kickstart their educational journey abroad.",
+      image: PrernaRanaImage
+    },
+    {
+      id: 4,
+      name: "Samson Madhukar Henry",
+      university: "University of Scranton",
+      testimonial: "My experience with UniOverseas Edutech has been incredibly smooth and reassuring. Their end-to-end guidance made the entire study abroad process—from shortlisting universities to securing my visa—stress-free and well-organized. What stood out most was the dedication of my counselor, who was always approachable, knowledgeable, and genuinely invested in my success. Their insights and constant support helped me make informed decisions with confidence. I truly recommend UniOverseas to anyone planning to study abroad.",
+      image: SamsonMadhukarHenryImage
+    },
+    {
+      id: 5,
+      name: "Manas Rai",
+      university: "Cranfield University",
+      testimonial: "I'm absolutely thrilled with the service I received from Unioversea! As a first-time applicant to universities abroad, I was clueless about the process, but Unioversea's expert team walked me through every step. They took the time to understand my needs and shortlisted top-ranking universities that fit my profile. What impressed me most was their personalized approach - I felt heard and understood throughout the entire journey. I highly recommend Unioversea to anyone looking to study abroad - their guidance and support can make all the difference!",
+      image: ManasRaiImage
+    },
+    {
+      id: 6,
+      name: "Jeevan Kolla",
+      university: "Lehigh University",
+      testimonial: "I received great personal consultation for my masters studies from the Unioversea Edtech. Mam really helped me through the process and I got into a prestigious university with a scholarship",
+      image: JeevanKollaImage
+    },
+    {
+      id: 7,
+      name: "Sumeet Gupta",
+      university: "Thomas Jefferson University",
+      testimonial: "UniOversea transformed my graduate school journey! Their personalized guidance helped me secure admission to my dream university with a scholarship I never thought possible. Eternally grateful for their expertise and support!",
+      image: SumeetGuptaImage
+    },
+    {
+      id: 8,
+      name: "Gurumehar Singh",
+      university: "Sheridan College",
+      testimonial: "UniOversea really helped me out with everything and made going through the whole process way easier than I expected. Couldn't have done it without them!",
+      image: GurumeharSinghImage
+    },
+    {
+      id: 9,
+      name: "Amit Soni",
+      university: "Sheridan College",
+      testimonial: "The genuine care and guidance provided by UniOversea helped me navigate the overwhelming admissions process and land in a good university for my under-grad studies in Canada. I am forever grateful for their belief in me when I doubted myself",
+      image: AmitSoniImage
     }
   ];
 
@@ -87,33 +139,62 @@ const SuccessStoriesSection = ({ colors }) => {
                 transition={{ duration: 0.5, ease: "easeInOut" }}
               >
                 <div className="bg-white rounded-2xl shadow-xl p-8 md:p-12">
-                  <div className="flex items-center gap-2 mb-8">
-                    {[1, 2, 3, 4, 5].map((star) => (
-                      <Star 
-                        key={star} 
-                        size={24} 
-                        fill={colors.neonGreen} 
-                        color={colors.neonGreen} 
-                      />
-                    ))}
+                  {/* Student photo with unique creative border */}
+                  <div className="flex justify-center mb-8">
+                    <div className="relative">
+                      {/* Decorative elements around the image */}
+                      <div className="absolute -inset-2 z-0">
+                        {/* Decorative circles */}
+                        <div className="absolute top-0 left-1/4 h-4 w-4 rounded-full bg-blue-400 opacity-70 shadow-lg"></div>
+                        <div className="absolute bottom-2 right-0 h-6 w-6 rounded-full bg-purple-500 opacity-60 shadow-lg"></div>
+                        <div className="absolute top-1/3 -left-2 h-5 w-5 rounded-full bg-pink-400 opacity-60 shadow-lg"></div>
+                        <div className="absolute bottom-1/4 -right-3 h-4 w-4 rounded-full bg-yellow-300 opacity-70 shadow-lg"></div>
+                        
+                        {/* Abstract shapes */}
+                        <div className="absolute -top-1 -right-1 h-10 w-10 rotate-45 bg-teal-400 opacity-60 shadow-lg"></div>
+                        <div className="absolute -bottom-2 -left-2 h-8 w-8 rotate-12 bg-red-400 opacity-50 shadow-lg"></div>
+                      </div>
+                      
+                      {/* Main photo container with 3D effect */}
+                      <div className="relative h-36 w-36 rounded-full bg-white shadow-[0_0_35px_rgba(0,0,0,0.2),_inset_0_0_15px_rgba(0,0,0,0.1)]">
+                        {/* Cut-out pattern overlay */}
+                        <div className="absolute inset-0 z-10 rounded-full opacity-20 mix-blend-overlay"
+                          style={{ 
+                            backgroundImage: 'radial-gradient(circle at 30% 40%, transparent 10px, white 10px, white 20px, transparent 20px), radial-gradient(circle at 70% 60%, transparent 10px, white 10px, white 20px, transparent 20px)',
+                            backgroundSize: '100px 100px'
+                          }}>
+                        </div>
+                        
+                        {/* Image container with cut-out mask */}
+                        <div className="absolute inset-2 overflow-hidden rounded-full border-4 border-white shadow-inner">
+                          <img 
+                            src={stories[currentIndex].image} 
+                            alt={`${stories[currentIndex].name}`} 
+                            className="h-full w-full object-cover"
+                          />
+                        </div>
+                        
+                        {/* Highlight reflection effect */}
+                        <div className="absolute inset-0 rounded-full opacity-30"
+                          style={{
+                            background: 'linear-gradient(135deg, rgba(255,255,255,0.8) 0%, rgba(255,255,255,0) 50%, rgba(255,255,255,0) 100%)'
+                          }}>
+                        </div>
+                      </div>
+                    </div>
                   </div>
                   
                   <p className="text-xl md:text-2xl italic mb-8 text-gray-700">
                     "{stories[currentIndex].testimonial}"
                   </p>
                   
-                  <div className="flex items-center">
-                    <div className="w-16 h-16 rounded-full bg-gray-200 flex items-center justify-center mr-4">
-                      <User size={32} color={colors.darkPurple} />
-                    </div>
-                    <div>
-                      <h4 className="text-xl font-bold" style={{ color: colors.darkPurple }}>
-                        {stories[currentIndex].name}
-                      </h4>
-                      <p className="text-gray-600">
-                        {stories[currentIndex].university}, {stories[currentIndex].year}
-                      </p>
-                    </div>
+                  <div className="flex flex-col items-center">
+                    <h4 className="text-xl font-bold" style={{ color: colors.darkPurple }}>
+                      {stories[currentIndex].name}
+                    </h4>
+                    <p className="text-gray-600">
+                      {stories[currentIndex].university}
+                    </p>
                   </div>
                 </div>
               </motion.div>
@@ -134,25 +215,20 @@ const SuccessStoriesSection = ({ colors }) => {
             ))}
           </div>
         </div>
-
-        <motion.div
-          className="text-center mt-12"
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5, delay: 0.3 }}
-        >
-          <motion.button
-            className="px-6 py-3 rounded-full font-medium inline-flex items-center gap-2"
-            style={{ backgroundColor: colors.neonGreen, color: colors.darkPurple }}
-            whileHover={{ scale: 1.05, backgroundColor: "#E3FF6A" }}
-            whileTap={{ scale: 0.98 }}
-          >
-            View All Success Stories
-            <ChevronRight size={20} />
-          </motion.button>
-        </motion.div>
       </div>
+      
+      {/* Add this style for the animations */}
+      <style jsx>{`
+        .animate-float {
+          animation: floating 4s ease-in-out infinite;
+        }
+        
+        @keyframes floating {
+          0% { transform: translateY(0px) rotate(0deg); }
+          50% { transform: translateY(-10px) rotate(5deg); }
+          100% { transform: translateY(0px) rotate(0deg); }
+        }
+      `}</style>
     </section>
   );
 };
