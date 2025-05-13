@@ -40,7 +40,7 @@ const App = () => {
       case 'tutoring':
         return <TutoringPage colors={colors} onContactClick={handleContactClick} />;
       case 'abroad':
-        return <StudyAbroadPage colors={colors} />;
+        return <StudyAbroadPage colors={colors} onContactClick={handleContactClick} />;
       case 'resources':
         return <ResourcesPage colors={colors} />;
       case 'about':

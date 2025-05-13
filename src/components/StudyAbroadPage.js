@@ -1,11 +1,12 @@
-// StudyAbroadPage.js
+// StudyAbroadPage.js with Partners Section
 import React, { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { 
   Globe, Check, ChevronRight, ArrowRight, MapPin, 
   GraduationCap, FilePlus, Users, Calendar, 
   FileText, CreditCard, Plane, School, CheckCircle,
-  ChevronLeft, ChevronDown, Briefcase
+  ChevronLeft, ChevronDown, Briefcase, Award,
+  Building, Link, Star, Bookmark
 } from 'lucide-react';
 
 // 3D Carousel Component
@@ -234,10 +235,29 @@ const Carousel3D = ({ items, activeIndex, setActiveIndex, colors }) => {
   );
 };
 
-const StudyAbroadPage = ({ colors }) => {
+const StudyAbroadPage = ({ colors = {
+  lightPurple: '#BEC1F8',
+  darkPurple: '#2E2CAB',
+  neonGreen: '#D8FC44'
+}, onContactClick }) => {
   const [activeTab, setActiveTab] = useState(0);
   const [activeDestination, setActiveDestination] = useState('usa');
+  const [activePartnerRegion, setActivePartnerRegion] = useState('usa');
   const [expandedFaq, setExpandedFaq] = useState(null);
+  
+  // Use the provided onContactClick or fallback to a default implementation
+  const handleContactClick = () => {
+    if (onContactClick) {
+      // Use the callback passed from App.js
+      onContactClick();
+    } else {
+      // Fallback method if onContactClick prop isn't provided
+      const contactSection = document.querySelector('#contact-section');
+      if (contactSection) {
+        contactSection.scrollIntoView({ behavior: 'smooth' });
+      }
+    }
+  };
   
   const toggleFaq = (index) => {
     setExpandedFaq(expandedFaq === index ? null : index);
@@ -271,7 +291,7 @@ const StudyAbroadPage = ({ colors }) => {
     }
   };
 
-  // Tabs for the page - Removed counselors, success stories, and packages
+  // Tabs for the page - Added partners section
   const tabs = [
     { 
       id: 'overview', 
@@ -283,13 +303,19 @@ const StudyAbroadPage = ({ colors }) => {
       id: 'process', 
       label: 'Our Process', 
       icon: <ArrowRight size={18} />,
-      component: <ProcessContent colors={colors} />
+      component: <ProcessContent colors={colors} onContactClick={handleContactClick} />
     },
     { 
       id: 'destinations', 
       label: 'Destinations', 
       icon: <MapPin size={18} />,
       component: <DestinationsContent colors={colors} activeDestination={activeDestination} setActiveDestination={setActiveDestination} />
+    },
+    { 
+      id: 'partners', 
+      label: 'Partner Universities', 
+      icon: <Building size={18} />,
+      component: <PartnersContent colors={colors} activePartnerRegion={activePartnerRegion} setActivePartnerRegion={setActivePartnerRegion} />
     },
     { 
       id: 'faq', 
@@ -319,99 +345,33 @@ const StudyAbroadPage = ({ colors }) => {
         }}
       >
         <div className="container mx-auto px-4">
-          <div className="max-w-6xl mx-auto">
-            <div className="flex flex-col md:flex-row items-center">
-              <motion.div 
-                className="md:w-1/2 mb-10 md:mb-0 md:pr-12"
-                initial={{ opacity: 0, x: -30 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.8, ease: "easeOut" }}
+          <div className="max-w-6xl mx-auto text-center">
+            <motion.div 
+              initial={{ opacity: 0, y: -30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, ease: "easeOut" }}
+            >
+              <h1 
+                className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 text-white"
               >
-                <h1 
-                  className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 text-white"
+                Study Abroad Counseling
+              </h1>
+              <p className="text-xl md:text-2xl text-white mb-8 max-w-3xl mx-auto">
+                Expert guidance for your international education journey, with your academic future as our only priority.
+              </p>
+              <div className="flex justify-center">
+                <motion.button
+                  className="py-3 px-8 rounded-full text-white font-medium shadow-lg flex items-center justify-center gap-2"
+                  style={{ backgroundColor: colors.darkPurple }}
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.98 }}
+                  onClick={handleContactClick}
                 >
-                  Study Abroad Counseling
-                </h1>
-                <p className="text-xl md:text-2xl text-white mb-8">
-                  Expert guidance for your international education journey, with your academic future as our only priority.
-                </p>
-                <div className="flex flex-col sm:flex-row gap-4">
-                  <motion.button
-                    className="py-3 px-6 rounded-full text-white font-medium shadow-lg flex items-center justify-center gap-2"
-                    style={{ backgroundColor: colors.darkPurple }}
-                    whileHover={{ scale: 1.05 }}
-                    whileTap={{ scale: 0.98 }}
-                  >
-                    <Users size={20} />
-                    Free Consultation
-                  </motion.button>
-                  <motion.button
-                    className="py-3 px-6 rounded-full font-medium shadow-lg flex items-center justify-center gap-2"
-                    style={{ backgroundColor: colors.neonGreen, color: colors.darkPurple }}
-                    whileHover={{ scale: 1.05 }}
-                    whileTap={{ scale: 0.98 }}
-                  >
-                    <Globe size={20} />
-                    Explore Destinations
-                  </motion.button>
-                </div>
-              </motion.div>
-              
-              <motion.div 
-                className="md:w-1/2 relative"
-                initial={{ opacity: 0, x: 30 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.8, ease: "easeOut" }}
-              >
-                <img 
-                  src="/api/placeholder/600/400" 
-                  alt="Students studying abroad" 
-                  className="w-full h-auto rounded-xl shadow-xl"
-                />
-                <motion.div 
-                  className="absolute -bottom-5 -right-5 bg-white p-4 rounded-lg shadow-lg"
-                  initial={{ opacity: 0, scale: 0.8 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  transition={{ delay: 0.5, duration: 0.5 }}
-                >
-                  <div className="flex items-center gap-2">
-                    <div className="flex -space-x-2">
-                      {[...Array(3)].map((_, i) => (
-                        <div 
-                          key={i} 
-                          className="w-8 h-8 rounded-full border-2 border-white overflow-hidden bg-gray-200"
-                          style={{ zIndex: 3 - i }}
-                        >
-                          <img 
-                            src={`/api/placeholder/50/50?${i}`} 
-                            alt="Student" 
-                            className="w-full h-full object-cover"
-                          />
-                        </div>
-                      ))}
-                    </div>
-                    <div className="text-sm">
-                      <p className="font-bold text-gray-800">100% Offer Guarantee</p>
-                      <p className="text-gray-600">Student-centered approach</p>
-                    </div>
-                  </div>
-                </motion.div>
-                
-                <motion.div 
-                  className="absolute -z-10 -bottom-4 -right-4 w-full h-full rounded-xl"
-                  style={{ backgroundColor: colors.neonGreen, opacity: 0.3 }}
-                  animate={{ 
-                    rotate: [0, 1, 0, -1, 0],
-                    scale: [1, 1.01, 1, 0.99, 1]
-                  }}
-                  transition={{ 
-                    duration: 6, 
-                    repeat: Infinity,
-                    repeatType: "reverse"
-                  }}
-                />
-              </motion.div>
-            </div>
+                  <Users size={20} />
+                  Free Consultation
+                </motion.button>
+              </div>
+            </motion.div>
           </div>
         </div>
       </div>
@@ -458,18 +418,13 @@ const StudyAbroadPage = ({ colors }) => {
             <p className="text-xl text-gray-700 mb-8 max-w-3xl mx-auto">
               Schedule a free consultation with our expert counselors to discuss your international education goals.
             </p>
-            <div className="flex flex-col sm:flex-row justify-center gap-4">
+            <div className="flex justify-center">
               <button
-                className="py-3 px-6 rounded-full text-white font-medium shadow-lg"
+                className="py-3 px-8 rounded-full text-white font-medium shadow-lg"
                 style={{ backgroundColor: colors.darkPurple }}
+                onClick={handleContactClick}
               >
                 Schedule a Consultation
-              </button>
-              <button
-                className="py-3 px-6 rounded-full font-medium shadow-lg"
-                style={{ backgroundColor: colors.neonGreen, color: colors.darkPurple }}
-              >
-                Explore Service Options
               </button>
             </div>
           </div>
@@ -561,44 +516,87 @@ const OverviewContent = ({ colors }) => {
 };
 
 // Process Content Component
-const ProcessContent = ({ colors }) => {
-  // Journey steps
+const ProcessContent = ({ colors, onContactClick }) => {
+  // Journey steps - expanded with additional steps
   const journeySteps = [
     {
-      title: "Initial Consultation",
+      title: "1. Initial Consultation",
       description: "A comprehensive discussion to understand your academic background, extracurricular achievements, career goals, and study abroad aspirations. We'll evaluate your profile and establish realistic targets.",
       timeline: "Week 1",
       icon: <Users />
     },
     {
-      title: "Profile Assessment",
+      title: "2. Profile Assessment",
       description: "Detailed analysis of your academic record, standardized test scores, extracurricular activities, and personal achievements to identify strengths and areas for enhancement.",
       timeline: "Week 2",
       icon: <FileText />
     },
     {
-      title: "University Shortlisting",
+      title: "3. University Shortlisting",
       description: "Strategic selection of universities categorized as reach, target, and safety options across your preferred destinations, considering your profile strength, career goals, and personal preferences.",
       timeline: "Weeks 3-4",
       icon: <School />
     },
     {
-      title: "Application Strategy",
+      title: "4. Application Strategy",
       description: "Development of a customized application timeline and approach for each university, highlighting unique angles for different institutions while maintaining authenticity.",
       timeline: "Week 5",
       icon: <Briefcase />
     },
     {
-      title: "Document Preparation",
+      title: "5. Document Preparation",
       description: "Expert guidance for crafting compelling: Statements of Purpose, Personal Statements, Essays and Supplemental Questions, Resumes/CVs, Letters of Recommendation.",
       timeline: "Weeks 6-10",
+      listItems: [
+        "Statements of Purpose",
+        "Personal Statements",
+        "Essays and Supplemental Questions",
+        "Resumes/CVs",
+        "Letters of Recommendation"
+      ],
       icon: <FilePlus />
     },
     {
-      title: "Application Submission",
+      title: "6. Application Submission",
       description: "Thorough review of all application components and assisted submission to ensure accuracy, completeness, and timely filing for each university.",
       timeline: "According to university deadlines",
       icon: <Check />
+    },
+    {
+      title: "7. Interview Preparation",
+      description: "Comprehensive mock interviews and feedback sessions tailored to specific university formats and common questions for your program.",
+      timeline: "As scheduled by universities",
+      icon: <Users />
+    },
+    {
+      title: "8. Scholarship Guidance",
+      description: "Identification of suitable scholarship opportunities and assistance with applications, including scholarship-specific essays and supporting documents.",
+      timeline: "According to scholarship deadlines",
+      icon: <Award />
+    },
+    {
+      title: "9. Decision Evaluation",
+      description: "100% offer guarantee. Analysis of admission offers, comparison of programs, financial considerations, and guidance for making the optimal final decision.",
+      timeline: "Upon receiving decisions",
+      icon: <CheckCircle />
+    },
+    {
+      title: "10. Loan Assistance",
+      description: "Connection with trusted financial partners for education loan options, document preparation, and application support.",
+      timeline: "After university selection",
+      icon: <CreditCard />
+    },
+    {
+      title: "11. Visa Support",
+      description: "Comprehensive guidance for visa application preparation, documentation, and interview coaching specific to your destination country.",
+      timeline: "3-4 months before departure",
+      icon: <FileText />
+    },
+    {
+      title: "12. Pre-departure Orientation",
+      description: "Practical guidance on housing, banking, travel arrangements, cultural adaptation, and academic expectations to ensure a smooth transition.",
+      timeline: "1-2 months before departure",
+      icon: <Plane />
     }
   ];
 
@@ -620,39 +618,110 @@ const ProcessContent = ({ colors }) => {
         {journeySteps.map((step, index) => (
           <div 
             key={index}
-            className={`relative mb-12 md:mb-16 ${index % 2 === 0 ? 'md:text-right' : ''}`}
+            className="relative mb-12 md:mb-16"
           >
             <div className="md:flex items-center">
-              <div className={`md:w-1/2 ${index % 2 === 0 ? 'md:pr-12' : 'md:order-2 md:pl-12'}`}>
-                <div className="bg-white rounded-xl shadow-md p-6">
-                  <div className="flex items-center mb-3">
-                    <div className="w-10 h-10 rounded-full flex items-center justify-center mr-3" style={{ backgroundColor: `${colors.lightPurple}30` }}>
-                      {step.icon}
+              {/* For even indices (0, 2, 4...), place content on the left */}
+              {index % 2 === 0 ? (
+                <>
+                  <div className="md:w-1/2 md:pr-12 md:text-right">
+                    <div className="bg-white rounded-xl shadow-md p-6">
+                      <div className="flex items-center mb-3 md:justify-end">
+                        <div className="w-10 h-10 rounded-full flex items-center justify-center mr-3" style={{ backgroundColor: `${colors.lightPurple}30` }}>
+                          {step.icon}
+                        </div>
+                        <h3 className="text-xl font-bold" style={{ color: colors.darkPurple }}>
+                          {step.title}
+                        </h3>
+                      </div>
+                      <p className="text-gray-600 mb-4">
+                        {step.description}
+                      </p>
+                      
+                      {/* Render list items if present */}
+                      {step.listItems && (
+                        <ul className="mb-4 md:text-right">
+                          {step.listItems.map((item, i) => (
+                            <li key={i} className="flex items-center md:justify-end mb-1">
+                              <span className="text-gray-600">{item}</span>
+                              <div className="w-2 h-2 rounded-full ml-2" style={{ backgroundColor: colors.neonGreen }}></div>
+                            </li>
+                          ))}
+                        </ul>
+                      )}
+                      
+                      <div className="flex md:justify-end">
+                        <div 
+                          className="inline-block px-3 py-1 rounded-full text-sm font-medium"
+                          style={{ 
+                            backgroundColor: `${colors.lightPurple}20`,
+                            color: colors.darkPurple
+                          }}
+                        >
+                          Timeline: {step.timeline}
+                        </div>
+                      </div>
                     </div>
-                    <h3 className="text-xl font-bold" style={{ color: colors.darkPurple }}>
-                      {step.title}
-                    </h3>
                   </div>
-                  <p className="text-gray-600 mb-4">
-                    {step.description}
-                  </p>
-                  <div 
-                    className="inline-block px-3 py-1 rounded-full text-sm font-medium"
-                    style={{ 
-                      backgroundColor: `${colors.lightPurple}20`,
-                      color: colors.darkPurple
-                    }}
-                  >
-                    Timeline: {step.timeline}
+                  
+                  {/* Timeline Node */}
+                  <div className="hidden md:flex absolute left-1/2 transform -translate-x-1/2 items-center justify-center">
+                    <div className="w-8 h-8 rounded-full bg-white border-4 border-gray-200 z-10"></div>
+                    <div className="w-6 h-6 rounded-full absolute" style={{ backgroundColor: colors.neonGreen }}></div>
                   </div>
-                </div>
-              </div>
-              
-              {/* Timeline Node */}
-              <div className="hidden md:flex absolute left-1/2 transform -translate-x-1/2 items-center justify-center">
-                <div className="w-8 h-8 rounded-full bg-white border-4 border-gray-200 z-10"></div>
-                <div className="w-6 h-6 rounded-full absolute" style={{ backgroundColor: colors.neonGreen }}></div>
-              </div>
+                  
+                  <div className="md:w-1/2 md:pl-12 hidden md:block"></div>
+                </>
+              ) : (
+                /* For odd indices (1, 3, 5...), place content on the right */
+                <>
+                  <div className="md:w-1/2 md:pr-12 hidden md:block"></div>
+                  
+                  {/* Timeline Node */}
+                  <div className="hidden md:flex absolute left-1/2 transform -translate-x-1/2 items-center justify-center">
+                    <div className="w-8 h-8 rounded-full bg-white border-4 border-gray-200 z-10"></div>
+                    <div className="w-6 h-6 rounded-full absolute" style={{ backgroundColor: colors.neonGreen }}></div>
+                  </div>
+                  
+                  <div className="md:w-1/2 md:pl-12">
+                    <div className="bg-white rounded-xl shadow-md p-6">
+                      <div className="flex items-center mb-3">
+                        <div className="w-10 h-10 rounded-full flex items-center justify-center mr-3" style={{ backgroundColor: `${colors.lightPurple}30` }}>
+                          {step.icon}
+                        </div>
+                        <h3 className="text-xl font-bold" style={{ color: colors.darkPurple }}>
+                          {step.title}
+                        </h3>
+                      </div>
+                      <p className="text-gray-600 mb-4">
+                        {step.description}
+                      </p>
+                      
+                      {/* Render list items if present */}
+                      {step.listItems && (
+                        <ul className="mb-4">
+                          {step.listItems.map((item, i) => (
+                            <li key={i} className="flex items-center mb-1">
+                              <div className="w-2 h-2 rounded-full mr-2" style={{ backgroundColor: colors.neonGreen }}></div>
+                              <span className="text-gray-600">{item}</span>
+                            </li>
+                          ))}
+                        </ul>
+                      )}
+                      
+                      <div 
+                        className="inline-block px-3 py-1 rounded-full text-sm font-medium"
+                        style={{ 
+                          backgroundColor: `${colors.lightPurple}20`,
+                          color: colors.darkPurple
+                        }}
+                      >
+                        Timeline: {step.timeline}
+                      </div>
+                    </div>
+                  </div>
+                </>
+              )}
             </div>
           </div>
         ))}
@@ -660,8 +729,9 @@ const ProcessContent = ({ colors }) => {
       
       <div className="text-center">
         <button
-          className="px-6 py-3 rounded-full font-medium inline-flex items-center gap-2"
+          className="px-8 py-3 rounded-full font-medium inline-flex items-center gap-2"
           style={{ backgroundColor: colors.darkPurple, color: 'white' }}
+          onClick={onContactClick}
         >
           Schedule Your Initial Consultation
           <Calendar size={18} />
@@ -673,11 +743,11 @@ const ProcessContent = ({ colors }) => {
 
 // Destinations Content Component
 const DestinationsContent = ({ colors, activeDestination, setActiveDestination }) => {
-  // Destinations data
+  // Destinations data with real flag URLs
   const destinations = {
     usa: {
       name: "United States",
-      flag: "/api/placeholder/48/36",
+      flag: "https://cdn.countryflags.com/thumbs/united-states-of-america/flag-square-500.png",
       description: "Home to many of the world's top-ranked universities, the US offers diverse academic programs, cutting-edge research opportunities, and a vibrant campus life.",
       universities: [
         "Harvard University", "Stanford University", "MIT", 
@@ -699,7 +769,7 @@ const DestinationsContent = ({ colors, activeDestination, setActiveDestination }
     },
     uk: {
       name: "United Kingdom",
-      flag: "/api/placeholder/48/36",
+      flag: "https://cdn.countryflags.com/thumbs/united-kingdom/flag-square-500.png",
       description: "Known for prestigious universities with centuries of tradition, focused degree programs, and shorter duration undergraduate courses (typically 3 years).",
       universities: [
         "University of Oxford", "University of Cambridge", "Imperial College London", 
@@ -720,7 +790,7 @@ const DestinationsContent = ({ colors, activeDestination, setActiveDestination }
     },
     canada: {
       name: "Canada",
-      flag: "/api/placeholder/48/36",
+      flag: "https://cdn.countryflags.com/thumbs/canada/flag-square-500.png",
       description: "Offering high-quality education with relatively affordable tuition and post-graduate work opportunities in a safe, multicultural environment.",
       universities: [
         "University of Toronto", "University of British Columbia", "McGill University", 
@@ -740,7 +810,7 @@ const DestinationsContent = ({ colors, activeDestination, setActiveDestination }
     },
     australia: {
       name: "Australia",
-      flag: "/api/placeholder/48/36",
+      flag: "https://cdn.countryflags.com/thumbs/australia/flag-square-500.png",
       description: "Featuring world-class universities with strong research capabilities in a diverse, welcoming environment with post-study work options.",
       universities: [
         "University of Melbourne", "University of Sydney", "Australian National University", 
@@ -760,7 +830,7 @@ const DestinationsContent = ({ colors, activeDestination, setActiveDestination }
     },
     europe: {
       name: "Europe",
-      flag: "/api/placeholder/48/36",
+      flag: "https://cdn.countryflags.com/thumbs/europe/flag-square-500.png",
       description: "Diverse educational opportunities with many English-taught programs, often with minimal or no tuition fees in certain countries.",
       universities: [
         "Technical University of Munich (Germany)", "University of Amsterdam (Netherlands)", 
@@ -824,7 +894,7 @@ const DestinationsContent = ({ colors, activeDestination, setActiveDestination }
           <img 
             src={destinations[activeDestination].flag} 
             alt={`${destinations[activeDestination].name} flag`}
-            className="w-10 h-7 object-cover rounded mr-3"
+            className="w-10 h-8 object-cover rounded mr-3"
           />
           <h3 className="text-2xl font-bold" style={{ color: colors.darkPurple }}>
             {destinations[activeDestination].name}
@@ -904,6 +974,242 @@ const DestinationsContent = ({ colors, activeDestination, setActiveDestination }
               </li>
             ))}
           </ul>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+// NEW Partners Content Component
+const PartnersContent = ({ colors, activePartnerRegion, setActivePartnerRegion }) => {
+  // Partner university data by region
+  const partnerRegions = {
+    usa: {
+      name: "United States",
+      flag: "https://cdn.countryflags.com/thumbs/united-states-of-america/flag-square-500.png",
+      universities: [
+        "Johns Hopkins University", 
+        "Northeastern University", 
+        "LeHigh University", 
+        "NYU", 
+        "University of Arizona", 
+        "SUNY Buffalo", 
+        "Arizona State University", 
+        "Suffolk University", 
+        "California State University", 
+        "University of Alabama", 
+        "University of Massachusetts", 
+        "Brandeis University"
+      ]
+    },
+    uk: {
+      name: "United Kingdom",
+      flag: "https://cdn.countryflags.com/thumbs/united-kingdom/flag-square-500.png",
+      universities: [
+        "University College London", 
+        "University of Warwick", 
+        "University of Edinburgh", 
+        "University of Manchester", 
+        "King's College London", 
+        "University of Glasgow", 
+        "University of Birmingham", 
+        "Queen Mary University of London", 
+        "Durham University", 
+        "University of Sheffield", 
+        "Cardiff University", 
+        "University of Exeter", 
+        "University of Leeds", 
+        "Queen's University Belfast", 
+        "University of York", 
+        "Newcastle University", 
+        "University of Liverpool"
+      ]
+    },
+    canada: {
+      name: "Canada",
+      flag: "https://cdn.countryflags.com/thumbs/canada/flag-square-500.png",
+      universities: [
+        "University of Toronto",
+        "University of British Columbia",
+        "McGill University",
+        "McMaster University",
+        "University of Alberta",
+        "Western University",
+        "University of Ottawa",
+        "York University",
+        "Queen's University",
+        "University of Calgary"
+      ]
+    },
+    australia: {
+      name: "Australia",
+      flag: "https://cdn.countryflags.com/thumbs/australia/flag-square-500.png",
+      universities: [
+        "University of Melbourne",
+        "University of Sydney",
+        "Australian National University",
+        "University of Queensland",
+        "Monash University",
+        "University of Adelaide",
+        "University of Western Australia",
+        "University of Technology Sydney",
+        "Macquarie University"
+      ]
+    },
+    europe: {
+      name: "Europe",
+      flag: "https://cdn.countryflags.com/thumbs/europe/flag-square-500.png",
+      universities: [
+        "Technical University of Munich (Germany)",
+        "Sciences Po (France)",
+        "Bocconi University (Italy)",
+        "University of Amsterdam (Netherlands)",
+        "KU Leuven (Belgium)",
+        "Trinity College Dublin (Ireland)",
+        "University of Copenhagen (Denmark)",
+        "Stockholm University (Sweden)",
+        "University of Barcelona (Spain)"
+      ]
+    }
+  };
+
+  // Benefits of our university partnerships
+  const partnershipBenefits = [
+    {
+      title: "Direct Admission Pathways",
+      description: "Our university partnerships create streamlined admission channels for qualified students, with benefits such as application fee waivers, priority processing, and expedited decisions.",
+      icon: <ArrowRight />
+    },
+    {
+      title: "Exclusive Academic Insights",
+      description: "Gain insider knowledge about program developments, admission criteria changes, and new academic opportunities through our direct relationships with partner institutions.",
+      icon: <Bookmark />
+    },
+    {
+      title: "Personalized Campus Connections",
+      description: "Facilitated direct connections with faculty, current students, admissions representatives and financial aid officers for meaningful interactions beyond standard procedures.",
+      icon: <Link />
+    },
+    {
+      title: "Scholarship Opportunities",
+      description: "Many partner universities offer exclusive scholarship and financial aid packages specifically for UniOversea students, helping to make your education more affordable.",
+      icon: <Award />
+    },
+    {
+      title: "Quality Assurance",
+      description: "We partner exclusively with accredited, reputable institutions with proven records of academic excellence and strong international student support.",
+      icon: <CheckCircle />
+    },
+    {
+      title: "Post-Admission Support",
+      description: "Benefit from pre-departure orientation, priority housing access, seamless credit transfers, and continued support services specific to our partner universities.",
+      icon: <Star />
+    }
+  ];
+
+  return (
+    <div className="max-w-5xl mx-auto">
+      <h2 className="text-3xl md:text-4xl font-bold mb-6 text-center" style={{ color: colors.darkPurple }}>
+        Our Partner Universities
+      </h2>
+      
+      <p className="text-lg text-center text-gray-700 mb-8 max-w-3xl mx-auto">
+        UniOversea has established strategic partnerships with a diverse network of accredited universities worldwide, 
+        creating unique advantages for our students throughout their academic journey.
+      </p>
+      
+      {/* Partnership Benefits */}
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
+        {partnershipBenefits.map((benefit, index) => (
+          <div 
+            key={index}
+            className="bg-white rounded-xl shadow-md p-6 hover:shadow-lg transition-shadow"
+          >
+            <div className="w-12 h-12 rounded-full flex items-center justify-center mb-4" style={{ backgroundColor: `${colors.lightPurple}30` }}>
+              <div style={{ color: colors.darkPurple }}>
+                {benefit.icon}
+              </div>
+            </div>
+            <h3 className="text-xl font-bold mb-2" style={{ color: colors.darkPurple }}>
+              {benefit.title}
+            </h3>
+            <p className="text-gray-600">
+              {benefit.description}
+            </p>
+          </div>
+        ))}
+      </div>
+      
+      {/* Important Note */}
+      <div className="bg-white rounded-xl shadow-md p-6 mb-8 border-l-4" style={{ borderLeftColor: colors.neonGreen }}>
+        <h3 className="text-xl font-bold mb-3" style={{ color: colors.darkPurple }}>
+          Our Commitment to You
+        </h3>
+        <p className="text-gray-700 mb-4">
+          While we're proud of our extensive university partnerships, we want to emphasize that our counseling recommendations are never influenced by these connections. Our guidance is always based on what's the best fit for your specific profile and goals.
+        </p>
+        <p className="text-gray-700">
+          We clearly identify when we're discussing partner universities, and we pledge that our guidance remains focused exclusively on what's best for your educational journey—never our business interests.
+        </p>
+      </div>
+      
+      {/* Partner Universities by Region */}
+      <h3 className="text-2xl font-bold mb-6 text-center" style={{ color: colors.darkPurple }}>
+        Partner Universities by Region
+      </h3>
+      
+      {/* Region Navigation */}
+      <div className="flex flex-wrap justify-center gap-3 mb-8">
+        {Object.keys(partnerRegions).map((key) => (
+          <button
+            key={key}
+            onClick={() => setActivePartnerRegion(key)}
+            className={`px-4 py-2 rounded-lg text-sm font-medium transition-all flex items-center gap-2 ${
+              activePartnerRegion === key 
+                ? 'shadow-md' 
+                : 'hover:bg-white/50'
+            }`}
+            style={{ 
+              backgroundColor: activePartnerRegion === key ? colors.neonGreen : 'white',
+              color: colors.darkPurple
+            }}
+          >
+            <img 
+              src={partnerRegions[key].flag} 
+              alt={`${partnerRegions[key].name} flag`}
+              className="w-6 h-4 object-cover rounded"
+            />
+            {partnerRegions[key].name}
+          </button>
+        ))}
+      </div>
+      
+      {/* Partner Universities List */}
+      <div className="bg-white rounded-xl shadow-lg p-6 md:p-8">
+        <div className="flex items-center mb-6">
+          <img 
+            src={partnerRegions[activePartnerRegion].flag} 
+            alt={`${partnerRegions[activePartnerRegion].name} flag`}
+            className="w-10 h-8 object-cover rounded mr-3"
+          />
+          <h3 className="text-2xl font-bold" style={{ color: colors.darkPurple }}>
+            {partnerRegions[activePartnerRegion].name} Partners
+          </h3>
+        </div>
+        
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+          {partnerRegions[activePartnerRegion].universities.map((university, index) => (
+            <div 
+              key={index}
+              className="p-4 rounded-lg hover:bg-gray-50 transition-colors flex items-start"
+            >
+              <div 
+                className="w-2 h-2 rounded-full mr-3 mt-2 flex-shrink-0"
+                style={{ backgroundColor: colors.neonGreen }}
+              ></div>
+              <span className="text-gray-700">{university}</span>
+            </div>
+          ))}
         </div>
       </div>
     </div>
