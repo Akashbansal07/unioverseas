@@ -290,27 +290,18 @@ const TutoringHero = ({ colors, onContactClick }) => {
           </motion.div>
           
           <motion.div
-            className="flex flex-col sm:flex-row justify-center gap-4"
+            className="flex justify-center"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.8, duration: 0.6 }}
           >
             <motion.button
-              className="py-3 px-6 rounded-full text-white font-medium shadow-lg bg-white bg-opacity-30 backdrop-blur-sm hover:bg-opacity-40 transition-all"
+              className="py-3 px-8 rounded-full text-white font-medium shadow-lg bg-white bg-opacity-30 backdrop-blur-sm hover:bg-opacity-40 transition-all"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.98 }}
               onClick={onContactClick}
             >
               Request Free Consultation
-            </motion.button>
-            
-            <motion.button
-              className="py-3 px-6 rounded-full font-medium shadow-lg"
-              style={{ backgroundColor: colors.neonGreen, color: colors.darkPurple }}
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.98 }}
-            >
-              View Tutoring Packages
             </motion.button>
           </motion.div>
         </div>
@@ -890,20 +881,13 @@ const TutoringCta = ({ colors, onContactClick }) => {
             Join the hundreds of students who have achieved their academic goals with UniOversea's expert tutoring services
           </p>
           
-          <div className="flex flex-col sm:flex-row justify-center gap-4">
+          <div className="flex justify-center">
             <button
-              className="py-3 px-6 rounded-full text-white font-medium shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-300"
+              className="py-3 px-8 rounded-full text-white font-medium shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-300"
               style={{ backgroundColor: colors.darkPurple }}
               onClick={onContactClick}
             >
               Schedule a Free Consultation
-            </button>
-            
-            <button
-              className="py-3 px-6 rounded-full font-medium shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-300"
-              style={{ backgroundColor: colors.neonGreen, color: colors.darkPurple }}
-            >
-              Learn About Our Tutors
             </button>
           </div>
         </div>
