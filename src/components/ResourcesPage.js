@@ -1,785 +1,599 @@
-// ResourcesPage.js
-import React, { useState } from 'react';
-import { motion } from 'framer-motion';
+import React, { useState, useRef } from 'react';
 import { 
-  BookOpen, FileText, Calendar, MapPin, Award, Download, 
-  ChevronRight, Play, ExternalLink, Clock, Search
+  BookOpen, ChevronRight, Search, Tag, 
+  Calendar, Award, GraduationCap, Layers
 } from 'lucide-react';
 
-const ResourcesPage = ({ colors }) => {
-  const [activeCategory, setActiveCategory] = useState('blog');
+const ResourcesPage = ({ colors = {
+  darkPurple: '#3a1d6e',
+  lightPurple: '#9c8fe1',
+  neonGreen: '#c0ff3c'
+} }) => {
+  const [selectedContent, setSelectedContent] = useState(null);
+  const [activeCategory, setActiveCategory] = useState('all');
+  const modalRef = useRef(null);
   
   const categories = [
-    { id: 'blog', label: 'Blog & Articles', icon: <BookOpen size={20} /> },
-    { id: 'free', label: 'Free Resources', icon: <Download size={20} /> },
-    { id: 'webinars', label: 'Webinars & Events', icon: <Calendar size={20} /> },
-    { id: 'countries', label: 'Country Guides', icon: <MapPin size={20} /> },
-    { id: 'scholarships', label: 'Scholarships', icon: <Award size={20} /> }
+    { id: 'all', name: 'All Topics', icon: <Layers size={18} /> },
+    { id: 'tests', name: 'Standardized Tests', icon: <Award size={18} /> },
+    { id: 'application', name: 'Application Process', icon: <Calendar size={18} /> },
+    { id: 'statements', name: 'Personal Statements', icon: <BookOpen size={18} /> }
   ];
-
-  const fadeIn = {
-    hidden: { opacity: 0, y: 20 },
-    visible: { 
-      opacity: 1, 
-      y: 0,
-      transition: { duration: 0.6 }
+  
+  const articles = [
+    {
+      id: 'sat-act',
+      title: "Choosing Between the SAT and ACT: A Comprehensive Comparison",
+      excerpt: "Detailed comparison to help you choose the right test based on your strengths.",
+      tags: ['tests'],
+      content: {
+        sections: [
+          {
+            title: "Choose SAT if:",
+            items: [
+              "You excel at in-depth reading analysis",
+              "Math is your strong suit",
+              "You prefer more time per question",
+              "Math - SAT emphasizes algebra and data analysis"
+            ]
+          },
+          {
+            title: "Choose ACT if:",
+            items: [
+              "Science is your strength",
+              "You work well under time pressure",
+              "ACT requires faster work",
+              "Math - ACT covers more geometry and trigonometry"
+            ]
+          },
+          {
+            title: "Consider your strengths:",
+            items: [
+              "Strong in science → Consider ACT",
+              "Excel at algebra/data analysis → Consider SAT",
+              "Work well under time pressure → Consider ACT",
+              "Prefer deeper analysis of fewer questions → Consider SAT"
+            ]
+          }
+        ],
+        note: "Most universities accept BOTH tests equally! Take a diagnostic test of each and compare your comfort & scores!"
+      }
+    },
+    {
+      id: 'undergrad',
+      title: "Navigating the Under-grad application process for USA",
+      excerpt: "Complete guide to undergraduate applications including timeline, tests, and financial considerations.",
+      tags: ['application'],
+      content: {
+        sections: [
+          {
+            title: "Timeline",
+            items: [
+              "August-September: Finalize university list and create application accounts",
+              "September-October: Begin writing essays and personal statements",
+              "October: Submit early decision/action applications",
+              "November-January: Submit regular decision applications",
+              "December-March: Interview with admissions officers (if required)",
+              "March-April: Receive admission decisions",
+              "April: Compare offers and work on financial documents for i-20",
+              "May: Apply for student visa (F-1)"
+            ]
+          },
+          {
+            title: "Standardized tests",
+            items: [
+              "SAT, ACT, AP"
+            ]
+          },
+          {
+            title: "Financial considerations",
+            items: [
+              "Tuition: $25,000-60,000 per year",
+              "Room and Board: $10,000-20,000 per year",
+              "Books and Supplies: $1,000-2,000 per year",
+              "Health Insurance: $1,500-3,000 per year"
+            ]
+          },
+          {
+            title: "Financial Aid options",
+            items: [
+              "Merit-based scholarships (academic, athletic, artistic)",
+              "Need-based aid (limited for international students)",
+              "External scholarships and grants"
+            ]
+          },
+          {
+            title: "Job Options",
+            items: [
+              "On campus jobs during semesters (limited to 20 hours/week)",
+              "Curricular Practical Training (CPT) for internships",
+              "One year Optional Practical Training (OPT) post-graduation",
+              "Often require more employer sponsorship for long-term positions",
+              "Post study stay back - 60 day grace period to either leave the US, change the visa status or enroll in another program"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      id: 'grad',
+      title: "Navigating the Grad application process for USA",
+      excerpt: "Guide to graduate school applications with timeline, tests, and financial information.",
+      tags: ['application'],
+      content: {
+        sections: [
+          {
+            title: "Timeline",
+            items: [
+              "September-October: Start work on documentation and especially start requesting for recommendation letters",
+              "October-November: Write personal statements, essays or work on portfolio",
+              "November-December: Submit applications through university portal",
+              "December-February: Interview with admissions committees (if requested)",
+              "February-April: Receive admission decisions",
+              "April: Finalise the university and work on financial documents for i-20",
+              "May-July: Apply for student visa (F-1)"
+            ]
+          },
+          {
+            title: "Standardized tests",
+            items: [
+              "GRE, GMAT, LSAT, MCAT"
+            ]
+          },
+          {
+            title: "Financial considerations",
+            items: [
+              "Tuition: $20,000-70,000 per year",
+              "Living Expenses: $10,000-20,000 per year",
+              "Health Insurance: $2,000-4,000 per year",
+              "Books and Supplies: $1,000-2,000 per year"
+            ]
+          },
+          {
+            title: "Financial support options",
+            items: [
+              "Teaching Assistantships (TA)",
+              "Research Assistantships (RA)",
+              "Merit-based scholarships",
+              "External Scholarships (Fulbright and other government-sponsored programs)"
+            ]
+          },
+          {
+            title: "Job Options",
+            items: [
+              "On-campus employment (limited to 20 hours/week)",
+              "Extended OPT for STEM fields (up to 36 months)",
+              "Greater eligibility for specialized work visas",
+              "Post study stay back - 60 day grace period to either leave the US, change the visa status or enroll in another program"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      id: 'statement',
+      title: "Crafting a Compelling Personal Statement: Do's and Don'ts",
+      excerpt: "Expert tips for writing effective personal statements for your applications.",
+      tags: ['statements'],
+      content: {
+        sections: [
+          {
+            title: "Do's ✓",
+            subsections: [
+              {
+                title: "Structure and Content",
+                items: [
+                  "Do tell a coherent story that connects your past experiences, current goals, and future aspirations",
+                  "Do be specific about why you're interested in this particular program/university",
+                  "Do demonstrate knowledge of the program's unique offerings, faculty research, or institutional values",
+                  "Do highlight concrete examples of your achievements rather than just stating them",
+                  "Do explain any gaps or weaknesses in your application honestly and constructively",
+                  "Do connect your background to your chosen field of study explicitly",
+                  "Do showcase personal growth and how challenges shaped your academic journey"
+                ]
+              },
+              {
+                title: "Style and Approach",
+                items: [
+                  "Do use a strong opening that captures attention immediately",
+                  "Do maintain focus on aspects relevant to your academic and professional goals",
+                  "Do write in your authentic voice while keeping a professional tone",
+                  "Do demonstrate passion for your field through specific examples",
+                  "Do proofread meticulously for grammar, spelling, and clarity",
+                  "Do respect word limits and be concise",
+                  "Do ask for feedback from mentors, professors, or advisors"
+                ]
+              }
+            ]
+          },
+          {
+            title: "Don'ts ✗",
+            subsections: [
+              {
+                title: "Content to Avoid",
+                items: [
+                  "Don't include your entire life story or irrelevant personal details",
+                  "Don't repeat information directly from other parts of your application",
+                  "Don't use generic statements that could apply to any university",
+                  "Don't focus on childhood dreams without connecting them to concrete actions",
+                  "Don't include controversial topics unless directly relevant to your research interests",
+                  "Don't exaggerate or fabricate accomplishments or experiences",
+                  "Don't criticize other institutions or educational systems"
+                ]
+              },
+              {
+                title: "Style Mistakes",
+                items: [
+                  "Don't use clichés like \"I've always wanted to help people\" without substantiation",
+                  "Don't write a resume in paragraph form instead of a narrative",
+                  "Don't use overly formal language or thesaurus-heavy vocabulary",
+                  "Don't include quotes unless absolutely necessary and relevant",
+                  "Don't start every sentence with \"I\"",
+                  "Don't use humor that might not translate across cultures",
+                  "Don't submit without proofreading by at least one other person"
+                ]
+              }
+            ]
+          },
+          {
+            title: "Program-Specific Considerations",
+            subsections: [
+              {
+                title: "Undergraduate Applications",
+                items: [
+                  "Do focus more on personal growth, intellectual curiosity, and potential to contribute",
+                  "Don't overemphasize career goals at the expense of showing academic interests"
+                ]
+              },
+              {
+                title: "Graduate Applications",
+                items: [
+                  "Do demonstrate research experience and specific academic interests",
+                  "Do highlight alignment with faculty research",
+                  "Don't be vague about your research interests or future plans"
+                ]
+              },
+              {
+                title: "MBA/Professional Programs",
+                items: [
+                  "Do emphasize leadership experiences and professional accomplishments",
+                  "Do clearly articulate career progression and goals",
+                  "Don't focus solely on technical skills without showing leadership potential"
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      id: 'standardized-tests',
+      title: "All you need to know about standardized tests for under-grad applications in US",
+      excerpt: "Complete breakdown of standardized tests required for US college applications.",
+      tags: ['tests'],
+      content: {
+        sections: [
+          {
+            title: "SAT/ACT",
+            items: [
+              "Provides a standardized measure that colleges use to evaluate applicants from different high schools with varying grading systems",
+              "Even at test-optional schools, competitive scores can enhance your application",
+              "Strong scores can compensate for weaker aspects of your application",
+              "Some state universities offer automatic scholarships based on test score ranges"
+            ]
+          },
+          {
+            title: "AP",
+            items: [
+              "Distinguishes your profile among competitive applicants as subject-specific AP courses helps admission officers assess your expertise and interest in program specific majors",
+              "Shows willingness to challenge yourself with college-level material",
+              "Qualifying scores (typically 3-5) earn college credits at many institutions and allows you to skip introductory courses",
+              "Demonstrates subject-matter expertise and often viewed more favorably than standard high school honors courses",
+              "Some scholarships specifically consider AP participation"
+            ]
+          },
+          {
+            title: "English Language Test (TOEFL/IELTS/Duolingo)",
+            items: [
+              "TOEFL is most widely accepted, valid for 2 years and tests reading, listening, speaking, and writing skills",
+              "IELTS is widely accepted alternate to TOEFL, valid for 2 years",
+              "Duolingo is accepted by some selective universities but is getting increasingly accepted since COVID-19, shorter and more affordable alternative, valid for 2 years",
+              "Exemption - Many US universities may waive the english proficiency requirement if the student completed entire high school education in English medium/ studied in an IB or IGCSE curriculum/ have strong SAT Evidence-Based Reading and Writing scores (typically 650+)/ have attended an international school with English as primary language of instruction"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      id: 'test-optional',
+      title: "Do I need SAT scores if the university is test-optional?",
+      excerpt: "Understanding test-optional policies and when you should still submit scores.",
+      tags: ['tests'],
+      content: {
+        sections: [
+          {
+            title: "Test-Optional Explained",
+            items: [
+              "Test-optional means you can apply without SAT scores, but submitting a good score can strengthen your application, especially if your school grades or your profile is average",
+              "Approximately 80% of applicants to selective test-optional schools still submit scores",
+              "Many universities practice \"holistic review of the profile\" but strong test scores can still provide an advantage"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      id: 'community-vs-university',
+      title: "What is the difference between community colleges and universities?",
+      excerpt: "Comparison of community colleges and universities to help you choose the right path.",
+      tags: ['application'],
+      content: {
+        sections: [
+          {
+            title: "Key Differences",
+            items: [
+              "Community colleges: Offer 2-year associate degrees at lower costs and focus on workforce preparation. It allows transfer to universities later",
+              "Universities: offer 4-year bachelor's degrees directly. Have research opportunities and facilities"
+            ]
+          }
+        ]
+      }
     }
-  };
-
+  ];
+  
   const handleCategoryChange = (categoryId) => {
     setActiveCategory(categoryId);
   };
 
-  // Blog/Articles content
-  const blogArticles = [
-    {
-      title: "Choosing Between the SAT and ACT: A Comprehensive Comparison",
-      excerpt: "An in-depth analysis of both standardized tests, helping you determine which option aligns better with your strengths and university goals.",
-      image: "/api/placeholder/400/250",
-      date: "April 15, 2025",
-      readTime: "8 min read"
-    },
-    {
-      title: "2025 Admissions Trends: What Universities Are Looking For",
-      excerpt: "Insights into the evolving priorities of admission committees across popular destinations, with actionable tips for strengthening your application.",
-      image: "/api/placeholder/400/250",
-      date: "April 3, 2025",
-      readTime: "12 min read"
-    },
-    {
-      title: "Navigating Financial Aid as an International Student",
-      excerpt: "A comprehensive guide to scholarship opportunities, tuition reduction strategies, and financial planning for global education.",
-      image: "/api/placeholder/400/250",
-      date: "March 28, 2025",
-      readTime: "10 min read"
-    },
-    {
-      title: "Crafting a Compelling Personal Statement: Do's and Don'ts",
-      excerpt: "Expert advice on creating authentic, impactful personal statements that resonate with admissions committees.",
-      image: "/api/placeholder/400/250",
-      date: "March 15, 2025",
-      readTime: "7 min read"
+  const filteredArticles = activeCategory === 'all' 
+    ? articles 
+    : articles.filter(article => article.tags.includes(activeCategory));
+  
+  const closeModal = (e) => {
+    if (modalRef.current && !modalRef.current.contains(e.target)) {
+      setSelectedContent(null);
     }
-  ];
-
-  // Free Resources content
-  const freeResources = [
-    {
-      title: "University Research Template",
-      description: "Structured format for comparing institutions across key factors",
-      icon: <FileText size={24} />,
-      format: "PDF, Excel"
-    },
-    {
-      title: "Application Timeline Planner",
-      description: "Customizable schedule for managing deadlines",
-      icon: <Calendar size={24} />,
-      format: "PDF, Google Sheets"
-    },
-    {
-      title: "SOP Outline Worksheet",
-      description: "Framework for developing compelling personal statements",
-      icon: <FileText size={24} />,
-      format: "Word, PDF"
-    },
-    {
-      title: "Scholarship Database",
-      description: "Regularly updated listing of international student opportunities",
-      icon: <Award size={24} />,
-      format: "Excel, PDF"
-    },
-    {
-      title: "Interview Preparation Checklist",
-      description: "Common questions and response strategies",
-      icon: <FileText size={24} />,
-      format: "PDF"
-    },
-    {
-      title: "Standardized Test Study Planner",
-      description: "Week-by-week preparation guides",
-      icon: <Calendar size={24} />,
-      format: "PDF, Google Calendar"
-    }
-  ];
-
-  // Webinars/Events content
-  const webinars = {
-    upcoming: [
-      {
-        title: "Subject Selection Strategies for IBDP Success",
-        date: "May 12, 2025",
-        time: "5:00 PM IST",
-        speaker: "Dr. Sarah Johnson, IB Curriculum Expert"
-      },
-      {
-        title: "US vs. UK Education Systems: Choosing Your Best Fit",
-        date: "May 20, 2025",
-        time: "6:30 PM IST",
-        speaker: "Mark Williams, International Education Consultant"
-      },
-      {
-        title: "Scholarship Hunting: Beyond the Obvious Options",
-        date: "June 5, 2025",
-        time: "5:00 PM IST",
-        speaker: "Lisa Chen, Financial Aid Specialist"
-      }
-    ],
-    past: [
-      {
-        title: "Mastering the Common Application",
-        duration: "55 minutes",
-        presenter: "James Halbert, Former Admissions Officer"
-      },
-      {
-        title: "Building a Competitive Extracurricular Profile",
-        duration: "48 minutes",
-        presenter: "Dr. Michelle Rodriguez, University Counselor"
-      },
-      {
-        title: "Financial Planning for International Education",
-        duration: "62 minutes",
-        presenter: "Robert Kumar, Education Finance Advisor"
-      }
-    ]
   };
 
-  // Country Guides content
-  const countryGuides = [
-    { 
-      country: "USA", 
-      flag: "/api/placeholder/80/60",
-      universities: 4500,
-      topCity: "Boston"
-    },
-    { 
-      country: "UK", 
-      flag: "/api/placeholder/80/60",
-      universities: 160,
-      topCity: "London"
-    },
-    { 
-      country: "Canada", 
-      flag: "/api/placeholder/80/60",
-      universities: 100,
-      topCity: "Toronto"
-    },
-    { 
-      country: "Australia", 
-      flag: "/api/placeholder/80/60",
-      universities: 43,
-      topCity: "Melbourne"
-    },
-    { 
-      country: "Germany", 
-      flag: "/api/placeholder/80/60",
-      universities: 400,
-      topCity: "Berlin"
-    },
-    { 
-      country: "Netherlands", 
-      flag: "/api/placeholder/80/60",
-      universities: 70,
-      topCity: "Amsterdam"
-    },
-    { 
-      country: "Singapore", 
-      flag: "/api/placeholder/80/60",
-      universities: 34,
-      topCity: "Singapore"
-    },
-    { 
-      country: "New Zealand", 
-      flag: "/api/placeholder/80/60",
-      universities: 8,
-      topCity: "Auckland"
+  // Determine card colors based on tag
+  const getCardStyle = (tags) => {
+    if (tags.includes('tests')) {
+      return { 
+        borderColor: colors.lightPurple,
+        icon: <Award size={24} className="mb-2" style={{ color: colors.darkPurple }} />
+      };
+    } else if (tags.includes('application')) {
+      return { 
+        borderColor: colors.neonGreen,
+        icon: <Calendar size={24} className="mb-2" style={{ color: colors.darkPurple }} />
+      };
+    } else if (tags.includes('statements')) {
+      return { 
+        borderColor: '#ffd166',
+        icon: <BookOpen size={24} className="mb-2" style={{ color: colors.darkPurple }} />
+      };
     }
-  ];
+    return { 
+      borderColor: 'gray',
+      icon: <Tag size={24} className="mb-2" style={{ color: colors.darkPurple }} />
+    };
+  };
+  
+  const renderArticleCard = (article) => {
+    const cardStyle = getCardStyle(article.tags);
+    
+    return (
+      <div 
+        key={article.id}
+        className="flex flex-col bg-white rounded-xl shadow-sm overflow-hidden h-full transition-all duration-300 hover:shadow-md"
+        style={{ borderLeft: `4px solid ${cardStyle.borderColor}` }}
+        onClick={() => setSelectedContent(article)}
+      >
+        <div className="p-6">
+          <div className="mb-4">
+            {cardStyle.icon}
+          </div>
+          
+          <h3 className="text-xl font-bold mb-3" style={{ color: colors.darkPurple }}>
+            {article.title}
+          </h3>
+          
+          <p className="text-gray-600 mb-4 line-clamp-3">
+            {article.excerpt}
+          </p>
+          
+          <div className="mt-auto flex items-center text-sm font-medium" style={{ color: colors.darkPurple }}>
+            <span>Read Article</span>
+            <ChevronRight size={16} className="ml-1" />
+          </div>
+        </div>
+      </div>
+    );
+  };
 
-  // Scholarship content
-  const scholarshipCategories = [
-    {
-      title: "University-Specific Scholarships",
-      description: "Funding opportunities offered directly by institutions to attract top talent",
-      count: 1250
-    },
-    {
-      title: "Government-Funded Opportunities",
-      description: "Scholarships provided by governments to promote international education",
-      count: 475
-    },
-    {
-      title: "Private Foundation Awards",
-      description: "Support from non-profit organizations with educational missions",
-      count: 680
-    },
-    {
-      title: "Field of Study Scholarships",
-      description: "Funding targeted to specific academic disciplines and research areas",
-      count: 920
-    },
-    {
-      title: "Diversity and Inclusion Initiatives",
-      description: "Scholarships aimed at increasing representation in higher education",
-      count: 350
-    },
-    {
-      title: "Athletic Scholarships",
-      description: "Funding for students with exceptional sporting achievements",
-      count: 200
-    },
-    {
-      title: "Research Grants",
-      description: "Financial support for innovative research projects and proposals",
-      count: 420
-    }
-  ];
+  const renderContentDetail = () => {
+    if (!selectedContent) return null;
 
-  const renderContent = () => {
-    switch (activeCategory) {
-      case 'blog':
-        return (
-          <motion.div 
-            key="blog" 
-            variants={fadeIn}
-            initial="hidden"
-            animate="visible"
-            className="py-8"
-          >
-            <div className="text-center mb-12">
-              <h2 className="text-3xl md:text-4xl font-bold mb-4" style={{ color: colors.darkPurple }}>
-                Educational Insights & Trends
-              </h2>
-              <p className="text-lg text-gray-600 max-w-3xl mx-auto">
-                Stay informed with our latest articles, guides, and expert insights on education, 
-                admissions, and international study opportunities.
-              </p>
-            </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
-              {blogArticles.map((article, index) => (
-                <motion.div 
-                  key={index}
-                  className="bg-white rounded-xl shadow-md overflow-hidden flex flex-col h-full border border-gray-100"
-                  whileHover={{ y: -5, boxShadow: "0 15px 30px -5px rgba(0, 0, 0, 0.1)" }}
-                  transition={{ duration: 0.3 }}
+    return (
+      <div 
+        className="fixed inset-0 bg-black/60 flex items-center justify-center z-40 p-4 pt-16 overflow-y-auto"
+        onClick={closeModal}
+      >
+        <div 
+          ref={modalRef}
+          className="bg-white rounded-xl max-w-4xl w-full max-h-[90vh] overflow-y-auto animate-fadeIn mt-4"
+          style={{ scrollPaddingTop: "70px" }}
+        >
+          <div className="sticky top-0 bg-white border-b border-gray-200 px-6 py-4 flex justify-between items-center z-40">
+            <h2 className="text-2xl font-bold" style={{ color: colors.darkPurple }}>
+              {selectedContent.title}
+            </h2>
+            <button 
+              className="p-2 rounded-full hover:bg-gray-100"
+              onClick={() => setSelectedContent(null)}
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+              </svg>
+            </button>
+          </div>
+          
+          <div className="p-6 pt-8">
+            {selectedContent.content.sections.map((section, idx) => (
+              <div key={idx} className="mb-8 pt-2" id={`section-${idx}`}>
+                <h3 
+                  className="text-xl font-bold mb-4 pb-2 border-b" 
+                  style={{ color: colors.darkPurple, borderColor: colors.lightPurple }}
                 >
-                  <div className="relative">
-                    <img 
-                      src={article.image} 
-                      alt={article.title} 
-                      className="w-full h-48 object-cover"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent flex items-end">
-                      <div className="p-4 text-white">
-                        <div className="flex items-center text-sm">
-                          <span className="mr-3">{article.date}</span>
-                          <span className="flex items-center">
-                            <Clock size={14} className="mr-1" />
-                            {article.readTime}
-                          </span>
-                        </div>
-                      </div>
+                  {section.title}
+                </h3>
+                
+                {section.subsections ? (
+                  section.subsections.map((subsection, subIdx) => (
+                    <div key={subIdx} className="mb-6">
+                      <h4 className="text-lg font-medium mb-3" style={{ color: colors.darkPurple }}>
+                        {subsection.title}
+                      </h4>
+                      <ul className="list-disc pl-6 space-y-2">
+                        {subsection.items.map((item, itemIdx) => (
+                          <li key={itemIdx} className="text-gray-700">{item}</li>
+                        ))}
+                      </ul>
                     </div>
-                  </div>
-                  <div className="p-6 flex-grow">
-                    <h3 className="text-xl font-bold mb-3" style={{ color: colors.darkPurple }}>
-                      {article.title}
-                    </h3>
-                    <p className="text-gray-600 mb-4">
-                      {article.excerpt}
-                    </p>
-                  </div>
-                  <div className="px-6 pb-6">
-                    <button 
-                      className="text-sm font-medium flex items-center"
-                      style={{ color: colors.darkPurple }}
-                    >
-                      Read Article
-                      <ChevronRight size={16} className="ml-1" />
-                    </button>
-                  </div>
-                </motion.div>
-              ))}
-            </div>
-
-            <div className="text-center">
-              <button
-                className="px-6 py-3 rounded-full font-medium inline-flex items-center gap-2"
-                style={{ backgroundColor: colors.neonGreen, color: colors.darkPurple }}
-              >
-                View All Articles
-                <ChevronRight size={20} />
-              </button>
-            </div>
-          </motion.div>
-        );
-
-      case 'free':
-        return (
-          <motion.div 
-            key="free" 
-            variants={fadeIn}
-            initial="hidden"
-            animate="visible"
-            className="py-8"
-          >
-            <div className="text-center mb-12">
-              <h2 className="text-3xl md:text-4xl font-bold mb-4" style={{ color: colors.darkPurple }}>
-                Tools for Your Educational Journey
-              </h2>
-              <p className="text-lg text-gray-600 max-w-3xl mx-auto">
-                Download our free resources to support your application process, university research, 
-                test preparation, and more.
-              </p>
-            </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
-              {freeResources.map((resource, index) => (
-                <motion.div 
-                  key={index}
-                  className="bg-white rounded-xl shadow-md p-6 border border-gray-100"
-                  whileHover={{ y: -5, boxShadow: "0 15px 30px -5px rgba(0, 0, 0, 0.1)" }}
-                  transition={{ duration: 0.3 }}
-                >
-                  <div className="w-12 h-12 rounded-full flex items-center justify-center mb-4" style={{ backgroundColor: `${colors.lightPurple}30` }}>
-                    <div style={{ color: colors.darkPurple }}>
-                      {resource.icon}
-                    </div>
-                  </div>
-                  <h3 className="text-xl font-bold mb-2" style={{ color: colors.darkPurple }}>
-                    {resource.title}
-                  </h3>
-                  <p className="text-gray-600 mb-4">
-                    {resource.description}
-                  </p>
-                  <div className="flex items-center justify-between">
-                    <span className="text-sm text-gray-500">
-                      Available formats: {resource.format}
-                    </span>
-                    <button 
-                      className="w-10 h-10 rounded-full flex items-center justify-center"
-                      style={{ backgroundColor: colors.neonGreen }}
-                    >
-                      <Download size={18} style={{ color: colors.darkPurple }} />
-                    </button>
-                  </div>
-                </motion.div>
-              ))}
-            </div>
-
-            <div className="text-center">
-              <button
-                className="px-6 py-3 rounded-full font-medium inline-flex items-center gap-2"
-                style={{ backgroundColor: colors.neonGreen, color: colors.darkPurple }}
-              >
-                Download All Resources
-                <Download size={20} />
-              </button>
-            </div>
-          </motion.div>
-        );
-
-      case 'webinars':
-        return (
-          <motion.div 
-            key="webinars" 
-            variants={fadeIn}
-            initial="hidden"
-            animate="visible"
-            className="py-8"
-          >
-            <div className="text-center mb-12">
-              <h2 className="text-3xl md:text-4xl font-bold mb-4" style={{ color: colors.darkPurple }}>
-                Knowledge Sessions
-              </h2>
-              <p className="text-lg text-gray-600 max-w-3xl mx-auto">
-                Join our live webinars with education experts or access recordings of past sessions 
-                to gain valuable insights on your academic journey.
-              </p>
-            </div>
-
-            <div className="mb-16">
-              <h3 className="text-2xl font-bold mb-6" style={{ color: colors.darkPurple }}>
-                Upcoming Webinars
-              </h3>
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
-                {webinars.upcoming.map((webinar, index) => (
-                  <motion.div 
-                    key={index}
-                    className="bg-white rounded-xl shadow-md overflow-hidden border border-gray-100"
-                    whileHover={{ y: -5, boxShadow: "0 15px 30px -5px rgba(0, 0, 0, 0.1)" }}
-                    transition={{ duration: 0.3 }}
-                  >
-                    <div className="h-2" style={{ backgroundColor: colors.neonGreen }}></div>
-                    <div className="p-6">
-                      <div className="flex items-center mb-4">
-                        <div className="w-10 h-10 rounded-full flex items-center justify-center mr-2" style={{ backgroundColor: `${colors.lightPurple}30` }}>
-                          <Calendar size={20} style={{ color: colors.darkPurple }} />
-                        </div>
-                        <div>
-                          <div className="flex items-center text-sm font-medium text-gray-500">
-                            <span>{webinar.date}</span>
-                            <span className="mx-2">•</span>
-                            <span>{webinar.time}</span>
-                          </div>
-                        </div>
-                      </div>
-                      <h3 className="text-xl font-bold mb-3" style={{ color: colors.darkPurple }}>
-                        {webinar.title}
-                      </h3>
-                      <p className="text-gray-600 mb-5">
-                        Presented by: {webinar.speaker}
-                      </p>
-                      <button 
-                        className="w-full py-2 rounded-lg font-medium flex items-center justify-center"
-                        style={{ 
-                          backgroundColor: colors.darkPurple,
-                          color: 'white'
-                        }}
-                      >
-                        Register Now
-                      </button>
-                    </div>
-                  </motion.div>
-                ))}
-              </div>
-              
-              <h3 className="text-2xl font-bold mb-6" style={{ color: colors.darkPurple }}>
-                Past Webinar Recordings
-              </h3>
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                {webinars.past.map((recording, index) => (
-                  <motion.div 
-                    key={index}
-                    className="bg-white rounded-xl shadow-md p-6 border border-gray-100"
-                    whileHover={{ y: -5, boxShadow: "0 15px 30px -5px rgba(0, 0, 0, 0.1)" }}
-                    transition={{ duration: 0.3 }}
-                  >
-                    <div className="relative mb-3 bg-gray-100 rounded-lg" style={{ paddingTop: '56.25%' }}>
-                      <div className="absolute inset-0 flex items-center justify-center">
-                        <div className="w-14 h-14 rounded-full flex items-center justify-center bg-white/80 backdrop-blur-sm shadow-md">
-                          <Play size={24} style={{ color: colors.darkPurple }} />
-                        </div>
-                      </div>
-                    </div>
-                    <h3 className="text-lg font-bold mb-2" style={{ color: colors.darkPurple }}>
-                      {recording.title}
-                    </h3>
-                    <div className="flex items-center justify-between text-sm text-gray-500">
-                      <span>{recording.presenter}</span>
-                      <span>{recording.duration}</span>
-                    </div>
-                  </motion.div>
-                ))}
-              </div>
-            </div>
-
-            <div className="flex justify-center gap-4">
-              <button
-                className="px-6 py-3 rounded-full font-medium inline-flex items-center gap-2"
-                style={{ backgroundColor: colors.darkPurple, color: 'white' }}
-              >
-                Register for Webinars
-                <Calendar size={18} />
-              </button>
-              <button
-                className="px-6 py-3 rounded-full font-medium inline-flex items-center gap-2"
-                style={{ backgroundColor: colors.neonGreen, color: colors.darkPurple }}
-              >
-                Access Recorded Sessions
-                <Play size={18} />
-              </button>
-            </div>
-          </motion.div>
-        );
-
-      case 'countries':
-        return (
-          <motion.div 
-            key="countries" 
-            variants={fadeIn}
-            initial="hidden"
-            animate="visible"
-            className="py-8"
-          >
-            <div className="text-center mb-12">
-              <h2 className="text-3xl md:text-4xl font-bold mb-4" style={{ color: colors.darkPurple }}>
-                Destination Insights
-              </h2>
-              <p className="text-lg text-gray-600 max-w-3xl mx-auto">
-                Explore comprehensive guides to higher education in popular study destinations,
-                including admission requirements, visa processes, and culture.
-              </p>
-            </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
-              {countryGuides.map((country, index) => (
-                <motion.div 
-                  key={index}
-                  className="bg-white rounded-xl shadow-md overflow-hidden border border-gray-100"
-                  whileHover={{ y: -5, boxShadow: "0 15px 30px -5px rgba(0, 0, 0, 0.1)" }}
-                  transition={{ duration: 0.3 }}
-                >
-                  <div className="aspect-w-16 aspect-h-9 relative">
-                    <img 
-                      src={country.flag} 
-                      alt={`${country.country} flag`} 
-                      className="w-full h-full object-cover"
-                    />
-                  </div>
-                  <div className="p-6">
-                    <h3 className="text-xl font-bold mb-4" style={{ color: colors.darkPurple }}>
-                      {country.country}
-                    </h3>
-                    <div className="space-y-2 mb-5">
-                      <div className="flex justify-between text-sm">
-                        <span className="text-gray-600">Universities:</span>
-                        <span className="font-medium">{country.universities}</span>
-                      </div>
-                      <div className="flex justify-between text-sm">
-                        <span className="text-gray-600">Top Student City:</span>
-                        <span className="font-medium">{country.topCity}</span>
-                      </div>
-                    </div>
-                    <button 
-                      className="w-full py-2 rounded-lg font-medium flex items-center justify-center"
-                      style={{ 
-                        backgroundColor: `${colors.lightPurple}30`,
-                        color: colors.darkPurple
-                      }}
-                    >
-                      Explore Guide
-                      <ExternalLink size={16} className="ml-1" />
-                    </button>
-                  </div>
-                </motion.div>
-              ))}
-            </div>
-
-            <div className="bg-gradient-to-r from-white to-blue-50 rounded-xl p-6 md:p-8 mb-8">
-              <div className="flex flex-col md:flex-row items-center">
-                <div className="mb-6 md:mb-0 md:mr-8">
-                  <h3 className="text-xl font-bold mb-2" style={{ color: colors.darkPurple }}>
-                    Each country guide includes:
-                  </h3>
-                  <ul className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-2">
-                    {[
-                      'Education System Overview',
-                      'Types of Institutions',
-                      'Application Procedures',
-                      'Visa Requirements',
-                      'Cost of Living',
-                      'Work Opportunities',
-                      'Cultural Adaptation Tips',
-                      'Featured Universities'
-                    ].map((item, index) => (
-                      <li key={index} className="flex items-center">
-                        <div 
-                          className="w-2 h-2 rounded-full mr-2"
-                          style={{ backgroundColor: colors.neonGreen }}
-                        ></div>
-                        <span>{item}</span>
-                      </li>
+                  ))
+                ) : (
+                  <ul className="list-disc pl-6 space-y-2">
+                    {section.items.map((item, itemIdx) => (
+                      <li key={itemIdx} className="text-gray-700">{item}</li>
                     ))}
                   </ul>
-                </div>
-                <div className="flex-shrink-0">
-                  <button
-                    className="px-6 py-3 rounded-full font-medium inline-flex items-center gap-2 whitespace-nowrap"
-                    style={{ backgroundColor: colors.darkPurple, color: 'white' }}
-                  >
-                    Browse Country Guides
-                    <MapPin size={18} />
-                  </button>
-                </div>
+                )}
               </div>
-            </div>
-          </motion.div>
-        );
-
-      case 'scholarships':
-        return (
-          <motion.div 
-            key="scholarships" 
-            variants={fadeIn}
-            initial="hidden"
-            animate="visible"
-            className="py-8"
-          >
-            <div className="text-center mb-12">
-              <h2 className="text-3xl md:text-4xl font-bold mb-4" style={{ color: colors.darkPurple }}>
-                Funding Your Education
-              </h2>
-              <p className="text-lg text-gray-600 max-w-3xl mx-auto">
-                Discover scholarship opportunities worldwide to support your international 
-                education journey with our comprehensive database.
-              </p>
-            </div>
-
-            <div className="relative mb-12 bg-white rounded-xl shadow-md overflow-hidden p-6 md:p-8">
-              <div className="relative z-10">
-                <h3 className="text-2xl font-bold mb-6" style={{ color: colors.darkPurple }}>
-                  Search Scholarships
-                </h3>
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
-                  <div>
-                    <label className="block text-sm font-medium mb-1 text-gray-700">Study Level</label>
-                    <select className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2" style={{ focusRing: colors.lightPurple }}>
-                      <option>Any Level</option>
-                      <option>Undergraduate</option>
-                      <option>Postgraduate</option>
-                      <option>Doctoral</option>
-                      <option>Research</option>
-                    </select>
-                  </div>
-                  <div>
-                    <label className="block text-sm font-medium mb-1 text-gray-700">Country</label>
-                    <select className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2" style={{ focusRing: colors.lightPurple }}>
-                      <option>Any Country</option>
-                      <option>USA</option>
-                      <option>UK</option>
-                      <option>Canada</option>
-                      <option>Australia</option>
-                      <option>Germany</option>
-                      <option>Others</option>
-                    </select>
-                  </div>
-                  <div>
-                    <label className="block text-sm font-medium mb-1 text-gray-700">Field of Study</label>
-                    <select className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2" style={{ focusRing: colors.lightPurple }}>
-                      <option>Any Field</option>
-                      <option>Business & Management</option>
-                      <option>Engineering & Technology</option>
-                      <option>Arts & Humanities</option>
-                      <option>Medicine & Health</option>
-                      <option>Sciences</option>
-                      <option>Social Sciences</option>
-                    </select>
-                  </div>
-                </div>
-                <button
-                  className="px-6 py-3 rounded-lg font-medium inline-flex items-center gap-2"
-                  style={{ backgroundColor: colors.darkPurple, color: 'white' }}
-                >
-                  Search Scholarships
-                  <Search size={18} />
-                </button>
-              </div>
-              <div 
-                className="absolute top-0 right-0 w-1/3 h-full opacity-10 pointer-events-none"
-                style={{ 
-                  backgroundImage: `url(/api/placeholder/400/800)`,
-                  backgroundSize: 'cover',
-                  backgroundPosition: 'center'
-                }}
-              ></div>
-            </div>
-
-            <h3 className="text-2xl font-bold mb-6" style={{ color: colors.darkPurple }}>
-              Scholarship Categories
-            </h3>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
-              {scholarshipCategories.map((category, index) => (
-                <motion.div 
-                  key={index}
-                  className="bg-white rounded-xl shadow-md p-6 border border-gray-100"
-                  whileHover={{ y: -5, boxShadow: "0 15px 30px -5px rgba(0, 0, 0, 0.1)" }}
-                  transition={{ duration: 0.3 }}
-                >
-                  <div className="flex justify-between items-start mb-4">
-                    <h4 className="text-lg font-bold" style={{ color: colors.darkPurple }}>
-                      {category.title}
-                    </h4>
-                    <span 
-                      className="px-2 py-1 rounded text-sm font-medium"
-                      style={{ 
-                        backgroundColor: `${colors.lightPurple}20`,
-                        color: colors.darkPurple
-                      }}
-                    >
-                      {category.count}
-                    </span>
-                  </div>
-                  <p className="text-gray-600 text-sm mb-4">
-                    {category.description}
-                  </p>
-                  <button 
-                    className="text-sm font-medium flex items-center mt-auto"
-                    style={{ color: colors.darkPurple }}
-                  >
-                    Browse Category
-                    <ChevronRight size={16} className="ml-1" />
-                  </button>
-                </motion.div>
-              ))}
-            </div>
-
-            <div className="text-center">
-              <button
-                className="px-6 py-3 rounded-full font-medium inline-flex items-center gap-2"
-                style={{ backgroundColor: colors.neonGreen, color: colors.darkPurple }}
+            ))}
+            
+            {selectedContent.content.note && (
+              <div className="mt-6 p-4 rounded-lg flex items-start gap-3"
+                style={{ backgroundColor: `${colors.neonGreen}20` }}
               >
-                Search Scholarship Database
-                <Search size={18} />
-              </button>
-            </div>
-          </motion.div>
-        );
-
-      default:
-        return <div>Select a category</div>;
-    }
+                <div className="text-xl">💡</div>
+                <p className="font-medium" style={{ color: colors.darkPurple }}>
+                  Pro Tip: {selectedContent.content.note}
+                </p>
+              </div>
+            )}
+          </div>
+          
+          <div className="border-t border-gray-200 px-6 py-4 flex justify-end">
+            <button
+              className="px-4 py-2 rounded-lg font-medium"
+              style={{ backgroundColor: colors.neonGreen, color: colors.darkPurple }}
+              onClick={() => setSelectedContent(null)}
+            >
+              Close
+            </button>
+          </div>
+        </div>
+      </div>
+    );
   };
 
   return (
     <div className="bg-gray-50 min-h-screen">
-      {/* Header */}
-      {/* Header/Hero Section with background image */}
-<div 
-  className="py-32 md:py-40 lg:py-48 bg-cover bg-center relative"
-  style={{ 
-    backgroundImage: "url('https://images.unsplash.com/photo-1741795746033-d50d48dc1da5?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTl8fHN0dWR5JTIwcmVzb3VyY2VzfGVufDB8fDB8fHww')",
-    backgroundColor: "rgba(0,0,0,0.7)",
-    backgroundBlendMode: "overlay"
-  }}
->
-  <div className="container mx-auto px-4 relative z-10">
-    <div className="max-w-4xl mx-auto text-center">
-      <h1 className="text-4xl md:text-5xl font-bold mb-6 text-white">
-        Resources
-      </h1>
-      <p className="text-xl text-white mb-6">
-        Access free tools, guides, and expert content to support your educational journey
-      </p>
-
-      {/* Category Navigation */}
-      <div className="flex flex-wrap justify-center gap-2 mt-8">
-        {categories.map((category) => (
-          <button
-            key={category.id}
-            onClick={() => handleCategoryChange(category.id)}
-            className={`px-4 py-2 rounded-full text-sm font-medium transition-all flex items-center gap-2 ${
-              activeCategory === category.id 
-                ? 'shadow-md' 
-                : 'hover:bg-white/50'
-            }`}
-            style={{ 
-              backgroundColor: activeCategory === category.id ? colors.neonGreen : 'white',
-              color: colors.darkPurple
-            }}
-          >
-            {category.icon}
-            {category.label}
-          </button>
-        ))}
+      {/* Hero Section - Kept intact as requested */}
+      <div 
+        className="py-20 bg-cover bg-center relative"
+        style={{ 
+          backgroundImage: "url('https://images.unsplash.com/photo-1741795746033-d50d48dc1da5?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTl8fHN0dWR5JTIwcmVzb3VyY2VzfGVufDB8fDB8fHww')",
+          backgroundColor: "rgba(0,0,0,0.7)",
+          backgroundBlendMode: "overlay"
+        }}
+      >
+        <div className="container mx-auto px-4 relative z-10">
+          <div className="max-w-4xl mx-auto text-center">
+            <h1 className="text-4xl md:text-5xl font-bold mb-6 text-white">
+              Educational Resources
+            </h1>
+            <p className="text-xl text-white mb-8">
+              A comprehensive collection of articles and guides to help with your educational journey
+            </p>
+            
+            <div className="inline-flex items-center gap-2 bg-white px-5 py-3 rounded-full shadow-md">
+              <BookOpen size={20} className="text-purple-800" />
+              <span className="font-medium text-purple-800">Blog & Articles</span>
+            </div>
+          </div>
+        </div>
       </div>
-    </div>
-  </div>
-</div>
 
-      {/* Main Content */}
-      <div className="container mx-auto px-4 pb-16">
-        {renderContent()}
+      {/* Redesigned Content Section */}
+      <div className="container mx-auto px-4 py-12">
+        <div className="text-center mb-12">
+          <h2 className="text-3xl md:text-4xl font-bold mb-4" style={{ color: colors.darkPurple }}>
+            Educational Insights & Trends
+          </h2>
+          <p className="text-lg text-gray-600 max-w-3xl mx-auto mb-6">
+            Explore our comprehensive guides to help with your education journey
+          </p>
+          
+          {/* Search Bar */}
+          <div className="max-w-2xl mx-auto mb-8 relative">
+            <div className="flex items-center bg-white rounded-full shadow-sm border border-gray-200 pl-4 pr-2 py-2">
+              <Search size={18} className="text-gray-400" />
+              <input 
+                type="text" 
+                placeholder="Search resources..." 
+                className="w-full ml-2 focus:outline-none text-gray-700"
+              />
+              <button 
+                className="ml-2 px-4 py-1 rounded-full text-sm font-medium" 
+                style={{ backgroundColor: colors.neonGreen, color: colors.darkPurple }}
+              >
+                Search
+              </button>
+            </div>
+          </div>
+          
+          {/* Category tabs */}
+          <div className="flex flex-wrap justify-center gap-3 mb-10">
+            {categories.map(category => (
+              <button
+                key={category.id}
+                className={`px-4 py-2 rounded-full text-sm font-medium flex items-center gap-2 transition-colors ${
+                  activeCategory === category.id 
+                    ? 'text-white shadow-md' 
+                    : 'bg-white text-gray-700 border border-gray-200 hover:bg-gray-50'
+                }`}
+                style={activeCategory === category.id ? { backgroundColor: colors.darkPurple } : {}}
+                onClick={() => handleCategoryChange(category.id)}
+              >
+                {category.icon}
+                {category.name}
+              </button>
+            ))}
+          </div>
+        </div>
+
+        {/* Card Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
+          {filteredArticles.map(article => renderArticleCard(article))}
+        </div>
+        
+        {/* No results message */}
+        {filteredArticles.length === 0 && (
+          <div className="text-center py-12">
+            <p className="text-lg text-gray-500">No articles found for this category.</p>
+          </div>
+        )}
+
+        {/* Content Modal */}
+        {renderContentDetail()}
+        
+        {/* Bottom Hint */}
+        <div className="text-center mt-8 mb-4">
+          <p className="text-gray-500 text-sm">
+            Click on any article card to read the full content
+          </p>
+        </div>
       </div>
     </div>
   );
