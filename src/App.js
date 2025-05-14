@@ -1,10 +1,9 @@
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import Navbar from './components/Navbar';
 import HomePage from './components/HomePage';
 import TutoringPage from './components/TutoringPage';
 import StudyAbroadPage from './components/StudyAbroadPage';
 import ResourcesPage from './components/ResourcesPage';
-import SuccessStoriesPage from './components/SuccessStoriesPage';
 import AboutUsPage from './components/AboutUsPage';
 import './App.css';
 
@@ -17,6 +16,17 @@ const App = () => {
     lightPurple: '#BEC1F8',
     darkPurple: '#2E2CAB',
     neonGreen: '#D8FC44'
+  };
+
+  // Add an effect to scroll to top when activeTab changes
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [activeTab]);
+
+  // Modified setActiveTab function that also scrolls to top
+  const handleTabChange = (tab) => {
+    setActiveTab(tab);
+    window.scrollTo(0, 0);
   };
 
   // Function to handle navigation to contact section
@@ -54,7 +64,7 @@ const App = () => {
     <div className="min-h-screen bg-white">
       <Navbar 
         activeTab={activeTab} 
-        setActiveTab={setActiveTab} 
+        setActiveTab={handleTabChange} 
         colors={colors} 
       />
       <main className="relative">
