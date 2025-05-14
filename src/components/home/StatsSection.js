@@ -88,15 +88,29 @@ const StatsSection = ({ colors }) => {
     { name: "Switzerland", code: "ch", flag: "https://cdn.countryflags.com/thumbs/switzerland/flag-square-500.png" },
   ];
 
-  // University logos array
-  const universities = [
-    { name: "Harvard University", country: "USA", logo: "https://upload.wikimedia.org/wikipedia/commons/7/70/Harvard_University_logo.svg" },
-    { name: "Stanford University", country: "USA", logo: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR3jDkYBdQuEVMbQ1hy36otEDX9AlAFvvJy_g&s" },
-    { name: "Yale University", country: "USA", logo: "https://rostrumedu.com/wp-content/uploads/al_opt_content/IMAGE/rostrumedu.com/wp-content/uploads/yale-117x150-2.webp.bv_resized_desktop.webp.bv.webp" },
-    { name: "University of Michigan", country: "USA", logo: "https://rostrumedu.com/wp-content/uploads/al_opt_content/IMAGE/rostrumedu.com/wp-content/uploads/1200px-Seal_of_the_University_of_Michigan.svg_-150x150-2.webp.bv_resized_desktop.webp.bv.webp" },
-    { name: "University of Cambridge", country: "UK", logo: "https://rostrumedu.com/wp-content/uploads/al_opt_content/IMAGE/rostrumedu.com/wp-content/uploads/university-of-cambridge-2-logo-png-transparent-119x150-2.webp.bv_resized_desktop.webp.bv.webp" },
-    { name: "University of Oxford", country: "UK", logo: "https://rostrumedu.com/wp-content/uploads/al_opt_content/IMAGE/rostrumedu.com/wp-content/uploads/PngItem_2788638-120x150-2.webp.bv_resized_desktop.webp.bv.webp" },
-    { name: "Cornell University", country: "USA", logo: "https://rostrumedu.com/wp-content/uploads/al_opt_content/IMAGE/rostrumedu.com/wp-content/uploads/Cornell_University_seal.svg_-150x150-2.webp.bv_resized_desktop.webp.bv.webp" },
+  // University logos arrays
+  const usUniversities = [
+    { name: "Johns Hopkins University", country: "USA", logo: "https://brand.jhu.edu/wp-content/uploads/2024/07/logos-vertical-1024x683.jpg" },
+    { name: "Northeastern University", country: "USA", logo: "https://brand.northeastern.edu/wp-content/uploads/2025/01/seal-black.svg" },
+    { name: "Lehigh University", country: "USA", logo: "https://collegeaim.org/wp-content/uploads/2021/08/Lehigh-University-logo.png" },
+    { name: "SUNY Buffalo", country: "USA", logo: "https://www.buffalo.edu/content/www/brand/resources-tools/downloads/jcr:content/par/image.img.418.auto.q65.png/1660936569132.png" },
+    { name: "Arizona State University", country: "USA", logo: "https://brandguide.asu.edu/modules/webspark/asu_brand/node_modules/@asu/component-header/dist/assets/img/arizona-state-university-logo-vertical.png" },
+    { name: "University of Arizona", country: "USA", logo: "https://www.arizona.edu/sites/default/files/www_webheader-01.svg" },
+    { name: "Suffolk University", country: "USA", logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e2/University_of_Suffolk_Logo.png/1200px-University_of_Suffolk_Logo.png" },
+    { name: "California State University", country: "USA", logo: "https://www.calstate.edu/_catalogs/masterpage/assets/images/logo.png" },
+    { name: "University of Alabama", country: "USA", logo: "https://upload.wikimedia.org/wikipedia/commons/4/47/University_of_Alabama_%28logo%29.png" },
+  ];
+  
+  const ukUniversities = [
+    { name: "University College London", country: "UK", logo: "https://upload.wikimedia.org/wikipedia/en/thumb/d/d1/University_College_London_logo.svg/500px-University_College_London_logo.svg.png" },
+    { name: "University of Exeter", country: "UK", logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/f/fb/Arms_of_the_University_of_Exeter.svg/330px-Arms_of_the_University_of_Exeter.svg.png" },
+    { name: "Queen's University Belfast", country: "UK", logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5a/Queen%27s_University_Belfast_arms.svg/330px-Queen%27s_University_Belfast_arms.svg.png" },
+    { name: "University of Warwick", country: "UK", logo: "https://d36jn9qou1tztq.cloudfront.net/static_war/render/id7/images/logo.svg.233060099087" },
+    { name: "University of Edinburgh", country: "UK", logo: "https://www.ed.ac.uk/themes/upstream/wpp_theme/images/logo.png" },
+    { name: "Kings College London", country: "UK", logo: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTvLqBw_MaWSW4ycrn4UHo4dlkiw972sMEdGA&s" },
+    { name: "University of Sheffield", country: "UK", logo: "https://www.sheffield.ac.uk/themes/custom/uos_public/images/logos/uos-crest.svg" },
+    { name: "Cardiff University", country: "UK", logo: "https://powertransition.energy/sites/default/files/styles/partnersnode/public/partners/cardiff-university.png?itok=9-Gob6om" },
+    { name: "University of Leeds", country: "UK", logo: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTlJEV_NxpeqzEiHz0Dsu4QstykPSxjdqUktg&s" },
   ];
 
   const containerVariants = {
@@ -156,7 +170,7 @@ const StatsSection = ({ colors }) => {
   };
 
   // Create a function to render university logos with dynamic keys and direction
-  const renderUniversities = (isReversed = false) => {
+  const renderUniversities = (universities, isReversed = false) => {
     // Need to duplicate the array to create a continuous effect
     const itemsToRender = [...universities, ...universities, ...universities, ...universities, ...universities];
     
@@ -285,7 +299,7 @@ const StatsSection = ({ colors }) => {
           ))}
         </motion.div>
 
-        {/* University Logos Scroll Animation - Now with two rows moving in opposite directions */}
+        {/* University Logos Scroll Animation - Two rows for US and UK universities */}
         <motion.div 
           className="mt-16"
           initial={{ opacity: 0 }}
@@ -293,6 +307,7 @@ const StatsSection = ({ colors }) => {
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
         >
+          {/* US Universities */}
           <motion.h3 
             className="text-xl md:text-2xl font-semibold text-center mb-8"
             style={{ color: colors.darkPurple }}
@@ -300,17 +315,26 @@ const StatsSection = ({ colors }) => {
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
           >
-            Our Partner Universities
+            Our US Partnered Universities
           </motion.h3>
           
-          {/* First row - Default direction */}
           <div className="relative w-full overflow-hidden py-4">
-            {renderUniversities(false)}
+            {renderUniversities(usUniversities, false)}
           </div>
           
-          {/* Second row - Reverse direction */}
-          <div className="relative w-full overflow-hidden py-4 mt-6">
-            {renderUniversities(true)}
+          {/* UK Universities */}
+          <motion.h3 
+            className="text-xl md:text-2xl font-semibold text-center mt-12 mb-8"
+            style={{ color: colors.darkPurple }}
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+          >
+            Our UK Partnered Universities
+          </motion.h3>
+          
+          <div className="relative w-full overflow-hidden py-4">
+            {renderUniversities(ukUniversities, false)}
           </div>
         </motion.div>
       </div>
