@@ -535,23 +535,7 @@ const ResourcesPage = ({ colors = {
             Explore our comprehensive guides to help with your education journey
           </p>
           
-          {/* Search Bar */}
-          <div className="max-w-2xl mx-auto mb-8 relative">
-            <div className="flex items-center bg-white rounded-full shadow-sm border border-gray-200 pl-4 pr-2 py-2">
-              <Search size={18} className="text-gray-400" />
-              <input 
-                type="text" 
-                placeholder="Search resources..." 
-                className="w-full ml-2 focus:outline-none text-gray-700"
-              />
-              <button 
-                className="ml-2 px-4 py-1 rounded-full text-sm font-medium" 
-                style={{ backgroundColor: colors.neonGreen, color: colors.darkPurple }}
-              >
-                Search
-              </button>
-            </div>
-          </div>
+
           
           {/* Category tabs */}
           <div className="flex flex-wrap justify-center gap-3 mb-10">

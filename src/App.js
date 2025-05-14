@@ -46,7 +46,11 @@ const App = () => {
   const renderContent = () => {
     switch (activeTab) {
       case 'home':
-        return <HomePage colors={colors} contactSectionRef={contactSectionRef} />;
+        return <HomePage 
+                 colors={colors} 
+                 contactSectionRef={contactSectionRef} 
+                 setActiveTab={handleTabChange} 
+               />;
       case 'tutoring':
         return <TutoringPage colors={colors} onContactClick={handleContactClick} />;
       case 'abroad':
@@ -56,7 +60,11 @@ const App = () => {
       case 'about':
         return <AboutUsPage colors={colors} onContactClick={handleContactClick} />;
       default:
-        return <HomePage colors={colors} contactSectionRef={contactSectionRef} />;
+        return <HomePage 
+                 colors={colors} 
+                 contactSectionRef={contactSectionRef}
+                 setActiveTab={handleTabChange}
+               />;
     }
   };
 

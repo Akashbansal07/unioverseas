@@ -5,7 +5,7 @@ import { Globe, BookOpen } from 'lucide-react';
 // Import the image directly - this is the most reliable method
 import modelImage from '../../utils/model.png';
 
-const HeroSection = ({ colors }) => {
+const HeroSection = ({ colors, onContactClick, setActiveTab }) => {
   // State to track viewport dimensions
   const [dimensions, setDimensions] = useState({
     height: 0,
@@ -39,6 +39,26 @@ const HeroSection = ({ colors }) => {
   // Hide when aspect ratio is portrait-like (height > width or very slightly landscape)
   const shouldShowModel = dimensions.aspectRatio > 0.8;
 
+  // Handle the consultation button click
+  const handleConsultationClick = () => {
+    if (onContactClick) {
+      onContactClick();
+    } else {
+      // Fallback for when onContactClick is not provided
+      const contactSection = document.querySelector('#contact-section');
+      if (contactSection) {
+        contactSection.scrollIntoView({ behavior: 'smooth' });
+      }
+    }
+  };
+
+  // Handle the study abroad button click
+  const handleStudyAbroadClick = () => {
+    if (setActiveTab) {
+      setActiveTab('abroad');
+    }
+  };
+
   return (
     <section 
       className="hero-section min-h-screen flex items-center justify-center relative"
@@ -69,7 +89,7 @@ const HeroSection = ({ colors }) => {
               animate={{ opacity: 1 }}
               transition={{ delay: 0.3, duration: 0.8 }}
             >
-              From Testprep to Admissions
+              From Testprep to Admissions - We've got you
             </motion.h1>
             <motion.h2
               className="text-3xl md:text-4xl font-semibold mb-6 text-white"
@@ -102,9 +122,10 @@ const HeroSection = ({ colors }) => {
                 style={{ backgroundColor: colors.darkPurple }}
                 whileHover={{ scale: 1.05, backgroundColor: "#3E3CD0" }}
                 whileTap={{ scale: 0.98 }}
+                onClick={handleConsultationClick}
               >
                 <BookOpen size={20} />
-                Explore Tutoring Services
+                Request Free Consultation
               </motion.button>
               
               <motion.button
@@ -112,6 +133,7 @@ const HeroSection = ({ colors }) => {
                 style={{ backgroundColor: colors.neonGreen, color: colors.darkPurple }}
                 whileHover={{ scale: 1.05, backgroundColor: "#E3FF6A" }}
                 whileTap={{ scale: 0.98 }}
+                onClick={handleStudyAbroadClick}
               >
                 <Globe size={20} />
                 Discover Study Abroad
