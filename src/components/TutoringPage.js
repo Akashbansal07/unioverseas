@@ -925,7 +925,7 @@ const TutoringPage = ({ colors = {
     { id: 'exams', label: 'Exam Prep', component: <ExamPrepSection colors={colors} /> },
     { id: 'approach', label: 'Approach', component: <ApproachSection colors={colors} /> },
     { id: 'tutors', label: 'Our Tutors', component: <TutorsSection colors={colors} /> },
-    { id: 'pricing', label: 'Pricing', component: <PricingSection colors={colors} /> },
+    { id: 'pricing', label: 'Packages', component: <PricingSection colors={colors} /> },
     { id: 'faq', label: 'FAQ', component: <FaqSection colors={colors} /> }
   ];
 

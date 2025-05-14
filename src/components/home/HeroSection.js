@@ -91,14 +91,7 @@ const HeroSection = ({ colors, onContactClick, setActiveTab }) => {
             >
               From Testprep to Admissions - We've got you
             </motion.h1>
-            <motion.h2
-              className="text-3xl md:text-4xl font-semibold mb-6 text-white"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 0.5, duration: 0.8 }}
-            >
-              Education That Puts <span className="underline decoration-4" style={{ textDecorationColor: colors.neonGreen }}>You First</span>
-            </motion.h2>
+           
             
             <motion.p 
               className="text-lg md:text-xl mb-8 text-white max-w-2xl"

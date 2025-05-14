@@ -315,7 +315,7 @@ const StatsSection = ({ colors }) => {
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
           >
-            Our US Partnered Universities
+            Our Partnered Universities
           </motion.h3>
           
           <div className="relative w-full overflow-hidden py-4">
@@ -330,7 +330,7 @@ const StatsSection = ({ colors }) => {
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
           >
-            Our UK Partnered Universities
+          
           </motion.h3>
           
           <div className="relative w-full overflow-hidden py-4">
