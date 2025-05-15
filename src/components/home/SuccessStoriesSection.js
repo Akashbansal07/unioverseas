@@ -142,7 +142,7 @@ const SuccessStoriesSection = ({ colors }) => {
                   {/* Student photo with unique creative border */}
                   <div className="flex justify-center mb-8">
                     <div className="relative">
-                      {/* Decorative elements around the image */}
+                      {/* Decorative elements around the image - keeping these */}
                       <div className="absolute -inset-2 z-0">
                         {/* Decorative circles */}
                         <div className="absolute top-0 left-1/4 h-4 w-4 rounded-full bg-blue-400 opacity-70 shadow-lg"></div>
@@ -157,16 +157,10 @@ const SuccessStoriesSection = ({ colors }) => {
                       
                       {/* Main photo container with 3D effect */}
                       <div className="relative h-36 w-36 rounded-full bg-white shadow-[0_0_35px_rgba(0,0,0,0.2),_inset_0_0_15px_rgba(0,0,0,0.1)]">
-                        {/* Cut-out pattern overlay */}
-                        <div className="absolute inset-0 z-10 rounded-full opacity-20 mix-blend-overlay"
-                          style={{ 
-                            backgroundImage: 'radial-gradient(circle at 30% 40%, transparent 10px, white 10px, white 20px, transparent 20px), radial-gradient(circle at 70% 60%, transparent 10px, white 10px, white 20px, transparent 20px)',
-                            backgroundSize: '100px 100px'
-                          }}>
-                        </div>
+                        {/* Removed the cut-out pattern overlay that was creating circles on top of the image */}
                         
-                        {/* Image container with cut-out mask */}
-                        <div className="absolute inset-2 overflow-hidden rounded-full border-4 border-white shadow-inner">
+                        {/* Image container with cut-out mask - increased z-index */}
+                        <div className="absolute inset-2 overflow-hidden rounded-full border-4 border-white shadow-inner z-20">
                           <img 
                             src={stories[currentIndex].image} 
                             alt={`${stories[currentIndex].name}`} 
@@ -174,8 +168,8 @@ const SuccessStoriesSection = ({ colors }) => {
                           />
                         </div>
                         
-                        {/* Highlight reflection effect */}
-                        <div className="absolute inset-0 rounded-full opacity-30"
+                        {/* Highlight reflection effect - made sure it's behind the image */}
+                        <div className="absolute inset-0 rounded-full opacity-30 z-10"
                           style={{
                             background: 'linear-gradient(135deg, rgba(255,255,255,0.8) 0%, rgba(255,255,255,0) 50%, rgba(255,255,255,0) 100%)'
                           }}>

@@ -87,8 +87,8 @@ const Navbar = ({ activeTab, setActiveTab, colors }) => {
                 alt="UniOverseas Logo" 
                 className="transition-all duration-300 w-auto object-contain"
                 style={{ 
-                  height: "140px", /* Increased logo size from the original 16px */
-                  maxHeight: "140px" /* Ensures it doesn't exceed this height */
+                  height: "180px", /* Increased logo size from the original 16px */
+                  maxHeight: "180px" /* Ensures it doesn't exceed this height */
                 }}
               />
             </button>
