@@ -1,4 +1,4 @@
-// SuccessStoriesSection.js
+// SuccessStoriesSection.js with fixed arrow positions
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ChevronLeft, ChevronRight, User } from 'lucide-react';
@@ -106,21 +106,21 @@ const SuccessStoriesSection = ({ colors }) => {
           <div className="w-24 h-1 mx-auto my-4" style={{ backgroundColor: colors.neonGreen }}></div>
         </motion.div>
 
+        {/* Container with relative positioning to hold both testimonial and arrows */}
         <div className="relative max-w-4xl mx-auto">
-          <div className="absolute left-0 top-1/2 -translate-y-1/2 z-10">
+          {/* Fixed positioned arrow buttons - now positioned outside the content area */}
+          <div className="fixed-arrow-container hidden md:block">
             <motion.button
-              className="w-12 h-12 rounded-full flex items-center justify-center shadow-lg bg-white"
+              className="left-arrow-fixed w-12 h-12 rounded-full flex items-center justify-center shadow-lg bg-white hover:bg-gray-50"
               whileHover={{ scale: 1.1, backgroundColor: colors.neonGreen }}
               whileTap={{ scale: 0.95 }}
               onClick={prevSlide}
             >
               <ChevronLeft size={24} color={colors.darkPurple} />
             </motion.button>
-          </div>
-          
-          <div className="absolute right-0 top-1/2 -translate-y-1/2 z-10">
+            
             <motion.button
-              className="w-12 h-12 rounded-full flex items-center justify-center shadow-lg bg-white"
+              className="right-arrow-fixed w-12 h-12 rounded-full flex items-center justify-center shadow-lg bg-white hover:bg-gray-50"
               whileHover={{ scale: 1.1, backgroundColor: colors.neonGreen }}
               whileTap={{ scale: 0.95 }}
               onClick={nextSlide}
@@ -128,7 +128,29 @@ const SuccessStoriesSection = ({ colors }) => {
               <ChevronRight size={24} color={colors.darkPurple} />
             </motion.button>
           </div>
+          
+          {/* Mobile-only arrows (inside container) */}
+          <div className="md:hidden flex justify-between items-center mb-4">
+            <motion.button
+              className="w-10 h-10 rounded-full flex items-center justify-center shadow-md bg-white"
+              whileHover={{ scale: 1.1, backgroundColor: colors.neonGreen }}
+              whileTap={{ scale: 0.95 }}
+              onClick={prevSlide}
+            >
+              <ChevronLeft size={20} color={colors.darkPurple} />
+            </motion.button>
+            
+            <motion.button
+              className="w-10 h-10 rounded-full flex items-center justify-center shadow-md bg-white"
+              whileHover={{ scale: 1.1, backgroundColor: colors.neonGreen }}
+              whileTap={{ scale: 0.95 }}
+              onClick={nextSlide}
+            >
+              <ChevronRight size={20} color={colors.darkPurple} />
+            </motion.button>
+          </div>
 
+          {/* Testimonial content */}
           <div className="overflow-hidden py-8">
             <AnimatePresence mode="wait">
               <motion.div
@@ -157,8 +179,6 @@ const SuccessStoriesSection = ({ colors }) => {
                       
                       {/* Main photo container with 3D effect */}
                       <div className="relative h-36 w-36 rounded-full bg-white shadow-[0_0_35px_rgba(0,0,0,0.2),_inset_0_0_15px_rgba(0,0,0,0.1)]">
-                        {/* Removed the cut-out pattern overlay that was creating circles on top of the image */}
-                        
                         {/* Image container with cut-out mask - increased z-index */}
                         <div className="absolute inset-2 overflow-hidden rounded-full border-4 border-white shadow-inner z-20">
                           <img 
@@ -211,7 +231,7 @@ const SuccessStoriesSection = ({ colors }) => {
         </div>
       </div>
       
-      {/* Add this style for the animations */}
+      {/* Add this style for the animations and fixed arrow positioning */}
       <style jsx>{`
         .animate-float {
           animation: floating 4s ease-in-out infinite;
@@ -221,6 +241,35 @@ const SuccessStoriesSection = ({ colors }) => {
           0% { transform: translateY(0px) rotate(0deg); }
           50% { transform: translateY(-10px) rotate(5deg); }
           100% { transform: translateY(0px) rotate(0deg); }
+        }
+        
+        /* Fixed arrow positioning */
+        .fixed-arrow-container {
+          position: relative;
+          height: 0;
+          z-index: 30;
+        }
+        
+        .left-arrow-fixed {
+          position: absolute;
+          left: -70px;
+          top: 220px;
+        }
+        
+        .right-arrow-fixed {
+          position: absolute;
+          right: -70px;
+          top: 220px;
+        }
+        
+        @media (min-width: 1200px) {
+          .left-arrow-fixed {
+            left: -80px;
+          }
+          
+          .right-arrow-fixed {
+            right: -80px;
+          }
         }
       `}</style>
     </section>

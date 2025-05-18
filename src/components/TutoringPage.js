@@ -150,8 +150,8 @@ const Carousel3D = ({ items, activeIndex, setActiveIndex, colors }) => {
       onMouseLeave={handleMouseLeave}
       style={{ cursor: isDragging ? 'grabbing' : 'grab' }}
     >
-      {/* Tab navigation */}
-      <div className="sticky top-16 bg-white shadow-md z-10 mb-4">
+      {/* Tab navigation - Fixed sticky position to top-20 to account for navbar height */}
+      <div className="sticky top-20 bg-white shadow-md z-10 mb-4">
         <div className="container mx-auto overflow-x-auto">
           <div className="flex whitespace-nowrap py-2 px-4 min-w-full justify-center">
             {items.map((tab, index) => (
@@ -235,7 +235,7 @@ const Carousel3D = ({ items, activeIndex, setActiveIndex, colors }) => {
 const TutoringHero = ({ colors, onContactClick }) => {
   return (
     <motion.div 
-      className="relative py-24 md:py-36 min-h-[600px] flex items-center"
+      className="relative py-24 md:py-36 min-h-[600px] flex items-center" // Removed mt-20
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.8 }}
@@ -903,6 +903,7 @@ const TutoringPage = ({ colors = {
   neonGreen: "#4ADE80"
 }, onContactClick }) => {
   const [activeTab, setActiveTab] = useState(0);
+  const carouselRef = useRef(null);
   
   // Use the provided onContactClick or fallback to a default implementation
   const handleContactClick = () => {
@@ -938,29 +939,34 @@ const TutoringPage = ({ colors = {
   };
 
   return (
-    <div className="bg-gray-50">
+    <div className="bg-gray-50"> {/* No additional padding at the top */}
       {/* Hero section */}
       <TutoringHero colors={colors} onContactClick={handleContactClick} />
       
-      {/* 3D Carousel Control */}
-      <div className="relative">
-        <div className="absolute left-4 top-1/2 -translate-y-1/2 z-20">
-          <button
-            className="w-12 h-12 rounded-full flex items-center justify-center shadow-lg bg-white hover:bg-gray-100 transition-colors duration-300"
-            onClick={prevTab}
-          >
-            <ChevronLeft size={24} color={colors.darkPurple} />
-          </button>
-        </div>
-        
-        <div className="absolute right-4 top-1/2 -translate-y-1/2 z-20">
-          <button
-            className="w-12 h-12 rounded-full flex items-center justify-center shadow-lg bg-white hover:bg-gray-100 transition-colors duration-300"
-            onClick={nextTab}
-          >
-            <ChevronRight size={24} color={colors.darkPurple} />
-          </button>
-        </div>
+      {/* Tab navigation and carousel */}
+      <div ref={carouselRef} className="relative">
+        {/* Navigation arrows - positioned inside the sticky section to move with the navbar */}
+        <div className="sticky top-20 z-30 h-0">
+  <div className="container mx-auto relative">
+    <div className="absolute left-2 top-64 md:left-28 md:top-72">
+      <button
+        className="w-12 h-12 rounded-full flex items-center justify-center shadow-lg bg-white hover:bg-gray-100 transition-colors duration-300"
+        onClick={prevTab}
+      >
+        <ChevronLeft size={24} color={colors.darkPurple} />
+      </button>
+    </div>
+    
+    <div className="absolute right-2 top-64 md:right-28 md:top-72">
+      <button
+        className="w-12 h-12 rounded-full flex items-center justify-center shadow-lg bg-white hover:bg-gray-100 transition-colors duration-300"
+        onClick={nextTab}
+      >
+        <ChevronRight size={24} color={colors.darkPurple} />
+      </button>
+    </div>
+  </div>
+</div>
         
         <Carousel3D 
           items={tabs}
