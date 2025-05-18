@@ -97,7 +97,7 @@ const StatsSection = ({ colors }) => {
     { name: "Arizona State University", country: "USA", logo: "https://brandguide.asu.edu/modules/webspark/asu_brand/node_modules/@asu/component-header/dist/assets/img/arizona-state-university-logo-vertical.png" },
     { name: "University of Arizona", country: "USA", logo: "https://www.arizona.edu/sites/default/files/www_webheader-01.svg" },
     { name: "Suffolk University", country: "USA", logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e2/University_of_Suffolk_Logo.png/1200px-University_of_Suffolk_Logo.png" },
-    { name: "California State University", country: "USA", logo: "https://www.calstate.edu/_catalogs/masterpage/assets/images/logo.png" },
+    { name: "California State University", country: "USA", logo: "https://boomi.com/wp-content/uploads/CSUWordmark_TwoLine.png" },
     { name: "University of Alabama", country: "USA", logo: "https://upload.wikimedia.org/wikipedia/commons/4/47/University_of_Alabama_%28logo%29.png" },
   ];
   
