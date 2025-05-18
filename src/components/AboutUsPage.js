@@ -1,9 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { motion } from 'framer-motion';
 import { 
   Users, Heart, BookOpen, Award, Check, 
   Zap, Smile, Shield, Globe, ArrowRight, 
-  MessageCircle, GraduationCap, Building, Star
+  MessageCircle, GraduationCap, Building, Star,
+  ChevronLeft, ChevronRight
 } from 'lucide-react';
 
 const AboutUsPage = ({ colors = {
@@ -12,6 +13,7 @@ const AboutUsPage = ({ colors = {
   neonGreen: "#4ADE80"
 }, onContactClick }) => {
   const [activeTab, setActiveTab] = useState(0);
+  const carouselRef = useRef(null);
   
   const fadeIn = {
     hidden: { opacity: 0, y: 20 },
@@ -51,11 +53,6 @@ const AboutUsPage = ({ colors = {
       id: 'mission', 
       label: 'Our Mission', 
       icon: <Heart size={18} />
-    },
-    { 
-      id: 'founder', 
-      label: 'Our Founder', 
-      icon: <GraduationCap size={18} />
     },
     { 
       id: 'approach', 
@@ -121,6 +118,14 @@ const AboutUsPage = ({ colors = {
       icon: <Globe />
     }
   ];
+
+  const nextTab = () => {
+    setActiveTab((prev) => (prev + 1) % tabs.length);
+  };
+
+  const prevTab = () => {
+    setActiveTab((prev) => (prev - 1 + tabs.length) % tabs.length);
+  };
 
   const renderTabContent = () => {
     switch (activeTab) {
@@ -234,65 +239,8 @@ const AboutUsPage = ({ colors = {
             </div>
           </motion.div>
         );
-        
-      case 2: // Our Founder
-        return (
-          <motion.div 
-            initial="hidden"
-            animate="visible"
-            variants={fadeIn}
-            className="max-w-4xl mx-auto"
-          >
-            <h2 className="text-3xl md:text-4xl font-bold mb-6" style={{ color: colors.darkPurple }}>
-              Leadership With Purpose
-            </h2>
-            
-            <div className="mb-8 relative">
-              <div className="absolute -left-4 top-0 bottom-0 w-1" style={{ backgroundColor: colors.neonGreen }}></div>
-              <p className="text-lg md:text-xl text-gray-700 pl-4 italic">
-                Driven by a vision for better educational guidance.
-              </p>
-            </div>
-            
-            <div className="grid grid-cols-1 gap-8 mb-12">
-              <div className="text-center">
-                <p className="mb-6 text-lg text-gray-700">
-                  UniOversea was founded by an education specialist with a clear vision: to create a student-first alternative to the status quo in educational consulting.
-                </p>
-                
-                <p className="mb-6 text-lg text-gray-700">
-                  With a Bachelor's and Master's degree in Physics, our founder brings strong academic credentials and a scientific approach to educational methodology. More importantly, years of experience in both tutoring and counseling roles provided firsthand insight into industry practices that often prioritized business interests over student needs.
-                </p>
-                
-                <p className="mb-6 text-lg text-gray-700">
-                  These experiences catalyzed the founding principle of UniOversea: that students deserve guidance based solely on what will best serve their educational goals and future prospects.
-                </p>
-                
-                <p className="text-lg text-gray-700">
-                  This commitment to student-centered guidance drives every aspect of UniOversea's operations and shapes our unique approach to both tutoring and international education counseling.
-                </p>
-              </div>
-            </div>
-            
-            <div className="bg-white p-6 rounded-xl shadow-md border-t-4" style={{ borderColor: colors.darkPurple }}>
-              <div className="flex items-start">
-                <div className="mr-3 mt-1">
-                  <GraduationCap size={24} style={{ color: colors.darkPurple }} />
-                </div>
-                <div>
-                  <h3 className="text-xl font-bold mb-2" style={{ color: colors.darkPurple }}>
-                    Foundational Experience
-                  </h3>
-                  <p className="text-gray-700">
-                    The blend of strong academic credentials with real-world experience in both tutoring and educational consulting gives our founder a unique perspective on how to effectively serve students with integrity and expertise.
-                  </p>
-                </div>
-              </div>
-            </div>
-          </motion.div>
-        );
       
-      case 3: // Our Approach
+      case 2: // Our Approach (was case 3 before)
         return (
           <motion.div 
             initial="hidden"
@@ -356,7 +304,7 @@ const AboutUsPage = ({ colors = {
           </motion.div>
         );
         
-      case 4: // Our Values
+      case 3: // Our Values (was case 4 before)
         return (
           <motion.div 
             initial="hidden"
@@ -459,16 +407,6 @@ const AboutUsPage = ({ colors = {
                     <MessageCircle size={20} />
                     Contact Us
                   </motion.button>
-                  <motion.button
-                    onClick={() => setActiveTab(2)}
-                    className="py-3 px-6 rounded-full font-medium shadow-lg flex items-center justify-center gap-2"
-                    style={{ backgroundColor: colors.neonGreen, color: colors.darkPurple }}
-                    whileHover={{ scale: 1.05 }}
-                    whileTap={{ scale: 0.98 }}
-                  >
-                    <GraduationCap size={20} />
-                    Meet Our Founder
-                  </motion.button>
                 </div>
               </motion.div>
             </div>
@@ -476,36 +414,82 @@ const AboutUsPage = ({ colors = {
         </div>
       </div>
       
-      
-      {/* Tab Navigation */}
-      <div className="sticky top-16 bg-white shadow-md z-10 mb-4">
-        <div className="container mx-auto overflow-x-auto">
-          <div className="flex whitespace-nowrap py-2 px-4 min-w-full justify-center">
-            {tabs.map((tab, index) => (
-              <motion.button
-                key={tab.id}
-                onClick={() => setActiveTab(index)}
-                className="px-4 py-2 mx-1 rounded-md text-sm font-medium transition-all flex items-center"
-                animate={{ 
-                  backgroundColor: activeTab === index ? colors.lightPurple : 'transparent',
-                  color: activeTab === index ? colors.darkPurple : '#333',
-                  scale: activeTab === index ? 1.05 : 1,
-                  fontWeight: activeTab === index ? 600 : 400
-                }}
-                whileHover={{ scale: 1.05, backgroundColor: `${colors.lightPurple}40` }}
-                whileTap={{ scale: 0.98 }}
+      {/* Tab Navigation with Arrows - Updated to match other pages */}
+      <div ref={carouselRef} className="relative">
+        {/* Navigation arrows positioned inside the sticky section to move with the navbar */}
+        <div className="sticky top-20 z-30 h-0">
+          <div className="container mx-auto relative">
+            <div className="absolute left-2 top-64 md:left-12 md:top-72">
+              <button
+                className="w-12 h-12 rounded-full flex items-center justify-center shadow-lg bg-white hover:bg-gray-100 transition-colors duration-300"
+                onClick={prevTab}
               >
-                <span className="mr-2">{tab.icon}</span>
-                {tab.label}
-              </motion.button>
-            ))}
+                <ChevronLeft size={24} color={colors.darkPurple} />
+              </button>
+            </div>
+            
+            <div className="absolute right-2 top-64 md:right-12 md:top-72">
+              <button
+                className="w-12 h-12 rounded-full flex items-center justify-center shadow-lg bg-white hover:bg-gray-100 transition-colors duration-300"
+                onClick={nextTab}
+              >
+                <ChevronRight size={24} color={colors.darkPurple} />
+              </button>
+            </div>
           </div>
         </div>
-      </div>
       
-      {/* Content Section */}
-      <div className="container mx-auto px-4 py-8 min-h-[600px]">
-        {renderTabContent()}
+        {/* Updated Tab Navigation - position changed to match TutoringPage */}
+        <div className="sticky top-20 bg-white shadow-md z-10 mb-4">
+          <div className="container mx-auto overflow-x-auto">
+            <div className="flex whitespace-nowrap py-2 px-4 min-w-full justify-center">
+              {tabs.map((tab, index) => (
+                <motion.button
+                  key={tab.id}
+                  onClick={() => setActiveTab(index)}
+                  className="px-4 py-2 mx-1 rounded-md text-sm font-medium transition-all flex items-center"
+                  animate={{ 
+                    backgroundColor: activeTab === index ? colors.lightPurple : 'transparent',
+                    color: activeTab === index ? colors.darkPurple : '#333',
+                    scale: activeTab === index ? 1.05 : 1,
+                    fontWeight: activeTab === index ? 600 : 400
+                  }}
+                  whileHover={{ scale: 1.05, backgroundColor: `${colors.lightPurple}40` }}
+                  whileTap={{ scale: 0.98 }}
+                >
+                  <span className="mr-2">{tab.icon}</span>
+                  {tab.label}
+                </motion.button>
+              ))}
+            </div>
+          </div>
+        </div>
+      
+        {/* Content Section */}
+        <div className="container mx-auto px-4 py-8 min-h-[500px]">
+          {renderTabContent()}
+        </div>
+        
+        {/* Pagination indicators */}
+        <div className="flex justify-center mt-6 mb-8 space-x-2">
+          {tabs.map((_, index) => (
+            <motion.button 
+              key={index}
+              className="w-3 h-3 rounded-full"
+              style={{ 
+                backgroundColor: index === activeTab ? colors.darkPurple : '#CBD5E0',
+                transition: 'background-color 0.3s ease'
+              }}
+              whileHover={{ scale: 1.2 }}
+              onClick={() => setActiveTab(index)}
+            />
+          ))}
+        </div>
+        
+        {/* Instructions for navigation */}
+        <div className="text-center text-sm text-gray-500 mb-4">
+          <p>Use arrow buttons to navigate between sections</p>
+        </div>
       </div>
       
       {/* CTA Section */}

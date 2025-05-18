@@ -9,7 +9,7 @@ import {
   Building, Link, Star, Bookmark
 } from 'lucide-react';
 
-// 3D Carousel Component
+// 3D Carousel Component - Updated to match TutoringPage
 const Carousel3D = ({ items, activeIndex, setActiveIndex, colors }) => {
   const [direction, setDirection] = useState(null);
   const [touchStartX, setTouchStartX] = useState(0);
@@ -153,8 +153,8 @@ const Carousel3D = ({ items, activeIndex, setActiveIndex, colors }) => {
       onMouseLeave={handleMouseLeave}
       style={{ cursor: isDragging ? 'grabbing' : 'grab' }}
     >
-      {/* Tab navigation */}
-      <div className="sticky top-16 bg-white shadow-md z-10 mb-4">
+      {/* Tab navigation - Updated to match TutoringPage with top-20 position */}
+      <div className="sticky top-20 bg-white shadow-md z-10 mb-4">
         <div className="container mx-auto overflow-x-auto">
           <div className="flex whitespace-nowrap py-2 px-4 min-w-full justify-center">
             {items.map((tab, index) => (
@@ -244,6 +244,7 @@ const StudyAbroadPage = ({ colors = {
   const [activeDestination, setActiveDestination] = useState('usa');
   const [activePartnerRegion, setActivePartnerRegion] = useState('usa');
   const [expandedFaq, setExpandedFaq] = useState(null);
+  const carouselRef = useRef(null);
   
   // Use the provided onContactClick or fallback to a default implementation
   const handleContactClick = () => {
@@ -376,28 +377,29 @@ const StudyAbroadPage = ({ colors = {
         </div>
       </div>
       
-      {/* 3D Carousel Control */}
-      <div className="relative">
-        <div className="absolute left-4 top-1/2 -translate-y-1/2 z-20">
-          <motion.button
-            className="w-12 h-12 rounded-full flex items-center justify-center shadow-lg bg-white"
-            onClick={prevTab}
-            whileHover={{ scale: 1.1, backgroundColor: colors.neonGreen }}
-            whileTap={{ scale: 0.95 }}
-          >
-            <ChevronLeft size={24} color={colors.darkPurple} />
-          </motion.button>
-        </div>
-        
-        <div className="absolute right-4 top-1/2 -translate-y-1/2 z-20">
-          <motion.button
-            className="w-12 h-12 rounded-full flex items-center justify-center shadow-lg bg-white"
-            onClick={nextTab}
-            whileHover={{ scale: 1.1, backgroundColor: colors.neonGreen }}
-            whileTap={{ scale: 0.95 }}
-          >
-            <ChevronRight size={24} color={colors.darkPurple} />
-          </motion.button>
+      {/* 3D Carousel with Navigation Arrows - Updated to match TutoringPage */}
+      <div ref={carouselRef} className="relative">
+        {/* Navigation arrows - positioned inside the sticky section to move with the navbar */}
+        <div className="sticky top-20 z-30 h-0">
+          <div className="container mx-auto relative">
+            <div className="absolute left-2 top-64 md:left-12 md:top-72">
+              <button
+                className="w-12 h-12 rounded-full flex items-center justify-center shadow-lg bg-white hover:bg-gray-100 transition-colors duration-300"
+                onClick={prevTab}
+              >
+                <ChevronLeft size={24} color={colors.darkPurple} />
+              </button>
+            </div>
+            
+            <div className="absolute right-2 top-64 md:right-12 md:top-72">
+              <button
+                className="w-12 h-12 rounded-full flex items-center justify-center shadow-lg bg-white hover:bg-gray-100 transition-colors duration-300"
+                onClick={nextTab}
+              >
+                <ChevronRight size={24} color={colors.darkPurple} />
+              </button>
+            </div>
+          </div>
         </div>
         
         <Carousel3D 
@@ -980,7 +982,7 @@ const DestinationsContent = ({ colors, activeDestination, setActiveDestination }
   );
 };
 
-// NEW Partners Content Component
+// Partners Content Component
 const PartnersContent = ({ colors, activePartnerRegion, setActivePartnerRegion }) => {
   // Partner university data by region
   const partnerRegions = {
