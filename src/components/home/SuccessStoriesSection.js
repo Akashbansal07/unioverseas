@@ -130,7 +130,7 @@ const SuccessStoriesSection = ({ colors }) => {
           </div>
           
           {/* Mobile-only arrows (inside container) */}
-          <div className="md:hidden flex justify-between items-center mb-4">
+          <div className="md:hidden flex justify-between items-center mb-4 mobile-arrows-container">
             <motion.button
               className="w-10 h-10 rounded-full flex items-center justify-center shadow-md bg-white"
               whileHover={{ scale: 1.1, backgroundColor: colors.neonGreen }}
@@ -260,6 +260,13 @@ const SuccessStoriesSection = ({ colors }) => {
           position: absolute;
           right: -70px;
           top: 220px;
+        }
+        
+        /* Mobile arrow positioning */
+        .mobile-arrows-container {
+          position: relative;
+          top: 160px;
+          z-index: 30;
         }
         
         @media (min-width: 1200px) {
