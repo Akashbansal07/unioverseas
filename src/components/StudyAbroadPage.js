@@ -5,7 +5,7 @@ import {
   Globe, Check, ChevronRight, ArrowRight, MapPin, 
   GraduationCap, FilePlus, Users, Calendar, 
   FileText, CreditCard, Plane, School, CheckCircle,
-  ChevronLeft, ChevronDown, Briefcase, Award,
+  ChevronDown, Briefcase, Award,
   Building, Link, Star, Bookmark
 } from 'lucide-react';
 
@@ -229,7 +229,7 @@ const Carousel3D = ({ items, activeIndex, setActiveIndex, colors }) => {
       
       {/* Instructions for navigation */}
       <div className="text-center text-sm text-gray-500 mb-4">
-        <p>Swipe, use arrow buttons, or scroll horizontally to navigate between sections</p>
+        <p>Swipe, use tab buttons, or scroll horizontally to navigate between sections</p>
       </div>
     </div>
   );
@@ -326,14 +326,6 @@ const StudyAbroadPage = ({ colors = {
     }
   ];
 
-  const nextTab = () => {
-    setActiveTab((prev) => (prev + 1) % tabs.length);
-  };
-
-  const prevTab = () => {
-    setActiveTab((prev) => (prev - 1 + tabs.length) % tabs.length);
-  };
-
   return (
     <div className="bg-gray-50 min-h-screen">
       {/* Hero Section */}
@@ -377,31 +369,8 @@ const StudyAbroadPage = ({ colors = {
         </div>
       </div>
       
-      {/* 3D Carousel with Navigation Arrows - Updated to match TutoringPage */}
+      {/* 3D Carousel - Navigation arrows removed */}
       <div ref={carouselRef} className="relative">
-        {/* Navigation arrows - positioned inside the sticky section to move with the navbar */}
-        <div className="sticky top-20 z-30 h-0">
-          <div className="container mx-auto relative">
-            <div className="absolute left-2 top-64 md:left-12 md:top-72">
-              <button
-                className="w-12 h-12 rounded-full flex items-center justify-center shadow-lg bg-white hover:bg-gray-100 transition-colors duration-300"
-                onClick={prevTab}
-              >
-                <ChevronLeft size={24} color={colors.darkPurple} />
-              </button>
-            </div>
-            
-            <div className="absolute right-2 top-64 md:right-12 md:top-72">
-              <button
-                className="w-12 h-12 rounded-full flex items-center justify-center shadow-lg bg-white hover:bg-gray-100 transition-colors duration-300"
-                onClick={nextTab}
-              >
-                <ChevronRight size={24} color={colors.darkPurple} />
-              </button>
-            </div>
-          </div>
-        </div>
-        
         <Carousel3D 
           items={tabs}
           activeIndex={activeTab}

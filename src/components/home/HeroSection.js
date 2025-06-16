@@ -169,22 +169,6 @@ const HeroSection = ({ colors, onContactClick, setActiveTab }) => {
           />
         </motion.div>
       )}
-      
-      {/* Background effect - centered at right bottom corner */}
-      <motion.div 
-        className="absolute rounded-full opacity-20 z-0 hidden md:block" // Hide on mobile
-        style={{ 
-          backgroundColor: colors.lightPurple,
-          width: '50%',
-          height: '70%',
-          right: '-12%',  /* Positioned to extend slightly off-screen */
-          bottom: '-30%', /* Positioned to extend slightly off-screen */
-          transform: 'translate(-25%, -25%)'  /* Pull the center toward the bottom right corner */
-        }}
-        initial={{ opacity: 0, x: 200, scale: 0.8 }}
-        animate={{ opacity: 0.2, x: 0, scale: 1 }}
-        transition={{ duration: 1.2, delay: 0.2, ease: "easeOut" }}
-      />
     </section>
   );
 };

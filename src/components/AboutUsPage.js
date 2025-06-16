@@ -3,8 +3,7 @@ import { motion } from 'framer-motion';
 import { 
   Users, Heart, BookOpen, Award, Check, 
   Zap, Smile, Shield, Globe, ArrowRight, 
-  MessageCircle, GraduationCap, Building, Star,
-  ChevronLeft, ChevronRight
+  MessageCircle, GraduationCap, Building, Star
 } from 'lucide-react';
 
 const AboutUsPage = ({ colors = {
@@ -118,14 +117,6 @@ const AboutUsPage = ({ colors = {
       icon: <Globe />
     }
   ];
-
-  const nextTab = () => {
-    setActiveTab((prev) => (prev + 1) % tabs.length);
-  };
-
-  const prevTab = () => {
-    setActiveTab((prev) => (prev - 1 + tabs.length) % tabs.length);
-  };
 
   const renderTabContent = () => {
     switch (activeTab) {
@@ -414,31 +405,8 @@ const AboutUsPage = ({ colors = {
         </div>
       </div>
       
-      {/* Tab Navigation with Arrows - Updated to match other pages */}
+      {/* Tab Navigation - Navigation arrows removed */}
       <div ref={carouselRef} className="relative">
-        {/* Navigation arrows positioned inside the sticky section to move with the navbar */}
-        <div className="sticky top-20 z-30 h-0">
-          <div className="container mx-auto relative">
-            <div className="absolute left-2 top-64 md:left-12 md:top-72">
-              <button
-                className="w-12 h-12 rounded-full flex items-center justify-center shadow-lg bg-white hover:bg-gray-100 transition-colors duration-300"
-                onClick={prevTab}
-              >
-                <ChevronLeft size={24} color={colors.darkPurple} />
-              </button>
-            </div>
-            
-            <div className="absolute right-2 top-64 md:right-12 md:top-72">
-              <button
-                className="w-12 h-12 rounded-full flex items-center justify-center shadow-lg bg-white hover:bg-gray-100 transition-colors duration-300"
-                onClick={nextTab}
-              >
-                <ChevronRight size={24} color={colors.darkPurple} />
-              </button>
-            </div>
-          </div>
-        </div>
-      
         {/* Updated Tab Navigation - position changed to match TutoringPage */}
         <div className="sticky top-20 bg-white shadow-md z-10 mb-4">
           <div className="container mx-auto overflow-x-auto">
@@ -488,7 +456,7 @@ const AboutUsPage = ({ colors = {
         
         {/* Instructions for navigation */}
         <div className="text-center text-sm text-gray-500 mb-4">
-          <p>Use arrow buttons to navigate between sections</p>
+          <p>Use tab buttons or pagination dots to navigate between sections</p>
         </div>
       </div>
       

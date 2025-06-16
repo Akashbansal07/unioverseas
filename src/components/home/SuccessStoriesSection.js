@@ -1,7 +1,7 @@
-// SuccessStoriesSection.js with fixed arrow positions
+// SuccessStoriesSection.js with website color theme
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ChevronLeft, ChevronRight, User } from 'lucide-react';
+import { ChevronLeft, ChevronRight, User, Quote } from 'lucide-react';
 // Import individual student photos with correct capitalization
 import KhushiBhatnagarImage from '../../utils/KhushiBhatnagar.jpeg';
 import KanikaAhlawatImage from '../../utils/KanikaAhlawat.jpeg';
@@ -13,7 +13,11 @@ import SumeetGuptaImage from '../../utils/SumeetGupta.jpeg';
 import GurumeharSinghImage from '../../utils/GurumeharSingh.jpeg';
 import AmitSoniImage from '../../utils/AmitSoni.jpeg';
 
-const SuccessStoriesSection = ({ colors }) => {
+const SuccessStoriesSection = ({ colors = {
+  lightPurple: '#BEC1F8',
+  darkPurple: '#2E2CAB',
+  neonGreen: '#D8FC44'
+} }) => {
   const stories = [
     {
       id: 1,
@@ -91,8 +95,22 @@ const SuccessStoriesSection = ({ colors }) => {
   };
 
   return (
-    <section className="py-20 bg-gray-50">
-      <div className="container mx-auto px-4 md:px-8">
+    <section className="py-20 relative overflow-hidden" style={{ 
+      background: `linear-gradient(135deg, ${colors.lightPurple}15 0%, rgba(255,255,255,0.9) 50%, ${colors.neonGreen}10 100%)`
+    }}>
+      {/* Background decorative elements */}
+      <div className="absolute inset-0 overflow-hidden">
+        <div className="absolute top-20 left-10 w-20 h-20 rounded-full opacity-20 animate-float" 
+             style={{ backgroundColor: colors.lightPurple }}></div>
+        <div className="absolute top-40 right-16 w-16 h-16 rounded-full opacity-20 animate-float-delay" 
+             style={{ backgroundColor: colors.neonGreen }}></div>
+        <div className="absolute bottom-32 left-20 w-12 h-12 rounded-full opacity-20 animate-float" 
+             style={{ backgroundColor: colors.darkPurple }}></div>
+        <div className="absolute bottom-20 right-32 w-24 h-24 rounded-full opacity-10 animate-float-delay" 
+             style={{ backgroundColor: colors.lightPurple }}></div>
+      </div>
+
+      <div className="container mx-auto px-4 md:px-8 relative z-10">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -100,19 +118,58 @@ const SuccessStoriesSection = ({ colors }) => {
           transition={{ duration: 0.6 }}
           className="text-center mb-16"
         >
-          <h2 className="text-3xl md:text-4xl font-bold mb-2" style={{ color: colors.darkPurple }}>
+          <h2 className="text-3xl md:text-4xl font-bold mb-4" style={{ color: colors.darkPurple }}>
             Transforming Educational Journeys
           </h2>
           <div className="w-24 h-1 mx-auto my-4" style={{ backgroundColor: colors.neonGreen }}></div>
+          <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+            Discover how our personalized guidance has helped students achieve their international education dreams
+          </p>
         </motion.div>
 
         {/* Container with relative positioning to hold both testimonial and arrows */}
-        <div className="relative max-w-4xl mx-auto">
+        <div className="relative max-w-5xl mx-auto">
           {/* Fixed positioned arrow buttons - now positioned outside the content area */}
           <div className="fixed-arrow-container hidden md:block">
             <motion.button
-              className="left-arrow-fixed w-12 h-12 rounded-full flex items-center justify-center shadow-lg bg-white hover:bg-gray-50"
-              whileHover={{ scale: 1.1, backgroundColor: colors.neonGreen }}
+              className="left-arrow-fixed w-14 h-14 rounded-full flex items-center justify-center shadow-lg bg-white hover:bg-gray-50 border-2"
+              style={{ borderColor: colors.lightPurple }}
+              whileHover={{ 
+                scale: 1.1, 
+                backgroundColor: colors.neonGreen,
+                borderColor: colors.neonGreen 
+              }}
+              whileTap={{ scale: 0.95 }}
+              onClick={prevSlide}
+            >
+              <ChevronLeft size={28} color={colors.darkPurple} />
+            </motion.button>
+            
+            <motion.button
+              className="right-arrow-fixed w-14 h-14 rounded-full flex items-center justify-center shadow-lg bg-white hover:bg-gray-50 border-2"
+              style={{ borderColor: colors.lightPurple }}
+              whileHover={{ 
+                scale: 1.1, 
+                backgroundColor: colors.neonGreen,
+                borderColor: colors.neonGreen 
+              }}
+              whileTap={{ scale: 0.95 }}
+              onClick={nextSlide}
+            >
+              <ChevronRight size={28} color={colors.darkPurple} />
+            </motion.button>
+          </div>
+          
+          {/* Mobile-only arrows (inside container) */}
+          <div className="md:hidden flex justify-between items-center mb-4 mobile-arrows-container">
+            <motion.button
+              className="w-12 h-12 rounded-full flex items-center justify-center shadow-md bg-white border-2"
+              style={{ borderColor: colors.lightPurple }}
+              whileHover={{ 
+                scale: 1.1, 
+                backgroundColor: colors.neonGreen,
+                borderColor: colors.neonGreen 
+              }}
               whileTap={{ scale: 0.95 }}
               onClick={prevSlide}
             >
@@ -120,33 +177,17 @@ const SuccessStoriesSection = ({ colors }) => {
             </motion.button>
             
             <motion.button
-              className="right-arrow-fixed w-12 h-12 rounded-full flex items-center justify-center shadow-lg bg-white hover:bg-gray-50"
-              whileHover={{ scale: 1.1, backgroundColor: colors.neonGreen }}
+              className="w-12 h-12 rounded-full flex items-center justify-center shadow-md bg-white border-2"
+              style={{ borderColor: colors.lightPurple }}
+              whileHover={{ 
+                scale: 1.1, 
+                backgroundColor: colors.neonGreen,
+                borderColor: colors.neonGreen 
+              }}
               whileTap={{ scale: 0.95 }}
               onClick={nextSlide}
             >
               <ChevronRight size={24} color={colors.darkPurple} />
-            </motion.button>
-          </div>
-          
-          {/* Mobile-only arrows (inside container) */}
-          <div className="md:hidden flex justify-between items-center mb-4 mobile-arrows-container">
-            <motion.button
-              className="w-10 h-10 rounded-full flex items-center justify-center shadow-md bg-white"
-              whileHover={{ scale: 1.1, backgroundColor: colors.neonGreen }}
-              whileTap={{ scale: 0.95 }}
-              onClick={prevSlide}
-            >
-              <ChevronLeft size={20} color={colors.darkPurple} />
-            </motion.button>
-            
-            <motion.button
-              className="w-10 h-10 rounded-full flex items-center justify-center shadow-md bg-white"
-              whileHover={{ scale: 1.1, backgroundColor: colors.neonGreen }}
-              whileTap={{ scale: 0.95 }}
-              onClick={nextSlide}
-            >
-              <ChevronRight size={20} color={colors.darkPurple} />
             </motion.button>
           </div>
 
@@ -160,27 +201,53 @@ const SuccessStoriesSection = ({ colors }) => {
                 exit={{ opacity: 0, x: -100 }}
                 transition={{ duration: 0.5, ease: "easeInOut" }}
               >
-                <div className="bg-white rounded-2xl shadow-xl p-8 md:p-12">
-                  {/* Student photo with unique creative border */}
+                <div className="bg-white rounded-3xl shadow-xl p-8 md:p-12 relative border-2" 
+                     style={{ borderColor: `${colors.lightPurple}30` }}>
+                  
+                  {/* Quote icon */}
+                  <div className="absolute top-6 right-6 opacity-20">
+                    <Quote size={48} color={colors.lightPurple} />
+                  </div>
+                  
+                  {/* Student photo with website-themed decorative elements */}
                   <div className="flex justify-center mb-8">
                     <div className="relative">
-                      {/* Decorative elements around the image - keeping these */}
-                      <div className="absolute -inset-2 z-0">
-                        {/* Decorative circles */}
-                        <div className="absolute top-0 left-1/4 h-4 w-4 rounded-full bg-blue-400 opacity-70 shadow-lg"></div>
-                        <div className="absolute bottom-2 right-0 h-6 w-6 rounded-full bg-purple-500 opacity-60 shadow-lg"></div>
-                        <div className="absolute top-1/3 -left-2 h-5 w-5 rounded-full bg-pink-400 opacity-60 shadow-lg"></div>
-                        <div className="absolute bottom-1/4 -right-3 h-4 w-4 rounded-full bg-yellow-300 opacity-70 shadow-lg"></div>
+                      {/* Decorative elements around the image using website colors */}
+                      <div className="absolute -inset-4 z-0">
+                        {/* Themed decorative circles */}
+                        <div className="absolute top-0 left-1/4 h-6 w-6 rounded-full opacity-80 shadow-lg animate-float" 
+                             style={{ backgroundColor: colors.lightPurple }}></div>
+                        <div className="absolute bottom-2 right-0 h-8 w-8 rounded-full opacity-70 shadow-lg animate-float-delay" 
+                             style={{ backgroundColor: colors.neonGreen }}></div>
+                        <div className="absolute top-1/3 -left-2 h-5 w-5 rounded-full opacity-75 shadow-lg animate-float" 
+                             style={{ backgroundColor: colors.darkPurple }}></div>
+                        <div className="absolute bottom-1/4 -right-3 h-4 w-4 rounded-full opacity-80 shadow-lg animate-float-delay" 
+                             style={{ backgroundColor: colors.lightPurple }}></div>
                         
-                        {/* Abstract shapes */}
-                        <div className="absolute -top-1 -right-1 h-10 w-10 rotate-45 bg-teal-400 opacity-60 shadow-lg"></div>
-                        <div className="absolute -bottom-2 -left-2 h-8 w-8 rotate-12 bg-red-400 opacity-50 shadow-lg"></div>
+                        {/* Abstract shapes with website theme */}
+                        <div className="absolute -top-1 -right-1 h-12 w-12 rotate-45 opacity-60 shadow-lg animate-float rounded-lg" 
+                             style={{ backgroundColor: colors.neonGreen }}></div>
+                        <div className="absolute -bottom-2 -left-2 h-10 w-10 rotate-12 opacity-50 shadow-lg animate-float-delay rounded-lg" 
+                             style={{ backgroundColor: colors.lightPurple }}></div>
                       </div>
                       
-                      {/* Main photo container with 3D effect */}
-                      <div className="relative h-36 w-36 rounded-full bg-white shadow-[0_0_35px_rgba(0,0,0,0.2),_inset_0_0_15px_rgba(0,0,0,0.1)]">
-                        {/* Image container with cut-out mask - increased z-index */}
-                        <div className="absolute inset-2 overflow-hidden rounded-full border-4 border-white shadow-inner z-20">
+                      {/* Main photo container with enhanced 3D effect */}
+                      <div className="relative h-40 w-40 rounded-full bg-white shadow-[0_0_40px_rgba(46,44,171,0.3),_inset_0_0_20px_rgba(0,0,0,0.1)]"
+                           style={{ 
+                             background: `linear-gradient(135deg, ${colors.lightPurple}20, white, ${colors.neonGreen}10)`
+                           }}>
+                        
+                        {/* Glowing ring effect */}
+                        <div className="absolute inset-0 rounded-full animate-pulse"
+                             style={{
+                               background: `conic-gradient(${colors.neonGreen}, ${colors.lightPurple}, ${colors.darkPurple}, ${colors.neonGreen})`,
+                               padding: '3px'
+                             }}>
+                          <div className="w-full h-full rounded-full bg-white"></div>
+                        </div>
+                        
+                        {/* Image container with cut-out mask */}
+                        <div className="absolute inset-3 overflow-hidden rounded-full border-4 border-white shadow-inner z-20">
                           <img 
                             src={stories[currentIndex].image} 
                             alt={`${stories[currentIndex].name}`} 
@@ -188,25 +255,32 @@ const SuccessStoriesSection = ({ colors }) => {
                           />
                         </div>
                         
-                        {/* Highlight reflection effect - made sure it's behind the image */}
-                        <div className="absolute inset-0 rounded-full opacity-30 z-10"
+                        {/* Enhanced highlight reflection effect */}
+                        <div className="absolute inset-0 rounded-full opacity-40 z-10"
                           style={{
-                            background: 'linear-gradient(135deg, rgba(255,255,255,0.8) 0%, rgba(255,255,255,0) 50%, rgba(255,255,255,0) 100%)'
+                            background: `linear-gradient(135deg, ${colors.lightPurple}60 0%, rgba(255,255,255,0.8) 30%, rgba(255,255,255,0) 70%)`
                           }}>
                         </div>
                       </div>
                     </div>
                   </div>
                   
-                  <p className="text-xl md:text-2xl italic mb-8 text-gray-700">
-                    "{stories[currentIndex].testimonial}"
-                  </p>
+                  {/* Enhanced testimonial styling */}
+                  <div className="relative">
+                    <p className="text-xl md:text-2xl italic mb-8 text-gray-700 leading-relaxed">
+                      "{stories[currentIndex].testimonial}"
+                    </p>
+                    
+                    {/* Decorative line */}
+                    <div className="w-16 h-1 mx-auto mb-6 rounded" 
+                         style={{ backgroundColor: colors.neonGreen }}></div>
+                  </div>
                   
                   <div className="flex flex-col items-center">
-                    <h4 className="text-xl font-bold" style={{ color: colors.darkPurple }}>
+                    <h4 className="text-2xl font-bold mb-2" style={{ color: colors.darkPurple }}>
                       {stories[currentIndex].name}
                     </h4>
-                    <p className="text-gray-600">
+                    <p className="text-lg font-medium" style={{ color: colors.lightPurple }}>
                       {stories[currentIndex].university}
                     </p>
                   </div>
@@ -215,15 +289,21 @@ const SuccessStoriesSection = ({ colors }) => {
             </AnimatePresence>
           </div>
 
-          <div className="flex justify-center mt-8">
+          {/* Enhanced pagination dots */}
+          <div className="flex justify-center mt-8 space-x-3">
             {stories.map((_, index) => (
               <motion.button 
                 key={index}
-                className="w-3 h-3 rounded-full mx-1"
+                className="w-4 h-4 rounded-full border-2 transition-all duration-300"
                 style={{ 
-                  backgroundColor: index === currentIndex ? colors.darkPurple : '#CBD5E0'
+                  backgroundColor: index === currentIndex ? colors.darkPurple : 'transparent',
+                  borderColor: index === currentIndex ? colors.darkPurple : colors.lightPurple
                 }}
-                whileHover={{ scale: 1.2 }}
+                whileHover={{ 
+                  scale: 1.2,
+                  backgroundColor: colors.neonGreen,
+                  borderColor: colors.neonGreen
+                }}
                 onClick={() => setCurrentIndex(index)}
               />
             ))}
@@ -231,15 +311,21 @@ const SuccessStoriesSection = ({ colors }) => {
         </div>
       </div>
       
-      {/* Add this style for the animations and fixed arrow positioning */}
+      {/* Enhanced styles with website theme animations */}
       <style jsx>{`
         .animate-float {
-          animation: floating 4s ease-in-out infinite;
+          animation: floating 6s ease-in-out infinite;
+        }
+        
+        .animate-float-delay {
+          animation: floating 6s ease-in-out infinite 3s;
         }
         
         @keyframes floating {
           0% { transform: translateY(0px) rotate(0deg); }
-          50% { transform: translateY(-10px) rotate(5deg); }
+          25% { transform: translateY(-8px) rotate(2deg); }
+          50% { transform: translateY(-15px) rotate(0deg); }
+          75% { transform: translateY(-8px) rotate(-2deg); }
           100% { transform: translateY(0px) rotate(0deg); }
         }
         
@@ -252,31 +338,40 @@ const SuccessStoriesSection = ({ colors }) => {
         
         .left-arrow-fixed {
           position: absolute;
-          left: -70px;
-          top: 220px;
+          left: -80px;
+          top: 240px;
+          transition: all 0.3s ease;
         }
         
         .right-arrow-fixed {
           position: absolute;
-          right: -70px;
-          top: 220px;
+          right: -80px;
+          top: 240px;
+          transition: all 0.3s ease;
         }
         
         /* Mobile arrow positioning */
         .mobile-arrows-container {
           position: relative;
-          top: 160px;
+          top: 180px;
           z-index: 30;
         }
         
         @media (min-width: 1200px) {
           .left-arrow-fixed {
-            left: -80px;
+            left: -90px;
           }
           
           .right-arrow-fixed {
-            right: -80px;
+            right: -90px;
           }
+        }
+        
+        /* Enhanced hover effects */
+        .left-arrow-fixed:hover,
+        .right-arrow-fixed:hover {
+          transform: scale(1.1);
+          box-shadow: 0 10px 25px rgba(46, 44, 171, 0.3);
         }
       `}</style>
     </section>
