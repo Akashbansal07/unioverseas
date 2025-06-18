@@ -141,19 +141,20 @@ const AboutUsPage = ({ colors = {
             
             <div className="grid grid-cols-1 gap-8 mb-12">
               <div>
-                <p className="mb-6 text-lg text-gray-700">
+                <p className="mb-2 text-lg text-gray-700">
                   UniOversea was born from a commitment to transform how educational guidance services operate. After years of witnessing industry practices where student outcomes were secondary to business interests, our founder set out to create a different kind of educational consultancy—one where transparency, ethics, and student success truly come first.
                 </p>
                 
-                <p className="mb-6 text-lg text-gray-700">
+                <p className="mb-2 text-lg text-gray-700">
                   Drawing on extensive experience both in tutoring and consulting, our founder recognized the critical need for an education service that would put the student needs first.
                 </p>
+                <p className="mb-6 text-lg text-gray-700">
+              Today, UniOversea stands as a beacon of honest guidance in educational consulting, maintaining our founding commitment to placing your academic success and aspirations at the center of every recommendation we make.
+            </p>
               </div>
             </div>
             
-            <p className="mb-6 text-lg text-gray-700">
-              Today, UniOversea stands as a beacon of honest guidance in educational consulting, maintaining our founding commitment to placing your academic success and aspirations at the center of every recommendation we make.
-            </p>
+           
             
             <div className="bg-white rounded-xl shadow-md p-6 mt-8 border-l-4" style={{ borderColor: colors.neonGreen }}>
               <h3 className="text-xl font-bold mb-4" style={{ color: colors.darkPurple }}>
