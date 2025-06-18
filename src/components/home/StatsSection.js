@@ -135,6 +135,22 @@ const StatsSection = ({ colors }) => {
     { name: "Northwestern University", country: "USA", logo: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQCEp9qejp9-PcNzgmN8ysK5Jf7p6mnVyQMow&s" },
   ];
 
+  // Fourth row - Additional Elite Universities
+  const additionalUniversities = [
+    { name: "London School of Economics", country: "UK", logo: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTPxN1V3Yf_SQwk3B3jhyf37Q6eks4qasEPLw&s" },
+    { name: "Carnegie Mellon University", country: "USA", logo: "https://www.drupal.org/files/styles/grid-4-2x/public/CMU_Logo_Stack_Red.png?itok=z-anp9I_" },
+    { name: "University of Auckland", country: "New Zealand", logo: "https://cdn.auckland.ac.nz/assets/central/central-services/mediaandmarketing/uoa-logos-2015/uoa-logo-2015-reverse.png" },
+    { name: "University of Texas at Austin", country: "USA", logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/7/77/University_of_Texas_at_Austin_logo.svg/2560px-University_of_Texas_at_Austin_logo.svg.png" },
+    { name: "University of Illinois at Urbana-Champaign", country: "USA", logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a6/University_of_Illinois_at_Urbana-Champaign_Wordmark.svg/2560px-University_of_Illinois_at_Urbana-Champaign_Wordmark.svg.png" },
+    { name: "University of Pittsburgh", country: "USA", logo: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQMf9HWyaayzH1VHSuwZwzpoNhZsHu4UEUhiA&s" },
+    { name: "Pennsylvania State University", country: "USA", logo: "https://1000logos.net/wp-content/uploads/2018/01/Penn-State-Logo.png" },
+    { name: "Purdue University", country: "USA", logo: "https://i0.wp.com/purdueece.com/wp-content/uploads/2023/02/Purdue-University-Logo.png?ssl=1" },
+    { name: "Georgia Institute of Technology", country: "USA", logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/9/93/Georgia_Tech_logo_2021.svg/2560px-Georgia_Tech_logo_2021.svg.png" },
+    { name: "University of Waterloo", country: "Canada", logo: "https://i.pinimg.com/736x/ec/ac/d5/ecacd5cc33aaa837c8bfbc0e5f1bbf50.jpg" },
+    { name: "University College Dublin", country: "Ireland", logo: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRUp7gpgda3WJ8iRr9BgwaY8xMDOW48CJGlGg&s" },
+    { name: "Boston University", country: "USA", logo: "https://logos-world.net/wp-content/uploads/2022/01/Boston-University-Emblem.png" },
+  ];
+
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
@@ -321,7 +337,7 @@ const StatsSection = ({ colors }) => {
           ))}
         </motion.div>
 
-        {/* University Logos Scroll Animation - Three rows */}
+        {/* University Logos Scroll Animation - Four rows */}
         <motion.div 
           className="mt-16"
           initial={{ opacity: 0 }}
@@ -362,6 +378,11 @@ const StatsSection = ({ colors }) => {
           
           <div className="relative w-full overflow-hidden py-4">
             {renderUniversities(eliteUniversities, false)}
+          </div>
+          
+          {/* Fourth Row - Additional Elite Universities */}
+          <div className="relative w-full overflow-hidden py-4">
+            {renderUniversities(additionalUniversities, false)}
           </div>
         </motion.div>
       </div>
