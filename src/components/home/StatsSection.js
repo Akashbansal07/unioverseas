@@ -104,13 +104,35 @@ const StatsSection = ({ colors }) => {
   const ukUniversities = [
     { name: "University College London", country: "UK", logo: "https://upload.wikimedia.org/wikipedia/en/thumb/d/d1/University_College_London_logo.svg/500px-University_College_London_logo.svg.png" },
     { name: "University of Exeter", country: "UK", logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/f/fb/Arms_of_the_University_of_Exeter.svg/330px-Arms_of_the_University_of_Exeter.svg.png" },
-    { name: "Queen's University Belfast", country: "UK", logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5a/Queen%27s_University_Belfast_arms.svg/330px-Queen%27s_University_Belfast_arms.svg.png" },
+    { name: "Queens University Belfast", country: "UK", logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5a/Queen%27s_University_Belfast_arms.svg/330px-Queen%27s_University_Belfast_arms.svg.png" },
     { name: "University of Warwick", country: "UK", logo: "https://d36jn9qou1tztq.cloudfront.net/static_war/render/id7/images/logo.svg.233060099087" },
     { name: "University of Edinburgh", country: "UK", logo: "https://www.ed.ac.uk/themes/upstream/wpp_theme/images/logo.png" },
     { name: "Kings College London", country: "UK", logo: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTvLqBw_MaWSW4ycrn4UHo4dlkiw972sMEdGA&s" },
     { name: "University of Sheffield", country: "UK", logo: "https://www.sheffield.ac.uk/themes/custom/uos_public/images/logos/uos-crest.svg" },
     { name: "Cardiff University", country: "UK", logo: "https://powertransition.energy/sites/default/files/styles/partnersnode/public/partners/cardiff-university.png?itok=9-Gob6om" },
     { name: "University of Leeds", country: "UK", logo: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTlJEV_NxpeqzEiHz0Dsu4QstykPSxjdqUktg&s" },
+  ];
+
+  // Third row - Elite International Universities
+  const eliteUniversities = [
+    { name: "University of Pennsylvania", country: "USA", logo: "https://logos-world.net/wp-content/uploads/2023/01/UPenn-Logo.png" },
+    { name: "Brown University", country: "USA", logo: "https://1000logos.net/wp-content/uploads/2022/05/Brown-University-Logo.png" },
+    { name: "Cornell University", country: "USA", logo: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR79Me_os_kfV6zXidkpqyJ2Ce3tLd9UHFjmw&s" },
+    { name: "Dartmouth University", country: "USA", logo: "https://www.capitalprepharbor.org/ourpages/auto/2020/6/25/61374990/screen%20shot%202020-06-25%20at%202_46_24%20pm.jpg" },
+    { name: "Princeton University", country: "USA", logo: "https://1000logos.net/wp-content/uploads/2022/07/University-of-Princeton-Logo.png" },
+    { name: "Yale University", country: "USA", logo: "https://kclsed.org/wp-content/uploads/2020/02/yale-university-logo-png-2.png" },
+    { name: "New York University", country: "USA", logo: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRwbCXxwonBhUQirS00MX1kJFS_gzzHbunrjQ&s" },
+    { name: "Imperial College London", country: "UK", logo: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTKQGUkzLPzAwUSTjTkEbEUpnBfzT7uqmSkoA&s" },
+    { name: "Stanford University", country: "USA", logo: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRTX3DpoDTfKzNJCJye6QIEyjiZQzQX4vX9fw&s" },
+    { name: "University of California Berkeley", country: "USA", logo: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQSTZ2KVwz_36-B2bMxByvuMRO-nMSikqzFUw&s" },
+    { name: "University of California Los Angeles", country: "USA", logo: "https://logos-world.net/wp-content/uploads/2021/11/UCLA-Logo.png" },
+    { name: "University of Melbourne", country: "Australia", logo: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTe9D9j_CdO8Dy6QjwhsuTWW_4rnL3UQhm7yw&s" },
+    { name: "University of Sydney", country: "Australia", logo: "https://cdn.worldvectorlogo.com/logos/the-university-of-sydney-3.svg" },
+    { name: "HEC Paris", country: "France", logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/3/32/HEC_Paris.svg/2560px-HEC_Paris.svg.png" },
+    { name: "University of British Columbia", country: "Canada", logo: "https://www.drupal.org/files/styles/grid-4-2x/public/2_2016_UBCNarrow_Signature_BlueRGB72.png?itok=RUOVZd4M" },
+    { name: "University of Michigan Ann Arbor", country: "USA", logo: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQeMKX8PEe0O-JMl00MtKmo8Y7NPBAWklZ32g&s" },
+    { name: "Duke University", country: "USA", logo: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSMvoop2tWSaSJ7FgDVmQVWYpGtZi5Dv3qLfw&s" },
+    { name: "Northwestern University", country: "USA", logo: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQCEp9qejp9-PcNzgmN8ysK5Jf7p6mnVyQMow&s" },
   ];
 
   const containerVariants = {
@@ -299,7 +321,7 @@ const StatsSection = ({ colors }) => {
           ))}
         </motion.div>
 
-        {/* University Logos Scroll Animation - Two rows for US and UK universities */}
+        {/* University Logos Scroll Animation - Three rows */}
         <motion.div 
           className="mt-16"
           initial={{ opacity: 0 }}
@@ -307,7 +329,6 @@ const StatsSection = ({ colors }) => {
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
         >
-          {/* US Universities */}
           <motion.h3 
             className="text-xl md:text-2xl font-semibold text-center mb-8"
             style={{ color: colors.darkPurple }}
@@ -318,11 +339,17 @@ const StatsSection = ({ colors }) => {
             Our Partnered Universities
           </motion.h3>
           
+          {/* First Row - US Universities */}
           <div className="relative w-full overflow-hidden py-4">
             {renderUniversities(usUniversities, false)}
           </div>
           
-          {/* UK Universities */}
+          {/* Second Row - UK Universities */}
+          <div className="relative w-full overflow-hidden py-4">
+            {renderUniversities(ukUniversities, false)}
+          </div>
+          
+          {/* Third Row - Elite International Universities */}
           <motion.h3 
             className="text-xl md:text-2xl font-semibold text-center mt-12 mb-8"
             style={{ color: colors.darkPurple }}
@@ -330,11 +357,11 @@ const StatsSection = ({ colors }) => {
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
           >
-          
+            Our Students Got Into Top Universities
           </motion.h3>
           
           <div className="relative w-full overflow-hidden py-4">
-            {renderUniversities(ukUniversities, false)}
+            {renderUniversities(eliteUniversities, false)}
           </div>
         </motion.div>
       </div>
