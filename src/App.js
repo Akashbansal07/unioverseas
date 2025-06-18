@@ -5,6 +5,9 @@ import TutoringPage from './components/TutoringPage';
 import StudyAbroadPage from './components/StudyAbroadPage';
 import ResourcesPage from './components/ResourcesPage';
 import AboutUsPage from './components/AboutUsPage';
+import PrivacyPolicy from './components/PrivacyPolicy';
+import TermsOfService from './components/TermsOfService';
+import Footer from './components/Footer';
 import './App.css';
 
 const App = () => {
@@ -59,6 +62,10 @@ const App = () => {
         return <ResourcesPage colors={colors} />;
       case 'about':
         return <AboutUsPage colors={colors} onContactClick={handleContactClick} />;
+      case 'privacy':
+        return <PrivacyPolicy colors={colors} />;
+      case 'terms':
+        return <TermsOfService colors={colors} />;
       default:
         return <HomePage 
                  colors={colors} 
@@ -78,6 +85,10 @@ const App = () => {
       <main className="relative">
         {renderContent()}
       </main>
+      <Footer 
+        colors={colors} 
+        setActiveTab={handleTabChange} 
+      />
     </div>
   );
 };

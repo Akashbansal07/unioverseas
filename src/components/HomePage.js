@@ -1,3 +1,4 @@
+// HomePage.js
 import React from 'react';
 import HeroSection from './home/HeroSection';
 import StatsSection from './home/StatsSection';
@@ -23,8 +24,12 @@ const HomePage = ({ colors, contactSectionRef, setActiveTab }) => {
         setActiveTab={setActiveTab} 
       />
       <StatsSection colors={colors} />
-      <ServicesSection colors={colors} />
+      <ServicesSection 
+        colors={colors} 
+        setActiveTab={setActiveTab}
+      />
       <SuccessStoriesSection colors={colors} />
+      <EventsSection colors={colors} />
       <div id="contact-section" ref={contactSectionRef}>
         <ContactSection colors={colors} />
       </div>
