@@ -135,7 +135,7 @@ const TermsOfService = ({ colors }) => {
                   <strong>UniOversea</strong><br/>
                   Email: <a href="mailto:pooja@unioversea.com" className="text-blue-600 hover:underline">pooja@unioversea.com</a><br/>
                   Phone: <a href="tel:+918800429321" className="text-blue-600 hover:underline">+91 8800429321</a><br/>
-                  Address: 123 Innovation Drive, Tech City, TC 12345
+                  Address: 1201, The Palm Square, Gurugram
                 </p>
               </div>
             </div>

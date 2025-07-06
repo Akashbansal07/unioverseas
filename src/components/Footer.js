@@ -198,8 +198,8 @@ const Footer = ({ colors, setActiveTab }) => {
                 <div>
                   <p className="text-gray-300 text-sm">Address:</p>
                   <p className="text-white text-sm">
-                    123 Innovation Drive,<br />
-                    Tech City, TC 12345
+                    1201, The Palm square<br />
+                    Gurugram
                   </p>
                 </div>
               </motion.div>
