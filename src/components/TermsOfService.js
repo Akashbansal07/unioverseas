@@ -79,7 +79,7 @@ const TermsOfService = ({ colors }) => {
                 6. Fees and Refund Policy
               </h2>
               <p className="text-gray-700 leading-relaxed mb-6">
-                Participation in our Services may require payment of fees, as outlined during enrollment or in a separate agreement. All fees must be paid in full prior to accessing the Services, unless otherwise agreed. Refunds are subject to our program-specific refund policy, which will be communicated at the time of enrollment. Unless otherwise stated, fees are non-refundable after the program start date. For refund inquiries, contact us at <a href="mailto:pooja@unioversea.com" className="text-blue-600 hover:underline">pooja@unioversea.com</a>.
+                Participation in our Services may require payment of fees, as outlined during enrollment or in a separate agreement. All fees must be paid in full prior to accessing the Services, unless otherwise agreed. Refunds are subject to our program-specific refund policy, which will be communicated at the time of enrollment. Unless otherwise stated, fees are non-refundable after the program start date. For refund inquiries, contact us at <a href="mailto:study@unioversea.com" className="text-blue-600 hover:underline">study@unioversea.com</a>.
               </p>
 
               <h2 className="text-2xl font-semibold mb-4 mt-8" style={{ color: colors.darkPurple }}>
@@ -133,7 +133,7 @@ const TermsOfService = ({ colors }) => {
               <div className="bg-gray-50 p-6 rounded-lg">
                 <p className="text-gray-700 leading-relaxed">
                   <strong>UniOversea</strong><br/>
-                  Email: <a href="mailto:pooja@unioversea.com" className="text-blue-600 hover:underline">pooja@unioversea.com</a><br/>
+                  Email: <a href="mailto:study@unioversea.com" className="text-blue-600 hover:underline">study@unioversea.com</a><br/>
                   Phone: <a href="tel:+918800429321" className="text-blue-600 hover:underline">+91 8800429321</a><br/>
                   Address: 1201, The Palm Square, Gurugram
                 </p>

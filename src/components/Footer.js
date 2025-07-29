@@ -155,13 +155,13 @@ const Footer = ({ colors, setActiveTab }) => {
                 <div>
                   <p className="text-gray-300 text-sm">Email:</p>
                   <a 
-                    href="mailto:pooja@unioversea.com" 
+                    href="mailto:study@unioversea.com" 
                     className="text-white text-sm hover:underline transition-colors duration-300"
                     style={{ ':hover': { color: colors.neonGreen }}}
                     onMouseEnter={(e) => e.target.style.color = colors.neonGreen}
                     onMouseLeave={(e) => e.target.style.color = 'white'}
                   >
-                    pooja@unioversea.com
+                    study@unioversea.com
                   </a>
                 </div>
               </motion.div>
